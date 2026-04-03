@@ -1,0 +1,59 @@
+.usp-banner {
+  padding: 20px 0;
+  background-color: var(--bg-light);
+  position: relative;
+  z-index: 1;
+}
+
+.usp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.usp-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  transition: transform 0.3s ease;
+}
+
+.usp-card:hover {
+  transform: translateY(-5px);
+}
+
+.usp-icon-wrap {
+  width: 52px;
+  height: 52px;
+  background-color: #f2f2f2; /* Light gray card identical to screenshot */
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-orange);
+}
+
+.usp-text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #121212;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .usp-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .usp-grid {
+    grid-template-columns: 1fr;
+  }
+}

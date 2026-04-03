@@ -1,0 +1,132 @@
+.footer {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  padding: 100px 0 3rem;
+  border-radius: 50px 50px 0 0;
+  margin-top: -50px;
+  position: relative;
+  z-index: 10;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6rem;
+  gap: 40px;
+}
+
+.footer-left {
+  max-width: 60%;
+}
+
+.footer-brand {
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  padding-bottom: 10px; /* Fix vertical clipping */
+  padding-right: 20px; /* Fix horizontal clipping of italic/large fonts */
+  letter-spacing: -3px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.footer-desc {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.footer-grid {
+  display: flex;
+  gap: 80px;
+}
+
+.footer-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer-nav a,
+.contact-link {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  display: inline-block;
+}
+
+.footer-nav a:hover,
+.contact-link:hover {
+  color: var(--primary-orange);
+}
+
+.footer-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-address {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.9rem;
+}
+
+.footer-social {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-social a {
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: var(--primary-orange);
+}
+
+@media (max-width: 1024px) {
+  .footer-content {
+    flex-direction: column;
+  }
+  
+  .footer-brand {
+    font-size: 6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+}
