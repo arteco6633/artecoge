@@ -148,34 +148,58 @@
   background-color: #ffffff;
 }
 
-.ff-phone-input {
-  display: flex;
-  align-items: center;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  padding: 0 20px;
-  overflow: hidden;
+.ff-phone-selector {
+  width: 100%;
 }
 
-.ff-flag {
-  color: #121212;
-  font-weight: 500;
-  margin-right: 12px;
-  font-size: 1rem;
+.ff-phone-container {
+  width: 100% !important;
+  font-family: inherit !important;
 }
 
-.ff-input-noborder {
-  flex-grow: 1;
-  border: none;
-  background: transparent;
-  padding: 16px 0;
-  font-size: 1rem;
-  font-family: inherit;
-  color: #121212;
+.ff-phone-input-field {
+  width: 100% !important;
+  height: 56px !important;
+  padding: 16px 20px 16px 60px !important;
+  border-radius: 12px !important;
+  border: none !important;
+  background-color: #f9f9f9 !important;
+  font-size: 1rem !important;
+  font-family: inherit !important;
+  color: #121212 !important;
+  transition: background-color 0.2s !important;
 }
 
-.ff-input-noborder:focus {
-  outline: none;
+.ff-phone-input-field:focus {
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.ff-phone-button {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 12px 0 0 12px !important;
+  padding-left: 15px !important;
+}
+
+.ff-phone-button:hover, .ff-phone-button.open {
+  background: transparent !important;
+}
+
+.ff-phone-dropdown {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  color: #121212 !important;
+}
+
+.ff-phone-dropdown .country:hover {
+  background-color: #f5f5f5 !important;
+}
+
+.ff-phone-dropdown .country.highlight {
+  background-color: #f0f0f0 !important;
 }
 
 .ff-checkbox-label {

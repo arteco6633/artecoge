@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useModal } from '../../ModalContext';
 import './HowWeWork.css';
 import stepBg from '../../assets/hero_background.png';
 
@@ -31,6 +32,7 @@ const steps = [
 
 const HowWeWork = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const { openModal } = useModal();
 
   const nextStep = () => setActiveStep(prev => (prev + 1) % steps.length);
   const prevStep = () => setActiveStep(prev => (prev === 0 ? steps.length - 1 : prev - 1));
@@ -76,7 +78,12 @@ const HowWeWork = () => {
               <div className="work-card-content">
                 <p className="anim-desc">{current.desc}</p>
                 <div className="work-card-bottom">
-                  <button className="btn-light-solid anim-btn">Подобрать проект со специалистом</button>
+                  <button 
+                    className="btn-light-solid anim-btn"
+                    onClick={() => openModal("Подобрать проект со специалистом", current.title)}
+                  >
+                    Подобрать проект со специалистом
+                  </button>
                   <span className="giant-num anim-giant-num">{current.num}</span>
                 </div>
               </div>

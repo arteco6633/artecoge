@@ -1,19 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Projects.css';
 import p1 from '../../assets/catalog_kitchen.png';
 import p2 from '../../assets/hero_background.png';
 import p3 from '../../assets/catalog_storage.png';
 
 const projectsData = [
-  { id: 1, image: p1, title: 'Уютная минималистичная кухня' },
-  { id: 2, image: p2, title: 'Современный частный интерьер' },
-  { id: 3, image: p3, title: 'Просторная гардеробная система' },
-  { id: 4, image: p2, title: 'Офисное пространство' },
-  { id: 5, image: p3, title: 'Коммерческая зона ресепшн' },
-  { id: 6, image: p1, title: 'Премиальный мебельный сет' }
+  { id: '1', slug: 'home-proj-1', image: p1, title: 'Уютная минималистичная кухня' },
+  { id: '2', slug: 'home-proj-2', image: p2, title: 'Современный частный интерьер' },
+  { id: '3', slug: 'home-proj-3', image: p3, title: 'Просторная гардеробная система' },
+  { id: '4', slug: 'home-proj-4', image: p2, title: 'Офисное пространство' },
+  { id: '5', slug: 'home-proj-5', image: p3, title: 'Коммерческая зона ресепшн' },
+  { id: '6', slug: 'home-proj-6', image: p1, title: 'Премиальный мебельный сет' }
 ];
 
 const Projects = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="projects" id="projects">
       <div className="container">
@@ -31,7 +34,12 @@ const Projects = () => {
 
         <div className="projects-grid">
           {projectsData.map(proj => (
-            <div className="project-card" key={proj.id} style={{backgroundImage: `url(${proj.image})`}}>
+            <div 
+              className="project-card" 
+              key={proj.id} 
+              style={{backgroundImage: `url(${proj.image})`, cursor: 'pointer'}}
+              onClick={() => navigate(`/project/${proj.slug}`)}
+            >
               <div className="project-card-overlay">
                 <span className="pc-caption-title">{proj.title}</span>
                 <span className="pc-caption-icon">

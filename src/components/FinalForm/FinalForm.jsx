@@ -1,11 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import './FinalForm.css';
 import bgImage from '../../assets/hero_background.png';
 
 const FinalForm = () => {
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: ''
+  });
+  const [country, setCountry] = useState('ge');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        if (data.country_code) setCountry(data.country_code.toLowerCase());
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Форма отправлена!');
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/arteco.one@mail.ru', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          _subject: "Заявка с сайта ARTECO (подвал)",
+          source: window.location.href
+        })
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({ name: '', phone: '' });
+      } else {
+        alert('Ошибка при отправке. Пожалуйста, свяжитесь с нами напрямую.');
+      }
+    } catch (error) {
+      alert('Ошибка соединения. Проверьте интернет.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -54,33 +100,70 @@ const FinalForm = () => {
             
             {/* Right Form Box */}
             <div className="ff-form-box">
-              <h3 className="ff-form-title">Бесплатная консультация специалиста</h3>
-              <p className="ff-form-subtitle">Заполните свои данные ниже чтобы мы могли связаться и обсудить все детали с Вами</p>
-              
-              <form className="ff-form" onSubmit={handleSubmit}>
-                <input type="text" placeholder="Ваше имя" required className="ff-input" />
-                
-                <div className="ff-phone-input">
-                  <span className="ff-flag">🇬🇪 +995</span>
-                  <input type="tel" placeholder="(000) 000-000" required className="ff-input-noborder" />
+              {isSubmitted ? (
+                <div className="ff-success-screen">
+                  <div className="success-icon-wrap" style={{ marginBottom: '20px' }}>
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <h3 className="ff-form-title">Заявка отправлена!</h3>
+                  <p className="ff-form-subtitle">Спасибо! Мы получили ваши данные и свяжемся с вами в ближайшее время.</p>
+                  <button className="ff-submit-btn" onClick={() => setIsSubmitted(false)}>Отправить ещё одну</button>
                 </div>
-                
-                <label className="ff-checkbox-label">
-                  <input type="checkbox" required className="ff-checkbox" />
-                  <span className="ff-checkbox-text">
-                    Я даю согласие ARTECO (ООО «АРТЕКО»), адрес: Тбилиси, ул. Чавчавадзе 17/4 на обработку моих персональных данных в целях связи со мной, предоставления консультаций, оказания услуг в соответствии с Политикой конфиденциальности.
-                  </span>
-                </label>
-                
-                <label className="ff-checkbox-label">
-                  <input type="checkbox" className="ff-checkbox" />
-                  <span className="ff-checkbox-text">
-                    Я соглашаюсь на получение информационных и рекламных сообщений о товарах, услугах, включая рассылки по телефону, электронной почте и в мессенджерах.
-                  </span>
-                </label>
-                
-                <button type="submit" className="ff-submit-btn">Отправить</button>
-              </form>
+              ) : (
+                <>
+                  <h3 className="ff-form-title">Бесплатная консультация специалиста</h3>
+                  <p className="ff-form-subtitle">Заполните свои данные ниже чтобы мы могли связаться и обсудить все детали с Вами</p>
+                  
+                  <form className="ff-form" onSubmit={handleSubmit}>
+                    <input 
+                      type="text" 
+                      placeholder="Ваше имя" 
+                      required 
+                      className="ff-input" 
+                      value={formData.name}
+                      onChange={e => setFormData({...formData, name: e.target.value})}
+                    />
+                    
+                    <div className="ff-phone-selector">
+                      <PhoneInput
+                        country={country}
+                        preferredCountries={['ge', 'ru', 'by', 'kz', 'am', 'az', 'uz', 'kg', 'tj', 'md']}
+                        value={formData.phone}
+                        onChange={phone => setFormData({...formData, phone})}
+                        inputClass="ff-phone-input-field"
+                        containerClass="ff-phone-container"
+                        buttonClass="ff-phone-button"
+                        dropdownClass="ff-phone-dropdown"
+                        placeholder="(000) 000-00-00"
+                        enableSearch={true}
+                        searchPlaceholder="Поиск..."
+                      />
+                    </div>
+                    
+                    <label className="ff-checkbox-label">
+                      <input type="checkbox" required className="ff-checkbox" />
+                      <span className="ff-checkbox-text">
+                        Я даю согласие ARTECO (ООО «АРТЕКО»), адрес: Тбилиси, ул. Чавчавадзе 17/4 на обработку моих персональных данных в целях связи со мной, предоставления консультаций, оказания услуг в соответствии с Политикой конфиденциальности.
+                      </span>
+                    </label>
+                    
+                    <label className="ff-checkbox-label">
+                      <input type="checkbox" className="ff-checkbox" />
+                      <span className="ff-checkbox-text">
+                        Я соглашаюсь на получение информационных и рекламных сообщений о товарах, услугах, включая рассылки по телефону, электронной почте и в мессенджерах.
+                      </span>
+                    </label>
+                    
+                    <button 
+                      type="submit" 
+                      className="ff-submit-btn"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Отправка..." : "Отправить"}
+                    </button>
+                  </form>
+                </>
+              )}
             </div>
           </div>
         </div>

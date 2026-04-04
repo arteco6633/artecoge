@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import './Catalog.css';
 import kitchenBg from '../../assets/catalog_kitchen.png';
 import storageBg from '../../assets/catalog_storage.png';
@@ -36,6 +37,7 @@ const catalogItems = [
 ];
 
 const Catalog = () => {
+  const navigate = useNavigate();
   return (
     <section className="catalog" id="catalog">
       <div className="container">
@@ -56,7 +58,11 @@ const Catalog = () => {
         
         <div className="catalog-grid-1to1">
           {catalogItems.map((item) => (
-            <div key={item.id} className="catalog-card-1to1 flip-card">
+            <div 
+              key={item.id} 
+              className="catalog-card-1to1 flip-card"
+              onClick={() => navigate('/catalog')}
+            >
               <div className="flip-card-inner">
                 {/* Front Side */}
                 <div className="flip-card-front">
@@ -88,10 +94,10 @@ const Catalog = () => {
                       {item.bullets.map((b, idx) => <li key={idx}>• {b}</li>)}
                     </ul>
                     <div className="hidden-footer">
-                      <a href="#category" className="hidden-link">
+                      <span className="hidden-link">
                         Смотреть категорию 
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{marginLeft: '12px', verticalAlign: 'middle', marginTop: '-2px'}}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                      </a>
+                      </span>
                     </div>
                   </div>
                 </div>

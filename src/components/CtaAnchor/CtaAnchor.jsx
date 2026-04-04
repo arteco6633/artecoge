@@ -1,8 +1,11 @@
 import React from 'react';
+import { useModal } from '../../ModalContext';
 import './CtaAnchor.css';
 import bgImage from '../../assets/catalog_storage.png'; 
 
 const CtaAnchor = () => {
+  const { openModal } = useModal();
+  
   return (
     <section className="cta-anchor-section" id="contact">
       <div className="container">
@@ -18,7 +21,12 @@ const CtaAnchor = () => {
               Мы честно скажем, подходим ли мы<br/>
               вам — ещё до начала работы.
             </h2>
-            <button className="cta-btn-white">Консультация со специалистом</button>
+            <button 
+              className="cta-btn-white"
+              onClick={() => openModal("Консультация со специалистом", "Оставьте заявку, и мы обсудим ваш проект")}
+            >
+              Консультация со специалистом
+            </button>
           </div>
         </div>
       </div>

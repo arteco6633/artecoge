@@ -1,34 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useModal } from '../../ModalContext';
 import './Partners.css';
 import placeholderImage1 from '../../assets/catalog_kitchen.png';
 import placeholderImage2 from '../../assets/catalog_storage.png';
 
 const tabsData = [
-  {
-    id: 'designers',
-    label: 'Дизайнерам',
-    subtitle: '/Для дизайнеров интерьеров',
-    titleMain: 'Мебельный партнёр для дизайнеров,',
-    titleGray: 'которые ценят репутацию',
-    cards: [
-      {
-        id: 1,
-        image: placeholderImage1,
-        title: 'Пробное изделие бесплатно',
-        text: 'В рамках затрат до 150 000 ₽ — чтобы вы могли убедиться в качестве, точности исполнения и подходе к работе до старта большого проекта.',
-        buttonLabel: 'Стать партнером',
-        isLink: false
-      },
-      {
-        id: 2,
-        image: placeholderImage2,
-        title: '',
-        text: 'Мы работаем с дизайнерами как с партнёрами, а не как с посредниками. Берём на себя мебельную часть проекта под ключ, снимая с вас риски сроков, качества и коммуникации с подрядчиками — чтобы вы спокойно вели проекты и сдавали их без репутационных потерь.',
-        buttonLabel: 'Подробнее',
-        isLink: true
-      }
-    ]
-  },
   {
     id: 'private',
     label: 'Частным клиентам',
@@ -51,6 +28,31 @@ const tabsData = [
         text: 'Когда вы делаете ремонт, мебель — самый рискованный этап. Ошибки в размерах, срывы сроков и несоответствие ожиданиям могут перечеркнуть месяцы работы и вложенные деньги. Мы берём на себя мебельную часть под ключ, чтобы вы получили результат без стресса и сюрпризов.',
         buttonLabel: '',
         isLink: false
+      }
+    ]
+  },
+  {
+    id: 'designers',
+    label: 'Дизайнерам',
+    subtitle: '/Для дизайнеров интерьеров',
+    titleMain: 'Мебельный партнёр для дизайнеров,',
+    titleGray: 'которые ценят репутацию',
+    cards: [
+      {
+        id: 1,
+        image: placeholderImage1,
+        title: 'Пробное изделие бесплатно',
+        text: 'В рамках затрат до 150 000 ₽ — чтобы вы могли убедиться в качестве, точности исполнения и подходе к работе до старта большого проекта.',
+        buttonLabel: 'Стать партнером',
+        isLink: false
+      },
+      {
+        id: 2,
+        image: placeholderImage2,
+        title: '',
+        text: 'Мы работаем с дизайнерами как с партнёрами, а не как с посредниками. Берём на себя мебельную часть проекта под ключ, снимая с вас риски сроков, качества и коммуникации с подрядчиками — чтобы вы спокойно вели проекты и сдавали их без репутационных потерь.',
+        buttonLabel: 'Подробнее',
+        isLink: true
       }
     ]
   },
@@ -82,8 +84,21 @@ const tabsData = [
 ];
 
 const Partners = () => {
-  const [activeTabId, setActiveTabId] = useState('designers');
+  const [activeTabId, setActiveTabId] = useState('private');
   const activeData = tabsData.find(t => t.id === activeTabId);
+  const { openModal } = useModal();
+
+  const handleNextTab = () => {
+    const currentIndex = tabsData.findIndex(t => t.id === activeTabId);
+    const nextIndex = (currentIndex + 1) % tabsData.length;
+    setActiveTabId(tabsData[nextIndex].id);
+  };
+
+  const handlePrevTab = () => {
+    const currentIndex = tabsData.findIndex(t => t.id === activeTabId);
+    const prevIndex = (currentIndex - 1 + tabsData.length) % tabsData.length;
+    setActiveTabId(tabsData[prevIndex].id);
+  };
 
   return (
     <section className="partners-section" id="partners">
@@ -119,13 +134,13 @@ const Partners = () => {
             </div>
             
             <div className="partners-cta-wrap">
-              <a href="#catalog" className="btn-primary-orange">
+              <Link to="/catalog" className="btn-primary-orange">
                 Перейти в каталог 
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{marginLeft: '8px', marginBottom: '-2px'}}>
                   <line x1="7" y1="7" x2="17" y2="17"></line>
                   <polyline points="17 7 17 17 7 17"></polyline>
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -141,20 +156,29 @@ const Partners = () => {
                   <p className={`pc-text ${!activeData.cards[0].title ? 'pc-text-large' : ''}`}>{activeData.cards[0].text}</p>
                   
                   {activeData.cards[0].buttonLabel && activeData.cards[0].isLink && (
-                    <a href="#contact" className="pc-link">
+                    <button 
+                      className="pc-link"
+                      onClick={() => openModal(activeData.cards[0].buttonLabel, activeData.label)}
+                      style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit' }}
+                    >
                       {activeData.cards[0].buttonLabel} 
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none" style={{ marginLeft: '8px' }}>
                         <circle cx="12" cy="12" r="10" fill="white"></circle>
                         <polyline points="12 16 16 12 12 8" stroke="#121212" strokeWidth="2" fill="none"></polyline>
                         <line x1="8" y1="12" x2="16" y2="12" stroke="#121212" strokeWidth="2"></line>
                       </svg>
-                    </a>
+                    </button>
                   )}
                 </div>
                 
                 {activeData.cards[0].buttonLabel && !activeData.cards[0].isLink && (
                   <div className="pc-bottom-area">
-                    <button className="pc-btn-white">{activeData.cards[0].buttonLabel}</button>
+                    <button 
+                      className="pc-btn-white"
+                      onClick={() => openModal(activeData.cards[0].buttonLabel, activeData.label)}
+                    >
+                      {activeData.cards[0].buttonLabel}
+                    </button>
                   </div>
                 )}
               </div>
@@ -170,20 +194,29 @@ const Partners = () => {
                     <p className={`pc-text ${!activeData.cards[1].title ? 'pc-text-large' : ''}`}>{activeData.cards[1].text}</p>
                     
                     {activeData.cards[1].buttonLabel && activeData.cards[1].isLink && (
-                      <a href="#contact" className="pc-link">
+                      <button 
+                        className="pc-link"
+                        onClick={() => openModal(activeData.cards[1].buttonLabel, activeData.label)}
+                        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit' }}
+                      >
                         {activeData.cards[1].buttonLabel} 
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none" style={{ marginLeft: '8px' }}>
                           <circle cx="12" cy="12" r="10" fill="white"></circle>
                           <polyline points="12 16 16 12 12 8" stroke="#121212" strokeWidth="2" fill="none"></polyline>
                           <line x1="8" y1="12" x2="16" y2="12" stroke="#121212" strokeWidth="2"></line>
                         </svg>
-                      </a>
+                      </button>
                     )}
                   </div>
                   
                   {activeData.cards[1].buttonLabel && !activeData.cards[1].isLink && (
                     <div className="pc-bottom-area">
-                      <button className="pc-btn-white">{activeData.cards[1].buttonLabel}</button>
+                      <button 
+                        className="pc-btn-white"
+                        onClick={() => openModal(activeData.cards[1].buttonLabel, activeData.label)}
+                      >
+                        {activeData.cards[1].buttonLabel}
+                      </button>
                     </div>
                   )}
                 </div>
@@ -191,12 +224,12 @@ const Partners = () => {
 
               {/* Arrows */}
               <div className="partners-arrows">
-                <button className="part-arrow-btn dark-ar">
+                <button className="part-arrow-btn dark-ar" onClick={handlePrevTab}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M15 18l-6-6 6-6"/>
                   </svg>
                 </button>
-                <button className="part-arrow-btn white-ar">
+                <button className="part-arrow-btn white-ar" onClick={handleNextTab}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M9 18l6-6-6-6"/>
                   </svg>
