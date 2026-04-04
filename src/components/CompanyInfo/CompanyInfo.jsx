@@ -1,7 +1,7 @@
 import React from 'react';
 import './CompanyInfo.css';
 import aboutImage from '../../assets/catalog_kitchen.png'; // Example placeholder
-import avatarImage from '../../assets/hero_background.png'; // Example placeholder
+import avatarImage from '../../assets/salavat.png'; 
 
 const CompanyInfo = () => {
   return (
