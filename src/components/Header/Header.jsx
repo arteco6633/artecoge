@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { useModal } from '../../ModalContext';
 import './Header.css';
+import { useModal } from '../../ModalContext';
+import logoMobile from '../../assets/logo-mobile.png';
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { openModal } = useModal();
+  const navigate = useNavigate();
+
+  const navLinks = [
+    { name: 'Каталог', path: '/catalog' },
+    { name: 'Проекты', href: '#projects' },
+    { name: 'О нас', href: '#about' },
+    { name: 'Как мы работаем', href: '#how-it-works' },
+    { name: 'Статьи', href: '#articles' },
+    { name: 'Контакты', href: '#contact' }
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,50 +28,105 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+  const handleNavClick = (link) => {
+    setIsMenuOpen(false);
+    if (link.path) {
+      navigate(link.path);
+    }
+  };
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="container header-container">
-        
-        {/* Left Side Logo */}
-        <div className="header-left">
-          <Link to="/#home" className="header-logo">ARTECO</Link>
+      <div className="header-container">
+        {/* Desktop Left: Full Logo */}
+        <div className="header-left desktop-only">
+          <a href="/" className="header-logo">
+            ARTECO
+          </a>
         </div>
 
-        {/* Center Nav Pill */}
-        <nav className={`nav-pill ${mobileMenuOpen ? 'open' : ''}`}>
-          <Link to="/catalog" onClick={() => setMobileMenuOpen(false)}>Каталог</Link>
-          <Link to="/#cooperation" onClick={() => setMobileMenuOpen(false)}>Сотрудничество</Link>
-          <Link to="/#about" onClick={() => setMobileMenuOpen(false)}>О компании</Link>
-          <Link to="/#projects" onClick={() => setMobileMenuOpen(false)}>Реализованные проекты</Link>
-          <Link to="/#contacts" onClick={() => setMobileMenuOpen(false)}>Контакты</Link>
-          <Link to="/#faq" onClick={() => setMobileMenuOpen(false)}>FAQ</Link>
-          
-          <button 
-            className="btn-light mobile-only" 
-            onClick={() => {
-              setMobileMenuOpen(false);
-              openModal("Рассчитать стоимость", "Мы свяжемся с вами для уточнения деталей проекта");
-            }}
-          >
-            Рассчитать стоимость
-          </button>
+        {/* Mobile Left: Icon Logo */}
+        <div className="header-left-mobile mobile-only">
+          <a href="/" className="header-logo-icon-img">
+            <img src={logoMobile} alt="ARTECO" />
+          </a>
+        </div>
+
+        {/* Desktop Center: Navigation Pill */}
+        <nav className="header-nav-pill desktop-only">
+          {navLinks.map((link) => (
+            link.path ? (
+              <button key={link.name} onClick={() => handleNavClick(link)} className="nav-link">
+                {link.name}
+              </button>
+            ) : (
+              <a key={link.name} href={link.href} className="nav-link">
+                {link.name}
+              </a>
+            )
+          ))}
         </nav>
 
-        {/* Right CTA */}
+        {/* Mobile Center: CTA Button */}
+        <div className="header-center-mobile mobile-only">
+          <button 
+            className="btn-header-cta-mobile"
+            onClick={() => openModal("Рассчитать стоимость", "Оставьте заявку, и мы подготовим расчет для вашего проекта")}
+          >
+            Рассчитать
+          </button>
+        </div>
+
+        {/* Right Section */}
         <div className="header-right">
           <button 
-            className="btn-light desktop-only"
-            onClick={() => openModal("Рассчитать стоимость", "Мы свяжемся с вами для уточнения деталей проекта")}
+            className="btn-header-cta desktop-only"
+            onClick={() => openModal("Рассчитать стоимость", "Оставьте заявку, и мы подготовим расчет для вашего проекта")}
           >
             Рассчитать стоимость
           </button>
-          <button className="mobile-menu-btn" onClick={toggleMenu}>
-            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+          
+          <div className="header-mobile-row mobile-only">
+             <button 
+               className="header-burger" 
+               onClick={() => setIsMenuOpen(!isMenuOpen)}
+             >
+               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+             </button>
+          </div>
         </div>
-        
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`header-menu-overlay ${isMenuOpen ? 'is-open' : ''}`}>
+        <div className="header-menu-content">
+          <div className="header-menu-header mobile-only">
+             <span className="menu-title">Меню</span>
+             <button onClick={() => setIsMenuOpen(false)} className="close-btn"><X size={24}/></button>
+          </div>
+          <nav className="header-nav-mobile">
+            {navLinks.map((link) => (
+              link.path ? (
+                <button 
+                  key={link.name} 
+                  onClick={() => handleNavClick(link)} 
+                  className="header-nav-link-mobile-btn"
+                >
+                  {link.name}
+                </button>
+              ) : (
+                <a 
+                  key={link.name} 
+                  href={link.href} 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="header-nav-link-mobile"
+                >
+                  {link.name}
+                </a>
+              )
+            ))}
+          </nav>
+        </div>
       </div>
     </header>
   );

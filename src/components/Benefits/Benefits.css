@@ -48,17 +48,25 @@
 }
 
 @media (max-width: 1024px) {
+  .benefits {
+    padding: 100px 0 60px 0;
+  }
   .benefits-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 }
 
 @media (max-width: 580px) {
   .benefits-grid {
     grid-template-columns: 1fr;
+    gap: 15px;
   }
   
   .benefit-card {
-    padding: 30px;
+    padding: 24px;
+  }
+  .benefit-title {
+    font-size: 1.2rem;
   }
 }

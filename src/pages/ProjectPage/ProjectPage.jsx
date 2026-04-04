@@ -10,19 +10,51 @@ import archi1 from '../../assets/projects/archi/main.jpg';
 import archi2 from '../../assets/projects/archi/2.jpg';
 import archi3 from '../../assets/projects/archi/3.jpg';
 import archi4 from '../../assets/projects/archi/4.jpg';
+import archi5 from '../../assets/projects/archi/5.jpg';
+import archi6 from '../../assets/projects/archi/6.jpg';
+import archi7 from '../../assets/projects/archi/7.jpg';
+import archi8 from '../../assets/projects/archi/8.jpg';
+import archi9 from '../../assets/projects/archi/9.jpg';
+import archi10 from '../../assets/projects/archi/10.jpg';
+import archi11 from '../../assets/projects/archi/11.jpg';
+
+import alpha1 from '../../assets/projects/alpha/main.jpg';
+import alpha2 from '../../assets/projects/alpha/2.jpg';
+import alpha3 from '../../assets/projects/alpha/3.jpg';
+import alpha4 from '../../assets/projects/alpha/4.jpg';
+import alpha5 from '../../assets/projects/alpha/5.jpg';
+import alpha6 from '../../assets/projects/alpha/6.jpg';
+import alpha7 from '../../assets/projects/alpha/7.jpg';
+import alpha8 from '../../assets/projects/alpha/8.jpg';
+import alpha9 from '../../assets/projects/alpha/9.jpg';
+import alpha10 from '../../assets/projects/alpha/10.jpg';
+import alpha11 from '../../assets/projects/alpha/11.jpg';
+import alpha12 from '../../assets/projects/alpha/12.jpg';
+import alpha13 from '../../assets/projects/alpha/13.jpg';
 
 // Dummy data for projects
 const projectsData = {
+  "alpha-home": {
+    name: "ЖК ALPHA HOME: МИНИМАЛИЗМ И ГАРМОНИЯ",
+    desc: "Локация в Диди Дигоми (Грузия, Тбилиси) — это всегда про баланс между городским ритмом и спокойствием природы. Для апартаментов в Alpha Home мы выбрали концепцию «тихой роскоши». Клиент пришел к нам с квартирой в состоянии «белого каркаса», что позволило реализовать проект с нуля. \n\n Мы вдохновились близостью комплекса к набережной Куры. В интерьере использованы фасады AGT в матовом исполнении и корпуса из ЛДСП EGGER с текстурой натурального дерева. Эмаль, нанесенная в 7 слоев, создала идеальную гладкость поверхностей. Этот проект — доказательство того, что мебель в Тбилиси может быть не просто функциональной, но и продолжением мироощущения владельца.",
+    details: [
+      { label: "Объект", value: "ЖК Alpha Home (Тбилиси, Диди Дигоми)" },
+      { label: "Материалы", value: "Фасады AGT, Эмаль (7 слоев), ЛДСП EGGER" },
+      { label: "Фурнитура", value: "Blum (Австрия)" },
+      { label: "Особенности", value: "Зона ТВ с озеленением" }
+    ],
+    images: [alpha1, alpha2, alpha3, alpha4, alpha5, alpha6, alpha7, alpha8, alpha9, alpha10, alpha11, alpha12, alpha13]
+  },
   "archi-lilac": {
     name: "ЖК ARCHI LILAC: ЭСТЕТИКА В ДЕТАЛЯХ",
-    desc: "Этот проект стал настоящим вызовом для нашей команды. Задача: создать интерьер, гармонирующий с современной архитектурой ЖК Archi Lilac. Мы вдохновлялись концепцией самого комплекса — местом, где переплетаются тишина района Мухиани и технологичность современного жилья. \n\n Главным акцентом стали встроенные системы хранения с использованием натурального шпона и MDF панелей, которые подчеркивают уют и функциональность. Мы уделили внимание каждой детали — от скрытых креплений до премиальной фурнитуры Blum, ведь в недвижимости такого уровня важна долговечность. Результат — пространство, ставшее органичным продолжением интерьерного кода квартиры.",
+    desc: "Этот проект стал настоящим вызовом для нашей команды. Задача: создать интерьер, гармонирующий с современной архитектурой ЖК Archi Lilac в Тбилиси (Грузия). Мы вдохновлялись концепцией самого комплекса — местом, где переплетаются тишина района Мухиани и технологичность современного жилья. \n\n Главным акцентом стали встроенные системы хранения с использованием премиальных фасадов AGT и эмали, окрашенной в 7 слоев, что подчеркивает глубину цвета и долговечность. Корпуса мебели выполнены из надежного ЛДСП EGGER. Мы уделили внимание каждой детали — от скрытых креплений до австрийской фурнитуры Blum. Результат — пространство, ставшее органиным продолжением интерьерного кода квартиры в одном из лучших ЖК Тбилиси.",
     details: [
-      { label: "Объект", value: "ЖК Archi Lilac (г. Тбилиси)" },
-      { label: "Материалы", value: "Натуральный шпон, MDF эмаль" },
+      { label: "Объект", value: "ЖК Archi Lilac (Грузия, Тбилиси)" },
+      { label: "Материалы", value: "Фасады AGT, Эмаль (7 слоев), ЛДСП EGGER" },
       { label: "Фурнитура", value: "Blum (Австрия)" },
       { label: "Стиль", value: "Современный минимализм" }
     ],
-    images: [archi1, archi2, archi3, archi4]
+    images: [archi8, archi5, archi1, archi2, archi3, archi4, archi6, archi7, archi9, archi10, archi11]
   },
   "alia-kitchen": {
     name: "ЖК ALIA — КУХНЯ",
@@ -173,6 +205,8 @@ const ProjectPage = () => {
               key={idx} 
               className={`pp-gallery-item ${idx === 0 ? 'pp-gallery-item--featured' : ''}`}
               style={{ backgroundImage: `url(${img})` }}
+              role="img"
+              aria-label={`Мебель на заказ Грузия, Тбилиси, ${project.name} - фото ${idx + 1}`}
             ></div>
           ))}
         </div>

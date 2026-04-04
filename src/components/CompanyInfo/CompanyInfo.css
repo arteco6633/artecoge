@@ -155,15 +155,61 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .company-info {
+    border-radius: 40px;
+    margin-top: -40px;
+    padding-bottom: 40px;
+  }
+
   .company-white-block {
-    padding: 40px 0;
+    padding: 60px 0;
+  }
+
+  .company-header-centered {
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  .company-title {
+    font-size: 1.6rem;
+    line-height: 1.25;
+  }
+
+  .company-title br {
+    display: none; /* Allow natural wrapping on mobile */
+  }
+
+  .company-content-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .company-image-card {
+    min-height: 280px;
     border-radius: 30px;
   }
-  .company-image-card {
-    min-height: 300px;
+
+  .company-quote-card {
+    padding: 30px 24px;
+    border-radius: 30px;
   }
+
+  .quote-main-text {
+    font-size: 1.15rem;
+    margin-bottom: 30px;
+  }
+
+  .quote-mark, .quote-mark-end {
+    font-size: 1.8rem;
+  }
+
   .author-name {
     font-size: 1.4rem;
+  }
+
+  .author-avatar {
+    width: 50px;
+    height: 50px;
   }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Catalog.css';
 import kitchenBg from '../../assets/catalog_kitchen.png';
@@ -40,6 +40,16 @@ const catalogItems = [
 
 const Catalog = () => {
   const navigate = useNavigate();
+  const [flippedId, setFlippedId] = useState(null);
+
+  const handleCardClick = (id) => {
+    if (flippedId === id) {
+      navigate('/catalog');
+    } else {
+      setFlippedId(id);
+    }
+  };
+
   return (
     <section className="catalog" id="catalog">
       <div className="container">
@@ -63,9 +73,9 @@ const Catalog = () => {
             <div 
               key={item.id} 
               className="catalog-card-1to1 flip-card"
-              onClick={() => navigate('/catalog')}
+              onClick={() => handleCardClick(item.id)}
             >
-              <div className="flip-card-inner">
+              <div className={`flip-card-inner ${flippedId === item.id ? 'is-flipped' : ''}`}>
                 {/* Front Side */}
                 <div className="flip-card-front">
                   <div 

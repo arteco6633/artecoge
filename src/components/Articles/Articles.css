@@ -114,23 +114,34 @@
   .articles-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .article-expanded-card:last-child {
-    display: none;
-  }
 }
 
 @media (max-width: 768px) {
+  .articles {
+    padding: 60px 0;
+  }
   .articles-main-title {
-    font-size: 3rem;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .articles-next-btn {
+    display: none;
   }
 }
 
 @media (max-width: 600px) {
   .articles-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 20px;
   }
   .article-expanded-card:last-child {
     display: flex;
+  }
+  .article-info {
+    padding: 24px 20px;
+  }
+  .article-title {
+    font-size: 1.15rem;
   }
 }

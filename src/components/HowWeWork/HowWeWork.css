@@ -57,8 +57,9 @@
 }
 .inactive-num:hover { color: #888; }
 .active-num {
-  color: transparent;
-  display: none;
+  color: var(--text-primary);
+  font-weight: 700;
+  border-bottom: 2px solid var(--text-primary);
 }
 
 .work-title {
@@ -155,10 +156,114 @@
   color: rgba(255,255,255,0.2);
 }
 
+@media (max-width: 900px) {
+  .how-we-work {
+    padding: 60px 0;
+    border-radius: 30px;
+    margin-top: -30px;
+  }
+
+  .work-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .work-left {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .work-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    justify-content: flex-start;
+    gap: 15px;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    text-align: left;
+  }
+
+  .work-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nums {
+    display: flex;
+    gap: 15px;
+  }
+
+  .work-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    text-align: left;
+  }
+
+  .work-arrows {
+    justify-content: flex-start;
+  }
+
+  .work-right {
+    height: auto;
+    min-height: 450px;
+  }
+
+  .work-image-card {
+    border-radius: 24px;
+    min-height: 450px;
+  }
+
+  .work-card-content {
+    padding: 24px;
+  }
+
+  .work-card-content p {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .work-card-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .btn-light-solid {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 0.9rem;
+  }
+
+  .giant-num {
+    font-size: 4rem;
+    align-self: flex-end;
+  }
+}
+
 @media (max-width: 1024px) {
+  .how-we-work {
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
   .work-grid { grid-template-columns: 1fr; gap: 40px; }
   .work-right { height: 400px; }
-  .work-title { font-size: 2.5rem; }
+  .work-title { font-size: 2.5rem; text-align: center; }
+  .work-nav { justify-content: center; }
+  .work-left { max-width: 100%; text-align: center; }
+  .work-arrows { justify-content: center; }
+}
+
+@media (max-width: 768px) {
+  .work-title { font-size: 1.8rem; margin-bottom: 30px; }
+  .work-right { height: 350px; }
+  .work-card-content { padding: 24px; }
+  .work-card-content p { font-size: 1rem; }
+  .giant-num { font-size: 5rem; }
+}
+
+@media (max-width: 480px) {
+  .work-right { height: 300px; }
 }
 
 /* Premium Animations */

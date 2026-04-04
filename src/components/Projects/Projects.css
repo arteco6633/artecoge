@@ -110,6 +110,7 @@
   
   .projects-desc {
     padding-bottom: 0;
+    max-width: 100%;
   }
   
   .projects-grid {
@@ -118,9 +119,24 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .projects {
+    border-radius: 30px;
+    padding: 60px 0;
+  }
   .projects-grid {
     grid-template-columns: 1fr;
     grid-auto-rows: 350px;
+    gap: 12px;
   }
+  .project-card-overlay {
+    opacity: 1;
+    background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    padding: 16px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-title { font-size: 1.8rem; }
+  .pc-caption-title { font-size: 0.85rem; }
 }
