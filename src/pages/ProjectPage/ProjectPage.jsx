@@ -6,8 +6,24 @@ import kitchenImg from '../../assets/catalog_kitchen.png';
 import storageImg from '../../assets/catalog_storage.png';
 import heroImg from '../../assets/hero_background.png';
 
+import archi1 from '../../assets/projects/archi/main.jpg';
+import archi2 from '../../assets/projects/archi/2.jpg';
+import archi3 from '../../assets/projects/archi/3.jpg';
+import archi4 from '../../assets/projects/archi/4.jpg';
+
 // Dummy data for projects
 const projectsData = {
+  "archi-lilac": {
+    name: "ЖК ARCHI LILAC: ЭСТЕТИКА В ДЕТАЛЯХ",
+    desc: "Этот проект стал настоящим вызовом для нашей команды. Задача: создать интерьер, гармонирующий с современной архитектурой ЖК Archi Lilac. Мы вдохновлялись концепцией самого комплекса — местом, где переплетаются тишина района Мухиани и технологичность современного жилья. \n\n Главным акцентом стали встроенные системы хранения с использованием натурального шпона и MDF панелей, которые подчеркивают уют и функциональность. Мы уделили внимание каждой детали — от скрытых креплений до премиальной фурнитуры Blum, ведь в недвижимости такого уровня важна долговечность. Результат — пространство, ставшее органичным продолжением интерьерного кода квартиры.",
+    details: [
+      { label: "Объект", value: "ЖК Archi Lilac (г. Тбилиси)" },
+      { label: "Материалы", value: "Натуральный шпон, MDF эмаль" },
+      { label: "Фурнитура", value: "Blum (Австрия)" },
+      { label: "Стиль", value: "Современный минимализм" }
+    ],
+    images: [archi1, archi2, archi3, archi4]
+  },
   "alia-kitchen": {
     name: "ЖК ALIA — КУХНЯ",
     desc: "Просторная светлая кухня, созданная для большой семьи. Мы использовали итальянский керамогранит для столешницы и шпонированные фасады из дуба. Скрытые системы хранения обеспечивают идеальный порядок.",

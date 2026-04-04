@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Projects.css';
-import p1 from '../../assets/catalog_kitchen.png';
+import p1 from '../../assets/projects/archi/main.jpg';
 import p2 from '../../assets/hero_background.png';
 import p3 from '../../assets/catalog_storage.png';
 
 const projectsData = [
-  { id: '1', slug: 'home-proj-1', image: p1, title: 'Уютная минималистичная кухня' },
+  { id: '1', slug: 'archi-lilac', image: p1, title: 'ЖК Archi Lilac: Эстетика в деталях' },
   { id: '2', slug: 'home-proj-2', image: p2, title: 'Современный частный интерьер' },
   { id: '3', slug: 'home-proj-3', image: p3, title: 'Просторная гардеробная система' },
   { id: '4', slug: 'home-proj-4', image: p2, title: 'Офисное пространство' },

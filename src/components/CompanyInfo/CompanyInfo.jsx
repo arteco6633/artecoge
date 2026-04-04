@@ -1,7 +1,7 @@
 import React from 'react';
 import './CompanyInfo.css';
 import aboutImage from '../../assets/catalog_kitchen.png'; // Example placeholder
-import avatarImage from '../../assets/salavat.png'; 
+import avatarImage from '../../assets/salavat_final.jpg'; 
 
 const CompanyInfo = () => {
   return (
@@ -26,7 +26,7 @@ const CompanyInfo = () => {
               <div className="quote-card-top">
                 <div className="quote-subtitle">
                   <span className="quote-mark">“</span>
-                  <p>В премиум-сегменте<br/>продаётся не материал.</p>
+                  <p>В мебельном сегменте<br/>продается не материал.</p>
                 </div>
                 <span className="quote-tag">Принципы</span>
               </div>
