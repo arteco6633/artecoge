@@ -74,15 +74,23 @@
   backface-visibility: hidden;
   border-radius: 20px;
   overflow: hidden;
+  transform: translateZ(0); /* Hardware acceleration */
 }
 
 .flip-card-front {
   background-color: transparent;
+  z-index: 2;
 }
 
 .flip-card-back {
   background-color: #2b2723;
   transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* Ensure back side is on top when flipped */
+.flip-card-inner.is-flipped .flip-card-back {
+  z-index: 3;
 }
 
 .catalog-card-bg {
