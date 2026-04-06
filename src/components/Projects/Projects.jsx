@@ -5,11 +5,12 @@ import p1 from '../../assets/projects/archi/8.jpg';
 import alphaMain from '../../assets/projects/alpha/main.jpg';
 import p2 from '../../assets/hero_background.png';
 import p3 from '../../assets/catalog_storage.png';
+import tbilisiMain from '../../assets/projects/tbilisi-gardens/main.jpg';
 
 const projectsData = [
   { id: '1', slug: 'archi-lilac', image: p1, title: 'ЖК Archi Lilac: Эстетика в деталях' },
   { id: '2', slug: 'alpha-home', image: alphaMain, title: 'Alpha Home: Минимализм и гармония' },
-  { id: '3', slug: 'home-proj-3', image: p3, title: 'Просторная гардеробная система' },
+  { id: '3', slug: 'tbilisi-gardens', image: tbilisiMain, title: 'Tbilisi Gardens: Премиум-класс в центре' },
   { id: '4', slug: 'home-proj-4', image: p2, title: 'Офисное пространство' },
   { id: '5', slug: 'home-proj-5', image: p3, title: 'Коммерческая зона ресепшн' },
   { id: '6', slug: 'home-proj-6', image: p1, title: 'Премиальный мебельный сет' }
@@ -38,17 +39,19 @@ const Projects = () => {
             <div 
               className="project-card" 
               key={proj.id} 
-              style={{backgroundImage: `url(${proj.image})`, cursor: 'pointer'}}
               onClick={() => navigate(`/project/${proj.slug}`)}
             >
-              <div className="project-card-overlay">
-                <span className="pc-caption-title">{proj.title}</span>
-                <span className="pc-caption-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="5" y1="5" x2="19" y2="19"></line>
-                    <polyline points="19 9 19 19 9 19"></polyline>
-                  </svg>
-                </span>
+              <div className="project-card-inner">
+                <img src={proj.image} alt={proj.title} className="project-card-img" />
+                <div className="project-card-overlay">
+                  <h3 className="pc-title">{proj.title}</h3>
+                  <div className="pc-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
           ))}

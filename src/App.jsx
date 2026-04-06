@@ -5,7 +5,10 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import CatalogPage from './pages/CatalogPage/CatalogPage';
 import ProjectPage from './pages/ProjectPage/ProjectPage';
+import ArticlesPage from './pages/ArticlesPage/ArticlesPage';
+import ArticleSingle from './pages/ArticleSingle/ArticleSingle';
 import { ModalProvider } from './ModalContext';
+import Admin from './pages/Admin/Admin';
 import './App.css';
 
 function App() {
@@ -18,6 +21,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/catalog" element={<CatalogPage />} />
             <Route path="/project/:projectId" element={<ProjectPage />} />
+            <Route path="/articles" element={<ArticlesPage />} />
+            <Route path="/article/:slug" element={<ArticleSingle />} />
+            <Route path="/admin-panel-secret" element={<Admin />} />
           </Routes>
         </main>
         <Footer />

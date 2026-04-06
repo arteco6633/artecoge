@@ -17,14 +17,14 @@
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   pointer-events: auto;
-  width: 90%;
-  max-width: 1100px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  width: 96%;
+  max-width: 1400px;
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(15px);
-  padding: 10px 24px;
+  padding: 8px 24px;
   border-radius: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .header.scrolled .header-container {
@@ -69,19 +69,28 @@
 }
 
 .nav-link {
-  font-size: 13px; font-weight: 600;
-  background: none; border: none;
-  color: #121212; transition: color 0.3s;
-  cursor: pointer; padding: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  color: #121212;
+  transition: color 0.3s;
+  cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
 }
 .nav-link:hover { color: var(--primary-orange); }
 
 .btn-header-cta {
   background-color: var(--primary-orange);
-  color: #ffffff; padding: 10px 24px;
-  border-radius: 50px; font-weight: 700;
-  font-size: 13px; border: none;
-  cursor: pointer; transition: transform 0.2s;
+  color: #ffffff;
+  padding: 10px 24px;
+  border-radius: var(--btn-radius);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
   white-space: nowrap;
 }
 
@@ -145,10 +154,10 @@
     background-color: var(--primary-orange);
     color: #ffffff;
     border: none;
-    border-radius: 100px;
+    border-radius: var(--btn-radius);
     padding: 12px 28px;
-    font-size: 16px;
-    font-weight: 800;
+    font-size: var(--f-btn);
+    font-weight: 700;
     cursor: pointer;
     white-space: nowrap;
     box-shadow: 0 4px 12px rgba(255, 122, 0, 0.25);

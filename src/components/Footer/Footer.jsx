@@ -25,7 +25,7 @@ const Footer = () => {
             <div className="footer-col">
               <h4 className="footer-title">Контакты</h4>
               <div className="footer-contact-info">
-                <a href="tel:+12345678900" className="contact-link">+1 (234) 567-8900</a>
+                <a href="tel:+995555123456" className="contact-link">+995 555-123-456</a>
                 <a href="mailto:info@arteco.ge" className="contact-link">info@arteco.ge</a>
               </div>
             </div>
@@ -33,7 +33,7 @@ const Footer = () => {
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; 2025 ARTECO. Все права защищены.</p>
+          <p>&copy; 2026 ARTECO. Все права защищены.</p>
           <div className="footer-social">
             <a href="#">IG</a>
             <a href="#">FB</a>

@@ -62,13 +62,20 @@
   border-bottom: 2px solid var(--text-primary);
 }
 
-.work-title {
-  font-size: 3rem;
+.step-title {
+  font-size: var(--f-h3);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.25;
+  color: #121212;
+  margin-bottom: 15px;
+}
+
+.work-title {
+  font-size: var(--f-h2);
+  font-weight: 700;
+  line-height: 1.25;
   color: var(--text-primary);
-  margin-bottom: 60px;
-  letter-spacing: -1px;
+  margin-bottom: 40px;
 }
 
 .work-arrows {
@@ -128,10 +135,11 @@
   color: var(--text-light);
 }
 
-.work-card-content p {
-  font-size: 1.2rem;
+.step-info p {
+  font-size: var(--f-base);
   line-height: 1.5;
-  max-width: 600px;
+  color: #555;
+  margin: 0 0 20px 0;
 }
 
 .work-card-bottom {
@@ -143,10 +151,13 @@
 .btn-light-solid {
   background-color: var(--text-light);
   color: var(--text-primary);
-  padding: 16px 28px;
-  border-radius: var(--border-radius-lg);
-  font-weight: 600;
+  padding: var(--btn-padding);
+  border-radius: var(--btn-radius);
+  font-weight: 700;
+  font-size: var(--f-btn);
   border: none;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 .giant-num {
@@ -195,7 +206,7 @@
   }
 
   .work-title {
-    font-size: 1.8rem;
+    font-size: var(--f-h2);
     margin-bottom: 30px;
     text-align: left;
   }
@@ -231,8 +242,6 @@
 
   .btn-light-solid {
     width: 100%;
-    padding: 14px 20px;
-    font-size: 0.9rem;
   }
 
   .giant-num {

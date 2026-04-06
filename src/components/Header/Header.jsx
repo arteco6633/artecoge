@@ -15,8 +15,7 @@ const Header = () => {
     { name: 'Каталог', path: '/catalog' },
     { name: 'Проекты', href: '#projects' },
     { name: 'О нас', href: '#about' },
-    { name: 'Как мы работаем', href: '#how-it-works' },
-    { name: 'Статьи', href: '#articles' },
+    { name: 'Статьи', path: '/articles' },
     { name: 'Контакты', href: '#contact' }
   ];
 

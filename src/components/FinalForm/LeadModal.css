@@ -167,13 +167,14 @@
 .modal-submit-btn {
   background: var(--text-primary);
   color: #ffffff;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 18px;
-  border-radius: 50px;
+  font-size: var(--f-btn);
+  font-weight: 700;
+  padding: var(--btn-padding);
+  border-radius: var(--btn-radius);
   border: none;
   cursor: pointer;
   transition: transform 0.2s, background-color 0.2s;
+  width: 100%;
 }
 
 .modal-submit-btn:hover {

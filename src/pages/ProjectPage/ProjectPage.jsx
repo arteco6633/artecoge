@@ -32,6 +32,12 @@ import alpha11 from '../../assets/projects/alpha/11.jpg';
 import alpha12 from '../../assets/projects/alpha/12.jpg';
 import alpha13 from '../../assets/projects/alpha/13.jpg';
 
+import tbilisi1 from '../../assets/projects/tbilisi-gardens/main.jpg';
+import tbilisi2 from '../../assets/projects/tbilisi-gardens/2.jpg';
+import tbilisi3 from '../../assets/projects/tbilisi-gardens/3.jpg';
+import tbilisi4 from '../../assets/projects/tbilisi-gardens/4.jpg';
+import tbilisi5 from '../../assets/projects/tbilisi-gardens/5.jpg';
+
 // Dummy data for projects
 const projectsData = {
   "alpha-home": {
@@ -108,15 +114,16 @@ const projectsData = {
     ],
     images: [heroImg, storageImg, kitchenImg, heroImg]
   },
-  "home-proj-3": {
-    name: "ПРОСТОРНАЯ ГАРДЕРОБНАЯ СИСТЕМА",
-    desc: "Гардеробная комната площадью 18 квадратных метров, спроектированная как витрина любимых вещей. Многоуровневая встроенная подсветка, фасады из стекла с эффектом тонировки и шпонированные полки.",
+  "tbilisi-gardens": {
+    name: "Tbilisi Gardens: Премиум-класс в центре",
+    desc: "Для этого масштабного проекта в ЖК Tbilisi Gardens мы разработали комплексное мебельное решение, которое подчеркивает интерьерную концепцию Висенте Вулфа (Vicente Wolf). Мы сфокусировались на материалах высшего класса: фасады AGT с инновационным покрытием, австрийская фурнитура Blum и продуманное освещение каждой зоны. Кухонный гарнитур и системы хранения выполнены в стиле современного минимализма, идеально вписываясь в архитектурные линии небоскреба. Этот проект — симбиоз нью-йоркского комфорта и безупречного качества исполнения от ARTECO.",
     details: [
-      { label: "Тип", value: "Открытая гардеробная" },
-      { label: "Особенности", value: "LED подсветка каждой полки, Остров" },
-      { label: "Фурнитура", value: "Vibo (Италия)" }
+      { label: "Объект", value: "ЖК Tbilisi Gardens (Тбилиси, Сабуртало)" },
+      { label: "Стиль", value: "Минимализм / Нью-Йоркский стандарт" },
+      { label: "Материалы", value: "Фасады AGT, Эмаль, ЛДСП EGGER" },
+      { label: "Дизайнер интерьера", value: "Vicente Wolf (концепция)" }
     ],
-    images: [storageImg, kitchenImg, heroImg, storageImg]
+    images: [tbilisi1, tbilisi2, tbilisi3, tbilisi4, tbilisi5]
   },
   "home-proj-4": {
     name: "ОФИСНОЕ ПРОСТРАНСТВО",
@@ -203,11 +210,15 @@ const ProjectPage = () => {
           {project.images.map((img, idx) => (
             <div 
               key={idx} 
-              className={`pp-gallery-item ${idx === 0 ? 'pp-gallery-item--featured' : ''}`}
-              style={{ backgroundImage: `url(${img})` }}
-              role="img"
-              aria-label={`Мебель на заказ Грузия, Тбилиси, ${project.name} - фото ${idx + 1}`}
-            ></div>
+              className={`pp-gallery-item ${idx % 3 === 0 ? 'pp-gallery-item--wide' : ''} ${idx % 5 === 0 ? 'pp-gallery-item--tall' : ''}`}
+            >
+              <img 
+                src={img} 
+                alt={`${project.name} - фото ${idx + 1}`} 
+                className="pp-gallery-img"
+                loading="lazy"
+              />
+            </div>
           ))}
         </div>
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Hero.css';
+import { useModal } from '../../ModalContext';
 import heroBg from '../../assets/hero_background.png';
 import bg1 from '../../assets/catalog_kitchen.png';
 import bg2 from '../../assets/catalog_storage.png';
@@ -10,8 +11,6 @@ const usps = [
   { num: '02', title: 'Собственная установка', img: bg2 },
   { num: '03', title: 'Собственное производство', img: bg3 }
 ];
-
-import { useModal } from '../../ModalContext';
 
 const Hero = ({ 
   title = <>АВТОРСКАЯ <span className="highlight-text">МЕБЕЛЬ</span> ПО ДИЗАЙН ПРОЕКТУ</>,
@@ -59,9 +58,9 @@ const Hero = ({
             {/* Orange Button INSIDE the card - DESKTOP ONLY */}
             <button 
               className="btn-orange-pill hero-cta-btn desktop-only"
-              onClick={() => openModal("Индивидуальный подбор", "Оставьте заявку для индивидуального подбора мебели")}
+              onClick={() => openModal("Перейти в каталог", "Оставьте заявку для получения каталога мебели")}
             >
-              Индивидуальный подбор ↘
+              Перейти в каталог ↘
             </button>
           </div>
 
@@ -109,12 +108,9 @@ const Hero = ({
         {/* BUTTON OUTSIDE ON MOBILE */}
         <button 
           className="btn-orange-pill hero-cta-btn-mobile"
-          onClick={() => openModal("Индивидуальный подбор", "Оставьте заявку для индивидуального подбора мебели")}
+          onClick={() => openModal("Перейти в каталог", "Оставьте заявку для получения каталога мебели")}
         >
-          Индивидуальный подбор 
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: '10px' }}>
-            <path d="M7 7l10 10M17 7v10H7" />
-          </svg>
+          Перейти в каталог ↘
         </button>
 
         {showSlider && (

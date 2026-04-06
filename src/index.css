@@ -11,6 +11,27 @@
   --border-radius-md: 20px;
   --header-height: 80px;
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --f-btn: 1.1rem;
+  --btn-padding: 18px 40px;
+  --btn-radius: 50px;
+
+  /* Typography Design System - Desktop */
+  --f-h1: 4rem;
+  --f-h2: 2.2rem;
+  --f-h3: 1.4rem;
+  --f-base: 1rem;
+  --f-label: 0.85rem;
+}
+
+/* Typography Design System - Mobile */
+@media (max-width: 900px) {
+  :root {
+    --f-h1: 2.2rem;
+    --f-h2: 1.7rem;
+    --f-h3: 1.2rem;
+    --f-base: 0.95rem;
+    --f-label: 0.8rem;
+  }
 }
 
 * {
@@ -59,15 +80,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-title {
-  font-size: 3rem;
-  font-weight: 800;
-  text-transform: uppercase;
+  font-size: 2.2rem;
+  font-weight: 700;
   margin-bottom: 2rem;
 }
 
 @media (max-width: 768px) {
   .section-title {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 }
 
@@ -89,10 +109,10 @@ button {
 .btn-primary {
   background-color: var(--primary-orange);
   color: var(--text-light);
-  padding: 16px 36px;
-  border-radius: var(--border-radius-lg);
-  font-weight: 600;
-  font-size: 16px;
+  padding: var(--btn-padding);
+  border-radius: var(--btn-radius);
+  font-weight: 700;
+  font-size: var(--f-btn);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -108,10 +128,10 @@ button {
 .btn-secondary {
   background-color: var(--bg-dark);
   color: var(--text-light);
-  padding: 16px 36px;
-  border-radius: var(--border-radius-lg);
-  font-weight: 600;
-  font-size: 16px;
+  padding: var(--btn-padding);
+  border-radius: var(--btn-radius);
+  font-weight: 700;
+  font-size: var(--f-btn);
   display: inline-flex;
   align-items: center;
   justify-content: center;

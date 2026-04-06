@@ -1,0 +1,218 @@
+.article-single-page {
+  padding-top: 0;
+  background-color: #ffffff;
+}
+
+.article-hero {
+  min-height: 600px;
+  height: 70vh;
+  background-size: cover;
+  background-position: center top;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Flow from top */
+  padding-top: 140px; /* Strong offset to be below ARTECO logo */
+  padding-bottom: 60px;
+  color: #ffffff;
+}
+
+.article-hero-content {
+  max-width: 900px;
+}
+
+.breadcrumb {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 24px;
+  text-decoration: none;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.breadcrumb:hover { color: #fff; }
+
+.article-category-tag {
+  display: inline-block;
+  background-color: var(--primary-orange);
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.article-main-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  color: #ffffff; /* Override global H1 color */
+}
+
+.article-meta {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.article-body-container {
+  padding: 80px 0 120px 0;
+}
+
+.article-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 80px;
+}
+
+.article-content-main {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #121212;
+}
+
+.article-text-wrapper p {
+  margin-bottom: 24px;
+}
+
+.article-sub-h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 48px 0 24px 0;
+  color: var(--text-primary);
+}
+
+.article-li {
+  list-style: none;
+  padding-left: 24px;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.article-li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--primary-orange);
+}
+
+.article-body-image-wrap {
+  margin: 40px 0;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.article-body-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.article-cta-box {
+  background-color: #f7f7f7;
+  padding: 48px;
+  border-radius: 32px;
+  margin-top: 60px;
+  text-align: center;
+}
+
+.article-cta-box h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.article-cta-box p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.article-cta-btn {
+  background-color: var(--text-primary);
+  color: #fff;
+  padding: 16px 40px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.article-sidebar {
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+}
+
+.sidebar-box {
+  background-color: #fcfcfc;
+  padding: 32px;
+  border-radius: 24px;
+  border: 1px solid #f0f0f0;
+}
+
+.sidebar-box h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sidebar-item {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.sidebar-item-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.sidebar-item-text h5 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 6px;
+  color: #121212;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sidebar-item-text span {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+@media (max-width: 1024px) {
+  .article-layout {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .article-hero {
+    height: 400px;
+    padding-bottom: 40px;
+  }
+}

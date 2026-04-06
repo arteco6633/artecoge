@@ -1,32 +1,31 @@
 import React from 'react';
 import './Articles.css';
-import a1 from '../../assets/hero_background.png';
-import a2 from '../../assets/catalog_kitchen.png';
-import a3 from '../../assets/catalog_storage.png';
+import { useNavigate } from 'react-router-dom';
+import { articlesData } from '../../data/articlesData';
 
 const seoDesc1 = "Для дизайнера интерьера этот стиль — возможность создать в проекте «якорь», объект-скульптуру, где массивное основание из грубо обработанного дерева встречается с безупречной геометрией тонкого шпона.";
 const seoDesc2 = "Для дизайнера интерьера Heritage Modern — это идеальный инструмент для создания вневременных пространств, где современное искусство гармонично соседствует с мебелью, имеющей «генетический код» классики.";
 
-const articles = [
-  { id: 1, title: 'Organic Brutalism: Грубый массив и изящный шпон в архитектуре мебели', desc: seoDesc1, img: a2, date: '14.03.2026' },
-  { id: 2, title: 'Heritage Modern: Антикварные силуэты и современные технологии в массиве дерева', desc: seoDesc2, img: a1, date: '14.03.2026' },
-  { id: 3, title: 'Heritage Modern: Антикварные силуэты и современные технологии в массиве дерева', desc: seoDesc2, img: a3, date: '14.03.2026' }
-];
-
 const Articles = () => {
+  const navigate = useNavigate();
+  const summaryArticles = articlesData.slice(0, 3);
+
   return (
     <section className="articles" id="articles">
       <div className="container relative-container">
-        <h2 className="articles-main-title">Статьи</h2>
+        <div className="articles-top">
+          <h2 className="articles-main-title">Экспертные статьи</h2>
+          <button className="view-all-btn" onClick={() => navigate('/articles')}>Все статьи</button>
+        </div>
         
         <div className="articles-slider-wrapper">
           <div className="articles-grid">
-            {articles.map(a => (
-              <div key={a.id} className="article-expanded-card">
+            {summaryArticles.map(a => (
+              <div key={a.id} className="article-expanded-card" onClick={() => navigate(`/article/${a.slug}`)}>
                 <div className="article-img" style={{backgroundImage: `url(${a.img})`}}></div>
                 <div className="article-info">
                   <h3 className="article-title">{a.title}</h3>
-                  <p className="article-excerpt">{a.desc}</p>
+                  <p className="article-excerpt">{a.excerpt}</p>
                   <span className="article-date">{a.date}</span>
                 </div>
               </div>
