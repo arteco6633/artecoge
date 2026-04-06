@@ -36,7 +36,7 @@ const FinalForm = () => {
         body: JSON.stringify({
           name: formData.name,
           phone: formData.phone,
-          _subject: "Заявка с сайта NOTIS (подвал)",
+          _subject: "Заявка с сайта ARTECO (подвал)",
           source: window.location.href
         })
       });

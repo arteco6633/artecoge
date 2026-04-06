@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; 2026 NOTIS. Все права защищены.</p>
+          <p>&copy; 2026 ARTECO. Все права защищены.</p>
           <div className="footer-social">
             <a href="https://wa.me/79651468409" target="_blank" rel="noopener noreferrer">WhatsApp</a>
             <a href="https://t.me/arteco_sale" target="_blank" rel="noopener noreferrer">Telegram</a>

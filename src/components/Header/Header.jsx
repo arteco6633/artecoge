@@ -40,14 +40,14 @@ const Header = () => {
         {/* Desktop Left: Full Logo */}
         <div className="header-left desktop-only">
           <a href="/" className="header-logo">
-            NOTIS
+            ARTECO
           </a>
         </div>
 
         {/* Mobile Left: Icon Logo */}
         <div className="header-left-mobile mobile-only">
           <a href="/" className="header-logo-icon-img">
-            <img src={logoMobile} alt="NOTIS" />
+            <img src={logoMobile} alt="ARTECO" />
           </a>
         </div>
 
