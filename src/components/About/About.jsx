@@ -10,7 +10,7 @@ const About = () => {
           <div className="about-text">
             <h2 className="section-title">Наша философия</h2>
             <p className="about-desc">
-              Мы не просто создаем мебель, мы формируем качественную среду для жизни. Каждый шкаф и кухня, созданные ARTECO, индивидуальны и подстроены под стиль жизни наших клиентов.
+              Мы не просто создаем мебель, мы формируем качественную среду для жизни. Каждый шкаф и кухня, созданные NOTIS, индивидуальны и подстроены под стиль жизни наших клиентов.
             </p>
             <p className="about-desc">
               Премиальные материалы, точная инженерия и продуманный дизайн. Так мы превращаем ваш дом в любимое место.
@@ -31,7 +31,7 @@ const About = () => {
             </div>
           </div>
           <div className="about-image-wrapper">
-             <img src={aboutImg} alt="ARTECO interior layout" className="about-image" />
+             <img src={aboutImg} alt="NOTIS interior layout" className="about-image" />
           </div>
         </div>
       </div>

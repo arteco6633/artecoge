@@ -25,19 +25,19 @@ const Footer = () => {
             <div className="footer-col">
               <h4 className="footer-title">Контакты</h4>
               <div className="footer-contact-info">
-                <a href="tel:+995555123456" className="contact-link">+995 555-123-456</a>
-                <a href="mailto:info@arteco.ge" className="contact-link">info@arteco.ge</a>
+                <a href="https://wa.me/79651468409" target="_blank" rel="noopener noreferrer" className="contact-link">WhatsApp</a>
+                <a href="https://t.me/arteco_sale" target="_blank" rel="noopener noreferrer" className="contact-link">Telegram</a>
+                <a href="tel:+995591088478" className="contact-link">+995 591 088 478</a>
               </div>
             </div>
           </div>
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; 2026 ARTECO. Все права защищены.</p>
+          <p>&copy; 2026 NOTIS. Все права защищены.</p>
           <div className="footer-social">
-            <a href="#">IG</a>
-            <a href="#">FB</a>
-            <a href="#">LN</a>
+            <a href="https://wa.me/79651468409" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href="https://t.me/arteco_sale" target="_blank" rel="noopener noreferrer">Telegram</a>
           </div>
         </div>
       </div>
