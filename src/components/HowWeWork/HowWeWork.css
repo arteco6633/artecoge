@@ -34,13 +34,15 @@
 .work-line {
   flex-grow: 1;
   height: 2px;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
 .work-line-fill {
   position: absolute;
-  top: 0; left: 0; height: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
   background-color: var(--text-primary);
   transition: width 0.3s ease;
 }
@@ -55,7 +57,11 @@
   cursor: pointer;
   transition: color 0.3s;
 }
-.inactive-num:hover { color: #888; }
+
+.inactive-num:hover {
+  color: #888;
+}
+
 .active-num {
   color: var(--text-primary);
   font-weight: 700;
@@ -89,7 +95,7 @@
   border-radius: 50%;
   background-color: transparent;
   color: var(--text-primary);
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,12 +132,15 @@
 
 .work-card-content {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.4) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4) 100%);
   color: var(--text-light);
 }
 
@@ -164,7 +173,7 @@
   font-size: 8rem;
   font-weight: 800;
   line-height: 0.8;
-  color: rgba(255,255,255,0.2);
+  color: rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 900px) {
@@ -193,7 +202,7 @@
     gap: 15px;
     -webkit-overflow-scrolling: touch;
     width: 100%;
-    text-align: left;
+    text-align: center;
   }
 
   .work-nav::-webkit-scrollbar {
@@ -208,11 +217,11 @@
   .work-title {
     font-size: var(--f-h2);
     margin-bottom: 30px;
-    text-align: left;
+    text-align: center;
   }
 
   .work-arrows {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .work-right {
@@ -255,41 +264,100 @@
     padding-top: 100px;
     padding-bottom: 60px;
   }
-  .work-grid { grid-template-columns: 1fr; gap: 40px; }
-  .work-right { height: 400px; }
-  .work-title { font-size: 2.5rem; text-align: center; }
-  .work-nav { justify-content: center; }
-  .work-left { max-width: 100%; text-align: center; }
-  .work-arrows { justify-content: center; }
+
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .work-right {
+    height: 400px;
+  }
+
+  .work-title {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .work-nav {
+    justify-content: center;
+  }
+
+  .work-left {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .work-arrows {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 768px) {
-  .work-title { font-size: 1.8rem; margin-bottom: 30px; }
-  .work-right { height: 350px; }
-  .work-card-content { padding: 24px; }
-  .work-card-content p { font-size: 1rem; }
-  .giant-num { font-size: 5rem; }
+  .work-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+
+  .work-right {
+    height: 350px;
+  }
+
+  .work-card-content {
+    padding: 24px;
+  }
+
+  .work-card-content p {
+    font-size: 1rem;
+  }
+
+  .giant-num {
+    font-size: 5rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .work-right { height: 300px; }
+  .work-right {
+    height: 300px;
+  }
 }
 
 /* Premium Animations */
 
 @keyframes slideUpFade {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeInScale {
-  0% { opacity: 0; transform: scale(0.9); }
-  100% { opacity: 1; transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes zoomOutFade {
-  0% { opacity: 0; transform: scale(1.05); }
-  100% { opacity: 1; transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .anim-title {
@@ -314,4 +382,3 @@
   animation: fadeInScale 0.7s ease-out 0.1s forwards;
   opacity: 0;
 }
-

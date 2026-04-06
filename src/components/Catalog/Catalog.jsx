@@ -56,7 +56,7 @@ const Catalog = () => {
         
         <div className="catalog-header">
           <div className="title-wrapper">
-            <span className="small-label" style={{ marginBottom: '16px', display: 'block', color: '#999', fontSize: '13px' }}>/Каталог</span>
+            <span className="small-label">/Каталог</span>
             <h2 className="catalog-main-title">
               Мы проектируем и изготавливаем мебель<br/>
               под конкретные задачи,<br/>

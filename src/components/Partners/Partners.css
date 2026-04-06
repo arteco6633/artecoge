@@ -1,7 +1,8 @@
 .partners-section {
   padding: 130px 0 100px 0;
   margin-top: -50px;
-  background-color: var(--bg-light); /* #f4f4f4 match */
+  background-color: var(--bg-light);
+  /* #f4f4f4 match */
   position: relative;
   z-index: 1;
 }
@@ -144,13 +145,17 @@
 
 .partner-card-overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
   z-index: 1;
 }
 
 .right-overlay {
-  background: rgba(0,0,0,0.5); /* darker for purely text ones */
+  background: rgba(0, 0, 0, 0.5);
+  /* darker for purely text ones */
 }
 
 .partner-card-content {
@@ -254,8 +259,9 @@
 
 @media (max-width: 900px) {
   .partners-section {
-    padding: 80px 0 60px 0;
-    overflow-x: hidden; /* Prevent any accidental overflow */
+    padding: 100px 0 60px 0;
+    overflow-x: hidden;
+    /* Prevent any accidental overflow */
   }
 
   .partners-grid-layout {
@@ -264,30 +270,37 @@
   }
 
   .partners-tabs-wrap {
-    width: 100vw;
-    margin-left: -16px; /* Offset container padding */
-    padding: 0 16px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin-bottom: 30px;
-  }
-
-  .partners-tabs-wrap::-webkit-scrollbar {
-    display: none;
+    width: 100%;
+    margin-bottom: 24px;
   }
 
   .partners-tabs {
-    width: max-content; /* Still max-content but inside a scrolling wrap */
-    background-color: #ffffff;
-    padding: 6px;
-    border-radius: 40px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    gap: 8px;
+    margin: 0 auto 24px auto;
+    width: 100%;
   }
 
   .partner-tab-btn {
-    padding: 10px 18px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 12px 20px;
     font-size: 13px;
-    white-space: nowrap; /* Prevents wrapping within the tab button */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    flex: 0 1 auto;
+  }
+
+  .partner-tab-btn:last-child {
+    flex: 1 1 100%; /* Make Corporate Projects take full width or be separate */
+    text-align: center;
+    max-width: fit-content;
+    margin: 0 auto;
   }
 
   .tab-name {
@@ -305,7 +318,8 @@
     gap: 20px;
   }
 
-  .card-tall, .card-short {
+  .card-tall,
+  .card-short {
     height: auto;
     min-height: 480px;
   }
@@ -320,9 +334,12 @@
 }
 
 @media (max-width: 768px) {
-  .card-tall, .card-short {
+
+  .card-tall,
+  .card-short {
     min-height: 420px;
   }
+
   .pc-title {
     font-size: var(--f-h3);
   }

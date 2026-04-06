@@ -15,11 +15,12 @@
   background-color: #ffffff;
   border-radius: 20px;
   padding: 32px;
-  box-shadow: 0 4px 25px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.03);
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 24px; /* Space between icon and text */
+  gap: 24px;
+  /* Space between icon and text */
   transition: transform 0.3s ease;
 }
 
@@ -53,7 +54,11 @@
   margin: 0;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
+  .usp-banner {
+    padding: 10px 0 40px;
+  }
+
   .usp-grid {
     grid-template-columns: 1fr;
     gap: 16px;
@@ -61,14 +66,14 @@
 
   .usp-card {
     padding: 24px;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     flex-direction: column;
+    gap: 16px;
   }
 
   .usp-icon-wrap {
-    margin-right: 0;
-    margin-bottom: 16px;
+    margin: 0;
   }
 
   .usp-title {
@@ -83,10 +88,6 @@
 
 @media (max-width: 600px) {
   .usp-grid {
-    grid-template-columns: 1fr;
     gap: 12px;
-  }
-  .usp-card {
-    padding: 24px;
   }
 }

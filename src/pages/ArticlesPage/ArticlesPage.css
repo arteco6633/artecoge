@@ -5,7 +5,7 @@
 
 .articles-hero {
   padding: 120px 0 80px 0;
-  text-align: left;
+  text-align: center;
 }
 
 .ap-header {
@@ -61,7 +61,7 @@
   border-radius: 32px;
   overflow: hidden;
   margin-bottom: 30px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
 }
 
 .ap-card-img {
@@ -217,12 +217,15 @@
   .ap-grid {
     grid-template-columns: 1fr;
   }
+
   .ap-newsletter-box {
     padding: 40px 24px;
   }
+
   .ap-subscribe-form {
     flex-direction: column;
   }
+
   .ap-btn {
     width: 100%;
   }

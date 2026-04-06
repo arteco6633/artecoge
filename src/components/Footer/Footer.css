@@ -23,8 +23,10 @@
   font-size: clamp(4rem, 10vw, 8rem);
   font-weight: 800;
   line-height: 1.1;
-  padding-bottom: 10px; /* Fix vertical clipping */
-  padding-right: 20px; /* Fix horizontal clipping of italic/large fonts */
+  padding-bottom: 10px;
+  /* Fix vertical clipping */
+  padding-right: 20px;
+  /* Fix horizontal clipping of italic/large fonts */
   letter-spacing: -3px;
   margin-bottom: 20px;
   background: linear-gradient(135deg, #fff 0%, #aaa 100%);
@@ -123,7 +125,7 @@
 
   .footer-left {
     max-width: 100%;
-    text-align: left;
+    text-align: center;
   }
 
   .footer-brand {

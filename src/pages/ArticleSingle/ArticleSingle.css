@@ -11,8 +11,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Flow from top */
-  padding-top: 140px; /* Strong offset to be below ARTECO logo */
+  justify-content: flex-start;
+  /* Flow from top */
+  padding-top: 140px;
+  /* Strong offset to be below ARTECO logo */
   padding-bottom: 60px;
   color: #ffffff;
 }
@@ -28,10 +30,12 @@
   color: #ffffff;
   margin-bottom: 24px;
   text-decoration: none;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.breadcrumb:hover { color: #fff; }
+.breadcrumb:hover {
+  color: #fff;
+}
 
 .article-category-tag {
   display: inline-block;
@@ -50,7 +54,8 @@
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 24px;
-  color: #ffffff; /* Override global H1 color */
+  color: #ffffff;
+  /* Override global H1 color */
 }
 
 .article-meta {
@@ -106,7 +111,7 @@
   margin: 40px 0;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .article-body-img {

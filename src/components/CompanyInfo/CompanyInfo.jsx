@@ -13,9 +13,11 @@ const CompanyInfo = () => {
             <span className="small-label">/О компании</span>
             <h2 className="company-title">
               Мы не передаём ключевые этапы подрядчикам и не<br/>
-              перекладываем ответственность <span className="text-gray">— весь путь от идеи до<br/>
-              установленной мебели мы контролируем внутри компании</span>
+              перекладываем ответственность
             </h2>
+            <p className="company-subtitle">
+              — весь путь от идеи до установленной мебели мы контролируем внутри компании
+            </p>
           </div>
 
           <div className="company-content-grid">

@@ -25,7 +25,7 @@
 }
 
 .catalog-subtitle {
-  font-size: var(--f-base);
+  font-size: 0.9rem;
   line-height: 1.6;
   color: var(--text-primary);
   margin: 0 0 0 auto;
@@ -121,9 +121,9 @@
 
 .card-top-title {
   color: white;
-  font-size: var(--f-h3);
-  font-weight: 500;
-  line-height: 1.4;
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.3;
   margin-top: 4px;
 }
 
@@ -196,12 +196,14 @@
 
   .catalog-main-title {
     font-size: var(--f-h2);
+    margin-bottom: 8px;
   }
 
   .catalog-subtitle {
     margin: 0;
     max-width: 100%;
-    font-size: var(--f-base);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
   }
 
   .catalog-grid-1to1 {
@@ -210,20 +212,20 @@
   }
 
   .catalog-card-1to1 {
-    height: 580px;
+    height: 520px; /* More compact on mobile */
   }
 
   .catalog-card-default {
-    padding: 20px;
+    padding: 24px;
   }
 
   .card-top-title {
-    font-size: var(--f-h3);
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 600px) {
   .catalog-card-1to1 {
-    height: 520px;
+    height: 480px;
   }
 }
