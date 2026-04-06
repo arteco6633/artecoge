@@ -37,7 +37,7 @@
 
 .footer-desc {
   color: rgba(255, 255, 255, 0.6);
-  font-size: 1.1rem;
+  font-size: 16px;
   line-height: 1.5;
 }
 
@@ -47,9 +47,10 @@
 }
 
 .footer-title {
-  font-size: 1.25rem;
+  font-size: 24px;
   font-weight: 600;
   margin-bottom: 24px;
+  color: #ffffff;
 }
 
 .footer-nav {
@@ -62,7 +63,7 @@
 .contact-link {
   color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 16px;
   transition: color 0.3s ease;
   display: inline-block;
 }
@@ -80,7 +81,7 @@
 
 .contact-address {
   color: rgba(255, 255, 255, 0.6);
-  font-size: 1rem;
+  font-size: 24px;
   line-height: 1.6;
   margin-top: 8px;
 }

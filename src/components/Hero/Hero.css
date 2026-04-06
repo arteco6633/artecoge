@@ -79,7 +79,7 @@
 }
 
 .hero-title {
-  font-size: var(--f-h1);
+  font-size: 64px;
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 40px;
@@ -100,7 +100,11 @@
   padding: var(--btn-padding);
   border-radius: var(--btn-radius);
   font-weight: 700;
+<<<<<<< HEAD
   font-size: var(--f-h3);
+=======
+  font-size: 16px;
+>>>>>>> 9487b67 (Standardization of Desktop typography and UI refinements (14/16/24/48px) across all major sections (Hero, Partners, Projects, HowWeWork, Faq, FinalForm, Footer). Finalized contact details and accent styling.)
   border: none;
   cursor: pointer;
   display: flex;
@@ -183,7 +187,7 @@
 }
 
 .mini-title {
-  font-size: var(--f-h3);
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.25;
   margin: 0;

@@ -56,7 +56,7 @@
 }
 
 .modal-title {
-  font-size: 2.2rem;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text-primary);
   margin: 0 0 12px 0;
@@ -186,6 +186,5 @@
   .modal-content {
     padding: 30px;
   }
-  .modal-title { font-size: 1.8rem; }
   .modal-close { top: 20px; right: 20px; }
 }

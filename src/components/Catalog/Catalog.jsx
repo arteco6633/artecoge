@@ -58,8 +58,8 @@ const Catalog = () => {
           <div className="title-wrapper">
             <span className="small-label">/Каталог</span>
             <h2 className="catalog-main-title">
-              Мы проектируем и изготавливаем мебель<br/>
-              под конкретные задачи,<br/>
+              Мы проектируем и изготавливаем<br/>
+              мебель под конкретные задачи,<br/>
               <span className="text-gray">а не по шаблонам</span>
             </h2>
           </div>
@@ -103,7 +103,13 @@ const Catalog = () => {
                   <div className="catalog-card-hidden">
                     <p className="hidden-desc">{item.title}</p>
                     <ul className="hidden-bullets">
-                      {item.bullets.map((b, idx) => <li key={idx}>• {b}</li>)}
+                      {item.bullets.map((b, idx) => (
+                        <li key={idx} onClick={(e) => e.stopPropagation()}>
+                          <Link to="/catalog" style={{ color: 'inherit', textDecoration: 'none' }}>
+                            • {b}
+                          </Link>
+                        </li>
+                      ))}
                     </ul>
                     <div className="hidden-footer">
                       <span className="hidden-link">

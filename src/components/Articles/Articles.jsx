@@ -38,7 +38,7 @@ const Articles = () => {
         <section className="articles" id="articles">
             <div className="container relative-container">
                 <div className="articles-top">
-                    <h2 className="articles-main-title">Экспертные статьи</h2>
+                    <h2 className="articles-main-title">Статьи</h2>
                     <button className="view-all-btn" onClick={() => navigate('/articles')}>Все статьи</button>
                 </div>
                 

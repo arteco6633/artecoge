@@ -11,7 +11,7 @@
   --border-radius-md: 20px;
   --header-height: 80px;
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --f-btn: 1.1rem;
+  --f-btn: 16px;
   --btn-padding: 18px 40px;
   --btn-radius: 50px;
 
@@ -160,7 +160,7 @@ button {
 /* Section labels */
 .small-label {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   color: #999;
   margin-bottom: 16px;
   font-weight: 500;

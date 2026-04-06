@@ -35,14 +35,14 @@
 
 .cta-label {
   display: block;
-  font-size: 0.95rem;
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 24px;
   font-weight: 500;
 }
 
 .cta-title {
-  font-size: var(--f-h2);
+  font-size: 48px;
   font-weight: 700;
   line-height: 1.25;
   color: #ffffff;
@@ -54,7 +54,7 @@
   color: #121212;
   padding: var(--btn-padding);
   border-radius: var(--btn-radius);
-  font-size: var(--f-btn);
+  font-size: 16px;
   font-weight: 700;
   border: none;
   cursor: pointer;

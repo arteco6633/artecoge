@@ -65,7 +65,7 @@ const FinalForm = () => {
             <div className="ff-info">
               <span className="ff-label">/Контакты</span>
               <h2 className="ff-title">
-                Обсудим ваш проект и скажем честно — подходим ли мы вам
+              Обсудим ваш <span className="text-orange-italic">проект</span> и скажем честно — подходим ли мы вам
               </h2>
               
               <div className="ff-contacts">
