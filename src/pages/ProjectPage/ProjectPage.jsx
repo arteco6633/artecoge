@@ -1,188 +1,76 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useModal } from '../../ModalContext';
+import { supabase } from '../../supabaseClient';
 import './ProjectPage.css';
-import kitchenImg from '../../assets/catalog_kitchen.png';
-import storageImg from '../../assets/catalog_storage.png';
-import heroImg from '../../assets/hero_background.png';
-
-import archi1 from '../../assets/projects/archi/main.jpg';
-import archi2 from '../../assets/projects/archi/2.jpg';
-import archi3 from '../../assets/projects/archi/3.jpg';
-import archi4 from '../../assets/projects/archi/4.jpg';
-import archi5 from '../../assets/projects/archi/5.jpg';
-import archi6 from '../../assets/projects/archi/6.jpg';
-import archi7 from '../../assets/projects/archi/7.jpg';
-import archi8 from '../../assets/projects/archi/8.jpg';
-import archi9 from '../../assets/projects/archi/9.jpg';
-import archi10 from '../../assets/projects/archi/10.jpg';
-import archi11 from '../../assets/projects/archi/11.jpg';
-
-import alpha1 from '../../assets/projects/alpha/main.jpg';
-import alpha2 from '../../assets/projects/alpha/2.jpg';
-import alpha3 from '../../assets/projects/alpha/3.jpg';
-import alpha4 from '../../assets/projects/alpha/4.jpg';
-import alpha5 from '../../assets/projects/alpha/5.jpg';
-import alpha6 from '../../assets/projects/alpha/6.jpg';
-import alpha7 from '../../assets/projects/alpha/7.jpg';
-import alpha8 from '../../assets/projects/alpha/8.jpg';
-import alpha9 from '../../assets/projects/alpha/9.jpg';
-import alpha10 from '../../assets/projects/alpha/10.jpg';
-import alpha11 from '../../assets/projects/alpha/11.jpg';
-import alpha12 from '../../assets/projects/alpha/12.jpg';
-import alpha13 from '../../assets/projects/alpha/13.jpg';
-
-import tbilisi1 from '../../assets/projects/tbilisi-gardens/main.jpg';
-import tbilisi2 from '../../assets/projects/tbilisi-gardens/2.jpg';
-import tbilisi3 from '../../assets/projects/tbilisi-gardens/3.jpg';
-import tbilisi4 from '../../assets/projects/tbilisi-gardens/4.jpg';
-import tbilisi5 from '../../assets/projects/tbilisi-gardens/5.jpg';
-
-// Dummy data for projects
-const projectsData = {
-  "alpha-home": {
-    name: "ЖК ALPHA HOME: МИНИМАЛИЗМ И ГАРМОНИЯ",
-    desc: "Локация в Диди Дигоми (Грузия, Тбилиси) — это всегда про баланс между городским ритмом и спокойствием природы. Для апартаментов в Alpha Home мы выбрали концепцию «тихой роскоши». Клиент пришел к нам с квартирой в состоянии «белого каркаса», что позволило реализовать проект с нуля. \n\n Мы вдохновились близостью комплекса к набережной Куры. В интерьере использованы фасады AGT в матовом исполнении и корпуса из ЛДСП EGGER с текстурой натурального дерева. Эмаль, нанесенная в 7 слоев, создала идеальную гладкость поверхностей. Этот проект — доказательство того, что мебель в Тбилиси может быть не просто функциональной, но и продолжением мироощущения владельца.",
-    details: [
-      { label: "Объект", value: "ЖК Alpha Home (Тбилиси, Диди Дигоми)" },
-      { label: "Материалы", value: "Фасады AGT, Эмаль (7 слоев), ЛДСП EGGER" },
-      { label: "Фурнитура", value: "Blum (Австрия)" },
-      { label: "Особенности", value: "Зона ТВ с озеленением" }
-    ],
-    images: [alpha1, alpha2, alpha3, alpha4, alpha5, alpha6, alpha7, alpha8, alpha9, alpha10, alpha11, alpha12, alpha13]
-  },
-  "archi-lilac": {
-    name: "ЖК ARCHI LILAC: ЭСТЕТИКА В ДЕТАЛЯХ",
-    desc: "Этот проект стал настоящим вызовом для нашей команды. Задача: создать интерьер, гармонирующий с современной архитектурой ЖК Archi Lilac в Тбилиси (Грузия). Мы вдохновлялись концепцией самого комплекса — местом, где переплетаются тишина района Мухиани и технологичность современного жилья. \n\n Главным акцентом стали встроенные системы хранения с использованием премиальных фасадов AGT и эмали, окрашенной в 7 слоев, что подчеркивает глубину цвета и долговечность. Корпуса мебели выполнены из надежного ЛДСП EGGER. Мы уделили внимание каждой детали — от скрытых креплений до австрийской фурнитуры Blum. Результат — пространство, ставшее органиным продолжением интерьерного кода квартиры в одном из лучших ЖК Тбилиси.",
-    details: [
-      { label: "Объект", value: "ЖК Archi Lilac (Грузия, Тбилиси)" },
-      { label: "Материалы", value: "Фасады AGT, Эмаль (7 слоев), ЛДСП EGGER" },
-      { label: "Фурнитура", value: "Blum (Австрия)" },
-      { label: "Стиль", value: "Современный минимализм" }
-    ],
-    images: [archi8, archi5, archi1, archi2, archi3, archi4, archi6, archi7, archi9, archi10, archi11]
-  },
-  "alia-kitchen": {
-    name: "ЖК ALIA — КУХНЯ",
-    desc: "Просторная светлая кухня, созданная для большой семьи. Мы использовали итальянский керамогранит для столешницы и шпонированные фасады из дуба. Скрытые системы хранения обеспечивают идеальный порядок.",
-    details: [
-      { label: "Стиль", value: "Минимализм" },
-      { label: "Материалы", value: "Шпон дуба, МДФ эмаль, Керамогранит" },
-      { label: "Фурнитура", value: "Blum (Австрия)" },
-      { label: "Срок реализации", value: "45 дней" }
-    ],
-    images: [heroImg, kitchenImg, storageImg, kitchenImg, heroImg]
-  },
-  "premium-park-kitchen": {
-    name: "ЖК PREMIUM PARK",
-    desc: "Современная кухня с островом. Идеальное сочетание темных фасадов и теплой подсветки рабочих зон.",
-    details: [
-      { label: "Стиль", value: "Современный" },
-      { label: "Материалы", value: "Fenix NTM, Кварцевый агломерат" },
-      { label: "Фурнитура", value: "Hettich (Германия)" },
-      { label: "Срок реализации", value: "40 дней" }
-    ],
-    images: [kitchenImg, storageImg, heroImg, storageImg]
-  },
-  "skyline-wardrobe": {
-    name: "ЖК SKYLINE — ГАРДЕРОБ",
-    desc: "Эргономичная гардеробная комната, где продумано каждое отделение: от брючниц до пантографов.",
-    details: [
-      { label: "Площадь", value: "12 кв.м." },
-      { label: "Материалы", value: "ЛДСП Egger, Стекло с тонировкой" },
-      { label: "Особенности", value: "Встроенная LED-подсветка с датчиком" }
-    ],
-    images: [storageImg, kitchenImg, heroImg, storageImg]
-  },
-  "home-proj-1": {
-    name: "УЮТНАЯ МИНИМАЛИСТИЧНАЯ КУХНЯ",
-    desc: "Проект кухни для молодой семьи, где главной задачей было сохранить максимум воздуха и света. Мы использовали скрытую фурнитуру и матовые фасады, которые легко мыть.",
-    details: [
-      { label: "Стиль", value: "Минимализм" },
-      { label: "Материалы", value: "МДФ эмаль матовая, Искусственный камень" },
-      { label: "Фурнитура", value: "Blum" }
-    ],
-    images: [kitchenImg, heroImg, storageImg, kitchenImg]
-  },
-  "home-proj-2": {
-    name: "СОВРЕМЕННЫЙ ЧАСТНЫЙ ИНТЕРЬЕР",
-    desc: "Комплексная меблировка загородного дома. От встроенных шкафов до деревянных стеновых панелей и кухни с островом. Единый стиль и идеальная подгонка под архитектуру.",
-    details: [
-      { label: "Площадь дома", value: "240 кв.м." },
-      { label: "Материалы", value: "Шпон американского ореха, Fenix NTM" },
-      { label: "Срок реализации", value: "3 месяца" }
-    ],
-    images: [heroImg, storageImg, kitchenImg, heroImg]
-  },
-  "tbilisi-gardens": {
-    name: "Tbilisi Gardens: Премиум-класс в центре",
-    desc: "Для этого масштабного проекта в ЖК Tbilisi Gardens мы разработали комплексное мебельное решение, которое подчеркивает интерьерную концепцию Висенте Вулфа (Vicente Wolf). Мы сфокусировались на материалах высшего класса: фасады AGT с инновационным покрытием, австрийская фурнитура Blum и продуманное освещение каждой зоны. Кухонный гарнитур и системы хранения выполнены в стиле современного минимализма, идеально вписываясь в архитектурные линии небоскреба. Этот проект — симбиоз нью-йоркского комфорта и безупречного качества исполнения от ARTECO.",
-    details: [
-      { label: "Объект", value: "ЖК Tbilisi Gardens (Тбилиси, Сабуртало)" },
-      { label: "Стиль", value: "Минимализм / Нью-Йоркский стандарт" },
-      { label: "Материалы", value: "Фасады AGT, Эмаль, ЛДСП EGGER" },
-      { label: "Дизайнер интерьера", value: "Vicente Wolf (концепция)" }
-    ],
-    images: [tbilisi1, tbilisi2, tbilisi3, tbilisi4, tbilisi5]
-  },
-  "home-proj-4": {
-    name: "ОФИСНОЕ ПРОСТРАНСТВО",
-    desc: "Разработка и производство мебели для креативного агентства в Тбилиси. Изготовили столы для open-space сложной геометрии, акустические перегородки и мебель для переговорных комнат.",
-    details: [
-      { label: "Тип проекта", value: "B2B / Коммерция" },
-      { label: "Материалы", value: "Фанера высшего сорта, HPL пластик" },
-      { label: "Срок реализации", value: "45 дней" }
-    ],
-    images: [heroImg, kitchenImg, storageImg, heroImg]
-  },
-  "home-proj-5": {
-    name: "КОММЕРЧЕСКАЯ ЗОНА РЕСЕПШН",
-    desc: "Статусная стойка ресепшн для бутик-отеля. Использовали массив дуба в сочетании с латунью и натуральным камнем. Стойка спроектирована с учетом эргономики рабочих мест сотрудников.",
-    details: [
-      { label: "Материалы", value: "Массив дуба, Натуральный мрамор, Латунь" },
-      { label: "Стиль", value: "Неоклассика / Модерн" }
-    ],
-    images: [storageImg, heroImg, kitchenImg, storageImg]
-  },
-  "home-proj-6": {
-    name: "ПРЕМИАЛЬНЫЙ МЕБЕЛЬНЫЙ СЕТ",
-    desc: "Эксклюзивный мебельный сет для гостиной: TV-зона, интегрированная система хранения и настенные панели с акустической подложкой. Сложная фрезеровка фасадов и интеграция умного дома.",
-    details: [
-      { label: "Объект", value: "Пентхаус" },
-      { label: "Особенности", value: "Сложная фрезеровка, скрытая проводка" },
-      { label: "Площадь покрытия", value: "35 кв.м." }
-    ],
-    images: [kitchenImg, storageImg, heroImg, kitchenImg]
-  }
-};
 
 const ProjectPage = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
   const { openModal } = useModal();
   
-  // Try to find the project, or use a default mock
-  const project = projectsData[projectId] || {
-    name: "ПРОЕКТ В РАЗРАБОТКЕ",
-    desc: "Детальное описание этого проекта скоро появится здесь. Мы подготавливаем лучшие фотографии и технические особенности.",
-    details: [
-      { label: "Статус", value: "В процессе" },
-      { label: "Материалы", value: "Премиальные" }
-    ],
-    images: [heroImg, storageImg, kitchenImg, heroImg]
-  };
-
-  // Get 'other projects' randomly or sequentially
-  const otherProjectsFull = Object.entries(projectsData)
-    .filter(([id, _]) => id !== projectId)
-    .map(([id, data]) => ({ id, ...data }));
-    
-  // Show 2 other projects
-  const otherProjects = otherProjectsFull.slice(0, 2);
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [activeImageIdx, setActiveImageIdx] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [otherProjects, setOtherProjects] = useState([]);
 
   useEffect(() => {
+    fetchProject();
+    fetchOtherProjects();
     window.scrollTo(0, 0);
   }, [projectId]);
+
+  const fetchProject = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('projects')
+      .select('*')
+      .eq('slug', projectId)
+      .single();
+
+    if (data) {
+      setProject(data);
+    } else {
+      console.error("Project not found:", error);
+    }
+    setLoading(false);
+  };
+
+  const fetchOtherProjects = async () => {
+    const { data } = await supabase
+      .from('projects')
+      .select('*')
+      .neq('slug', projectId)
+      .limit(2);
+    setOtherProjects(data || []);
+  };
+
+  const openLightbox = (idx) => {
+    setActiveImageIdx(idx);
+    setIsLightboxOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    setIsLightboxOpen(false);
+    document.body.style.overflow = 'auto';
+  };
+
+  const nextImage = (e) => {
+    e?.stopPropagation();
+    if (!project?.images) return;
+    setActiveImageIdx((prev) => (prev + 1) % project.images.length);
+  };
+
+  const prevImage = (e) => {
+    e?.stopPropagation();
+    if (!project?.images) return;
+    setActiveImageIdx((prev) => (prev - 1 + project.images.length) % project.images.length);
+  };
+
+  if (loading) return <div className="admin-loading" style={{padding: '200px 0', textAlign:'center', color: '#fff'}}>Загрузка проекта...</div>;
+  if (!project) return <div style={{padding: '200px 0', textAlign:'center', color: '#fff'}}>Проект не найден. <button onClick={() => navigate('/')}>На главную</button></div>;
 
   return (
     <div className="project-page">
@@ -191,36 +79,75 @@ const ProjectPage = () => {
           ← Назад в каталог
         </button>
 
-        <div className="pp-header">
-          <h1 className="pp-title">{project.name}</h1>
-          <div className="pp-info">
-            <p className="pp-desc">{project.desc}</p>
-            <div className="pp-details">
-              {project.details.map((item, idx) => (
-                <div key={idx} className="pp-detail-item">
-                  <span className="pp-detail-label">{item.label}</span>
-                  <span className="pp-detail-value">{item.value}</span>
-                </div>
-              ))}
+        <div className="pp-content-layout">
+          <div className="pp-header">
+            <h1 className="pp-title">{project.name}</h1>
+            <div className="pp-info">
+              <p className="pp-desc">{project.desc}</p>
+              <div className="pp-details">
+                {project.details && project.details.map((item, idx) => (
+                  <div key={idx} className="pp-detail-item">
+                    <span className="pp-detail-label">{item.label}</span>
+                    <span className="pp-detail-value">{item.value}</span>
+                  </div>
+                ))}
+                <button 
+                  className="btn-primary" 
+                  style={{marginTop:'20px', width:'100%'}}
+                  onClick={() => openModal("Обсудить проект", project.name)}
+                >
+                  Обсудить мой проект
+                </button>
+              </div>
             </div>
           </div>
+
+          {project.images && project.images.length > 0 && (
+            <div className="pp-slider-section">
+              <div className="pp-slider-container">
+                <div className="pp-slider-track" style={{ transform: `translateX(-${activeImageIdx * 100}%)` }}>
+                  {project.images.map((img, idx) => (
+                    <div key={idx} className="pp-slide" onClick={() => openLightbox(idx)}>
+                      <img src={img} alt={`${project.name} photo ${idx + 1}`} />
+                    </div>
+                  ))}
+                </div>
+                {project.images.length > 1 && (
+                    <>
+                        <button className="pp-slider-arrow prev" onClick={(e) => { e.stopPropagation(); prevImage(e); }}>‹</button>
+                        <button className="pp-slider-arrow next" onClick={(e) => { e.stopPropagation(); nextImage(e); }}>›</button>
+                    </>
+                )}
+              </div>
+              
+              <div className="pp-thumbnails">
+                {project.images.map((img, idx) => (
+                  <div 
+                    key={idx} 
+                    className={`pp-thumb ${activeImageIdx === idx ? 'active' : ''}`}
+                    onClick={() => setActiveImageIdx(idx)}
+                  >
+                    <img src={img} alt="thumb" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
-        <div className="pp-gallery">
-          {project.images.map((img, idx) => (
-            <div 
-              key={idx} 
-              className={`pp-gallery-item ${idx % 3 === 0 ? 'pp-gallery-item--wide' : ''} ${idx % 5 === 0 ? 'pp-gallery-item--tall' : ''}`}
-            >
-              <img 
-                src={img} 
-                alt={`${project.name} - фото ${idx + 1}`} 
-                className="pp-gallery-img"
-                loading="lazy"
-              />
+        {isLightboxOpen && project.images && (
+          <div className="pp-lightbox" onClick={closeLightbox}>
+            <button className="pp-lightbox-close">✕</button>
+            <button className="pp-lightbox-nav prev" onClick={prevImage}>‹</button>
+            <div className="pp-lightbox-content">
+              <img src={project.images[activeImageIdx]} alt="Lightbox" />
+              <div className="pp-lightbox-counter">
+                {activeImageIdx + 1} / {project.images.length}
+              </div>
             </div>
-          ))}
-        </div>
+            <button className="pp-lightbox-nav next" onClick={nextImage}>›</button>
+          </div>
+        )}
 
         {otherProjects.length > 0 && (
           <div className="pp-other-projects">
@@ -230,7 +157,7 @@ const ProjectPage = () => {
                 <div 
                   key={other.id} 
                   className="pp-other-card" 
-                  onClick={() => navigate(`/project/${other.id}`)}
+                  onClick={() => navigate(`/project/${other.slug}`)}
                 >
                   <div className="pp-other-img" style={{ backgroundImage: `url(${other.images[0]})` }}></div>
                   <div className="pp-other-info">
@@ -243,7 +170,7 @@ const ProjectPage = () => {
           </div>
         )}
 
-        <div className="pp-cta" style={{ backgroundImage: `url(${heroImg})` }}>
+        <div className="pp-cta" style={{ backgroundImage: `url(${project.images[0]})` }}>
           <h2 className="pp-cta-title">Понравился проект?</h2>
           <p className="pp-cta-desc">Оставьте заявку, и мы адаптируем подобное решение под ваши размеры и бюджет.</p>
           <button 
@@ -257,5 +184,6 @@ const ProjectPage = () => {
     </div>
   );
 };
+
 
 export default ProjectPage;

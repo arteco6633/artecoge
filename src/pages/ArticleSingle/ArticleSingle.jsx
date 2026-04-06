@@ -89,7 +89,7 @@ const ArticleSingle = () => {
                             <div className="article-text-wrapper">
                                 {article.content.split('\n').map((line, idx) => {
                                     const trimmed = line.trim();
-                                    if (!trimmed) return null;
+                                    if (!trimmed) return <br key={idx} />;
                                     
                                     if (trimmed.startsWith('###')) {
                                         return <h3 key={idx} className="article-sub-h3">{trimmed.replace('###', '').trim()}</h3>;
@@ -98,9 +98,11 @@ const ArticleSingle = () => {
                                     if (trimmed.startsWith('-')) {
                                         return <li key={idx} className="article-li">{trimmed.replace('-', '').trim()}</li>;
                                     }
-                                    
-                                    if (trimmed.startsWith('[[')) {
-                                        const imgKey = trimmed.replace('[[', '').replace(']]', '');
+
+                                    // Handle [[IMG1]] or just IMG1
+                                    const imgKeyMatch = trimmed.match(/^\[?\[?(IMG\d+)\]?\]?$/);
+                                    if (imgKeyMatch) {
+                                        const imgKey = imgKeyMatch[1];
                                         if (article.images && article.images[imgKey]) {
                                             return (
                                                 <div key={idx} className="article-body-image-wrap">

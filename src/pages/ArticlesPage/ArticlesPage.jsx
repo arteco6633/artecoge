@@ -23,10 +23,12 @@ const ArticlesPage = () => {
 
         if (error) {
             console.error('Error fetching articles:', error);
-            setArticles(staticArticles); // Fallback if no table
+            setArticles(staticArticles);
         } else {
-            // Combine with static articles for now or just use dynamic
-            setArticles([...(data || []), ...staticArticles]);
+            // Priority to DB articles, then append unique static ones
+            const dbSlugs = new Set((data || []).map(a => a.slug));
+            const uniqueStatic = staticArticles.filter(a => !dbSlugs.has(a.slug));
+            setArticles([...(data || []), ...uniqueStatic]);
         }
         setLoading(false);
     };

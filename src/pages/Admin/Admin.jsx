@@ -3,201 +3,275 @@ import { supabase } from '../../supabaseClient';
 import './Admin.css';
 
 const Admin = () => {
+    const [activeTab, setActiveTab] = useState('articles'); // 'articles' or 'projects'
     const [articles, setArticles] = useState([]);
+    const [projects, setProjects] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [editingArticle, setEditingArticle] = useState(null);
+    const [editingItem, setEditingItem] = useState(null);
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
     const fileInputRef = useRef(null);
+    const textareaRef = useRef(null);
     
-    const [formData, setFormData] = useState({
-        title: '',
-        slug: '',
-        category: '',
-        date: '',
-        img: '',
-        excerpt: '',
-        content: '',
-        images: {} // Map of tag -> url
+    // Form for Articles
+    const [articleForm, setArticleForm] = useState({
+        title: '', slug: '', category: '', date: '', img: '', excerpt: '', content: '', images: {}
+    });
+
+    // Form for Projects
+    const [projectForm, setProjectForm] = useState({
+        name: '', slug: '', desc: '', images: [], 
+        details: [
+            { label: 'Объект', value: '' },
+            { label: 'Материалы', value: '' },
+            { label: 'Фурнитура', value: '' }
+        ]
     });
 
     useEffect(() => {
-        fetchArticles();
-    }, []);
+        fetchData();
+    }, [activeTab]);
 
-    const fetchArticles = async () => {
+    const fetchData = async () => {
         setLoading(true);
-        const { data, error } = await supabase
-            .from('articles')
-            .select('*')
-            .order('created_at', { ascending: false });
-
-        if (error) {
-            console.error('Error fetching articles:', error);
-            setArticles([]);
-        } else {
+        if (activeTab === 'articles') {
+            const { data } = await supabase.from('articles').select('*').order('created_at', { ascending: false });
             setArticles(data || []);
+        } else {
+            const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
+            setProjects(data || []);
         }
         setLoading(false);
     };
 
-    const handleOpenModal = (article = null) => {
-        if (article) {
-            setEditingArticle(article);
-            setFormData({
-                title: article.title || '',
-                slug: article.slug || '',
-                category: article.category || '',
-                date: article.date || '',
-                img: article.img || '',
-                excerpt: article.excerpt || '',
-                content: article.content || '',
-                images: article.images || {}
-            });
+    const generateSlug = (text) => {
+        return text
+            .trim()
+            .toLowerCase()
+            .replace(/[^\w\s-а-яА-ЯёЁ]/g, '') // Allow letters, numbers, spaces, and dashes
+            .replace(/\s+/g, '-')             // Replace spaces with dashes
+            .replace(/-+/g, '-')              // Replace multiple dashes with single dash
+            .replace(/^-+|-+$/g, '');         // Remove leading/trailing dashes
+    };
+
+    const handleOpenModal = (item = null) => {
+        if (activeTab === 'articles') {
+            if (item) {
+                setEditingItem(item);
+                setArticleForm({ ...item, images: item.images || {} });
+            } else {
+                setEditingItem(null);
+                setArticleForm({
+                    title: '', slug: '', category: 'Тренды', 
+                    date: new Date().toLocaleDateString('ru-RU'),
+                    img: '', excerpt: '', content: '', images: {}
+                });
+            }
         } else {
-            setEditingArticle(null);
-            setFormData({
-                title: '',
-                slug: '',
-                category: 'Тренды',
-                date: new Date().toLocaleDateString('ru-RU'),
-                img: '',
-                excerpt: '',
-                content: '',
-                images: {}
-            });
+            if (item) {
+                setEditingItem(item);
+                setProjectForm({ 
+                    name: item.name || '', 
+                    slug: item.slug || '', 
+                    desc: item.desc || '', 
+                    images: item.images || [],
+                    details: (item.details && item.details.length > 0) ? item.details : [
+                        { label: 'Объект', value: '' },
+                        { label: 'Материалы', value: '' },
+                        { label: 'Фурнитура', value: '' }
+                    ]
+                });
+            } else {
+                setEditingItem(null);
+                setProjectForm({
+                    name: '', slug: '', desc: '', images: [],
+                    details: [
+                        { label: 'Объект', value: '' },
+                        { label: 'Материалы', value: '' },
+                        { label: 'Фурнитура', value: '' }
+                    ]
+                });
+            }
         }
         setIsModalOpen(true);
     };
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
-        setEditingArticle(null);
+        setEditingItem(null);
     };
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e, formType) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-        
-        if (name === 'title' && !formData.slug && !editingArticle) {
-            const generatedSlug = value
-                .toLowerCase()
-                .replace(/[^\w\s-]/g, '')
-                .replace(/\s+/g, '-');
-            setFormData(prev => ({ ...prev, slug: generatedSlug }));
+        if (formType === 'article') {
+            setArticleForm(prev => {
+                const updated = { ...prev, [name]: value };
+                if (name === 'title' && !editingItem) {
+                    updated.slug = generateSlug(value);
+                }
+                return updated;
+            });
+        } else {
+            setProjectForm(prev => {
+                const updated = { ...prev, [name]: value };
+                if (name === 'name' && !editingItem) {
+                    updated.slug = generateSlug(value);
+                }
+                return updated;
+            });
         }
+    };
+
+    const insertToTextarea = (text) => {
+        if (!textareaRef.current) return;
+        const start = textareaRef.current.selectionStart;
+        const end = textareaRef.current.selectionEnd;
+        const content = articleForm.content;
+        const newContent = content.substring(0, start) + text + content.substring(end);
+        setArticleForm(prev => ({ ...prev, content: newContent }));
+        
+        // Return focus
+        setTimeout(() => {
+            textareaRef.current.focus();
+            textareaRef.current.setSelectionRange(start + text.length, start + text.length);
+        }, 10);
+    };
+
+    // Project Details Management
+    const handleDetailChange = (index, field, value) => {
+        const newDetails = [...projectForm.details];
+        newDetails[index][field] = value;
+        setProjectForm(prev => ({ ...prev, details: newDetails }));
+    };
+
+    const addDetail = () => {
+        setProjectForm(prev => ({ ...prev, details: [...prev.details, { label: '', value: '' }] }));
+    };
+
+    const removeDetail = (index) => {
+        setProjectForm(prev => ({ ...prev, details: projectForm.details.filter((_, i) => i !== index) }));
     };
 
     const handleImageUpload = async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+        const files = Array.from(e.target.files);
+        if (files.length === 0) return;
 
         setUploading(true);
-        const fileExt = file.name.split('.').pop();
-        const fileName = `${Math.random()}.${fileExt}`;
-        const filePath = `articles/${fileName}`;
+        const bucket = activeTab === 'articles' ? 'articles' : 'projects';
+        const newUrls = [];
 
-        // Upload to 'articles' bucket
-        const { error: uploadError, data } = await supabase.storage
-            .from('articles')
-            .upload(filePath, file);
+        for (const file of files) {
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
+            const filePath = `${fileName}`;
 
-        if (uploadError) {
-            alert('Ошибка загрузки: ' + uploadError.message + '\nУбедитесь, что вы создали бакет "articles" в Supabase Storage и сделали его публичным.');
-            setUploading(false);
-            return;
+            const { error: uploadError } = await supabase.storage.from(bucket).upload(filePath, file);
+
+            if (uploadError) {
+                console.error("Upload error:", uploadError);
+                alert(`Ошибка загрузки: ${uploadError.message}. Убедитесь, что бакет "${bucket}" создан и настройки RLS позволяют загрузку!`);
+                setUploading(false);
+                return;
+            }
+
+            const { data: { publicUrl } } = supabase.storage.from(bucket).getPublicUrl(filePath);
+            newUrls.push(publicUrl);
         }
 
-        // Get Public URL
-        const { data: { publicUrl } } = supabase.storage
-            .from('articles')
-            .getPublicUrl(filePath);
-
-        // Add to images object
-        const imageCount = Object.keys(formData.images).length + 1;
-        const tag = `IMG${imageCount}`;
-        
-        setFormData(prev => ({
-            ...prev,
-            img: prev.img || publicUrl, // Set as main img if none exists
-            images: { ...prev.images, [tag]: publicUrl }
-        }));
+        if (activeTab === 'articles') {
+            const updatedImages = { ...articleForm.images };
+            newUrls.forEach(url => {
+                const tag = `IMG${Object.keys(updatedImages).length + 1}`;
+                updatedImages[tag] = url;
+            });
+            setArticleForm(prev => ({
+                ...prev,
+                img: prev.img || newUrls[0],
+                images: updatedImages
+            }));
+        } else {
+            setProjectForm(prev => ({
+                ...prev,
+                images: [...prev.images, ...newUrls]
+            }));
+        }
         setUploading(false);
     };
 
-    const insertTag = (tag) => {
-        const textarea = document.getElementById('article-content-textarea');
-        const start = textarea.selectionStart;
-        const end = textarea.selectionEnd;
-        const text = textarea.value;
-        const before = text.substring(0, start);
-        const after = text.substring(end, text.length);
-        
-        const newText = before + tag + after;
-        setFormData(prev => ({ ...prev, content: newText }));
-        
-        // Reset focus and selection
-        setTimeout(() => {
-            textarea.focus();
-            textarea.setSelectionRange(start + tag.length, start + tag.length);
-        }, 0);
+    const removeImage = (indexOrTag) => {
+        if (activeTab === 'articles') {
+            const updatedImages = { ...articleForm.images };
+            delete updatedImages[indexOrTag];
+            setArticleForm(prev => ({ ...prev, images: updatedImages }));
+        } else {
+            setProjectForm(prev => ({
+                ...prev,
+                images: prev.images.filter((_, i) => i !== indexOrTag)
+            }));
+        }
     };
 
     const handleSave = async (e) => {
         e.preventDefault();
         setLoading(true);
+        const table = activeTab === 'articles' ? 'articles' : 'projects';
+        
+        // Ensure slug is clean one last time
+        const cleanSlug = generateSlug(activeTab === 'articles' ? articleForm.slug : projectForm.slug);
+        const payload = activeTab === 'articles' 
+            ? { ...articleForm, slug: cleanSlug } 
+            : { ...projectForm, slug: cleanSlug };
 
-        const payload = { ...formData };
-
-        if (editingArticle) {
-            const { error } = await supabase
-                .from('articles')
-                .update(payload)
-                .eq('id', editingArticle.id);
-
-            if (error) alert('Error updating: ' + error.message);
+        let result;
+        if (editingItem) {
+            result = await supabase.from(table).update(payload).eq('id', editingItem.id);
         } else {
-            const { error } = await supabase
-                .from('articles')
-                .insert([payload]);
-
-            if (error) alert('Error creating: ' + error.message);
+            result = await supabase.from(table).insert([payload]);
         }
 
+        if (result.error) {
+            alert("Ошибка сохранения: " + result.error.message);
+        } else {
+            handleCloseModal();
+            fetchData();
+        }
         setLoading(false);
-        handleCloseModal();
-        fetchArticles();
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Вы уверены, что хотите удалить эту статью?')) return;
-        setLoading(true);
-        const { error } = await supabase.from('articles').delete().eq('id', id);
-        if (error) alert('Error deleting: ' + error.message);
-        setLoading(false);
-        fetchArticles();
+        if (!window.confirm('Вы уверены, что хотите удалить этот элемент?')) return;
+        const table = activeTab === 'articles' ? 'articles' : 'projects';
+        const { error } = await supabase.from(table).delete().eq('id', id);
+        if (error) alert("Ошибка удаления: " + error.message);
+        fetchData();
     };
 
-    // Render Preview Logic
+    // Render Article Preview
     const renderPreview = () => {
-        if (!formData.content) return <p style={{color: '#444'}}>Предпросмотр будет здесь...</p>;
+        if (!articleForm.content) return <p style={{color: '#666'}}>Контент статьи пуст...</p>;
         
-        return formData.content.split('\n').map((line, idx) => {
+        return articleForm.content.split('\n').map((line, idx) => {
             const trimmed = line.trim();
             if (!trimmed) return <br key={idx} />;
             
             if (trimmed.startsWith('###')) {
-                return <h3 key={idx}>{trimmed.replace('###', '').trim()}</h3>;
+                return <h3 key={idx} className="preview-h3">{trimmed.replace('###', '').trim()}</h3>;
             }
             
             if (trimmed.startsWith('-')) {
-                return <li key={idx}>{trimmed.replace('-', '').trim()}</li>;
+                return <li key={idx} className="preview-li">{trimmed.replace('-', '').trim()}</li>;
             }
-            
-            if (trimmed.startsWith('[[')) {
-                const imgKey = trimmed.replace('[[', '').replace(']]', '');
-                if (formData.images && formData.images[imgKey]) {
-                    return <img key={idx} src={formData.images[imgKey]} alt="article" />;
+
+            const imgKeyMatch = trimmed.match(/^\[?\[?(IMG\d+)\]?\]?$/);
+            if (imgKeyMatch) {
+                const imgKey = imgKeyMatch[1];
+                if (articleForm.images && articleForm.images[imgKey]) {
+                    return (
+                        <div key={idx} className="preview-img-wrap">
+                            <img src={articleForm.images[imgKey]} alt="preview" />
+                            <small>{imgKey}</small>
+                        </div>
+                    );
                 }
             }
 
@@ -208,159 +282,164 @@ const Admin = () => {
     return (
         <div className="admin-container">
             <div className="container">
+                <div className="admin-tabs">
+                    <button className={activeTab === 'articles' ? 'active' : ''} onClick={() => setActiveTab('articles')}>Статьи</button>
+                    <button className={activeTab === 'projects' ? 'active' : ''} onClick={() => setActiveTab('projects')}>Проекты</button>
+                </div>
+
                 <div className="admin-header">
-                    <h1 className="admin-title">Управление контентом</h1>
+                    <h1 className="admin-title">{activeTab === 'articles' ? 'Управление статьями' : 'Управление проектами'}</h1>
                     <button className="admin-add-btn" onClick={() => handleOpenModal()}>
-                        + Новая статья
+                        + {activeTab === 'articles' ? 'Добавить статью' : 'Добавить проект'}
                     </button>
                 </div>
 
-                {loading && !isModalOpen ? (
-                    <div className="admin-loading">Загрузка данных...</div>
-                ) : (
-                    <div className="admin-articles-list">
-                        {articles.length === 0 ? (
-                            <p style={{color: '#666', textAlign: 'center', marginTop: '40px'}}>Статей в базе нет.</p>
-                        ) : (
-                            articles.map(article => (
-                                <div key={article.id} className="admin-article-item">
-                                    <div className="admin-article-info">
-                                        <h3>{article.title}</h3>
-                                        <p>{article.category} • {article.date} • /{article.slug}</p>
-                                    </div>
-                                    <div className="admin-article-actions">
-                                        <button className="admin-btn-edit" onClick={() => handleOpenModal(article)}>Изменить</button>
-                                        <button className="admin-btn-delete" onClick={() => handleDelete(article.id)}>Удалить</button>
-                                    </div>
+                <div className="admin-list">
+                    {loading && !isModalOpen ? (
+                        <div className="admin-loading">Загрузка данных...</div>
+                    ) : (
+                        (activeTab === 'articles' ? articles : projects).map(item => (
+                            <div key={item.id} className="admin-item-card">
+                                <div className="admin-item-preview" style={{ backgroundImage: `url(${item.img || (item.images && item.images[0])})` }}>
+                                    {!item.img && !(item.images && item.images[0]) && <div style={{padding: '20px', color: '#666'}}>Нет фото</div>}
                                 </div>
-                            ))
-                        )}
-                    </div>
-                )}
+                                <div className="admin-item-info">
+                                    <h3>{item.title || item.name}</h3>
+                                    <p>URL-адрес: /{item.slug}</p>
+                                </div>
+                                <div className="admin-item-actions">
+                                    <button onClick={() => handleOpenModal(item)}>Править</button>
+                                    <button className="delete" onClick={() => handleDelete(item.id)}>Удалить</button>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
             </div>
 
             {isModalOpen && (
                 <div className="admin-modal-overlay">
-                    <div className="admin-modal">
-                        <div className="admin-modal-header" style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: '30px'}}>
-                            <h2 style={{margin:0}}>{editingArticle ? 'Редактирование статьи' : 'Создание статьи'}</h2>
-                            <button className="admin-btn-cancel" onClick={handleCloseModal}>✕ Закрыть</button>
+                    <div className="admin-modal full-screen">
+                        <div className="admin-modal-header">
+                            <h2>{editingItem ? 'Редактирование' : 'Новое'} / {activeTab === 'articles' ? 'Статья' : 'Проект'}</h2>
+                            <button className="close-btn" onClick={handleCloseModal}>✕</button>
                         </div>
                         
-                        <div className="admin-editor-layout">
-                            <div className="admin-editor-form">
-                                <form onSubmit={handleSave} className="admin-form">
-                                    <div className="admin-form-group full" style={{marginBottom:'20px'}}>
-                                        <label>Заголовок статьи</label>
-                                        <input 
-                                            type="text" name="title" value={formData.title} 
-                                            onChange={handleInputChange} required className="admin-input"
-                                            placeholder="Введите заголовок..."
-                                        />
-                                    </div>
-
-                                    <div className="admin-form-grid" style={{marginBottom:'20px'}}>
-                                        <div className="admin-form-group">
-                                            <label>URL (Slug)</label>
-                                            <input 
-                                                type="text" name="slug" value={formData.slug} 
-                                                onChange={handleInputChange} required className="admin-input"
-                                            />
-                                        </div>
-                                        <div className="admin-form-group">
-                                            <label>Категория</label>
-                                            <input 
-                                                type="text" name="category" value={formData.category} 
-                                                onChange={handleInputChange} className="admin-input"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="admin-image-upload-zone" onClick={() => fileInputRef.current.click()}>
-                                        <input 
-                                            type="file" ref={fileInputRef} style={{display:'none'}} 
-                                            accept="image/*" onChange={handleImageUpload} 
-                                        />
-                                        {uploading ? 'Загрузка фото...' : 'Нажмите, чтобы загрузить фотографии в статью'}
-                                    </div>
-
-                                    {Object.keys(formData.images).length > 0 && (
-                                        <div style={{marginBottom:'20px'}}>
-                                            <label>Галерея статьи:</label>
-                                            <div className="admin-image-grid">
-                                                {Object.entries(formData.images).map(([tag, url]) => (
-                                                    <div 
-                                                        key={tag} 
-                                                        className={`admin-image-thumb ${formData.img === url ? 'is-cover' : ''}`}
-                                                    >
-                                                        <img src={url} alt={tag} />
-                                                        {formData.img === url && <span className="admin-cover-badge">Обложка</span>}
-                                                        <div className="admin-image-thumb-overlay">
-                                                            <button 
-                                                                type="button" 
-                                                                className="admin-overlay-btn"
-                                                                onClick={() => insertTag(`[[${tag}]]`)}
-                                                            >
-                                                                Вставить в текст
-                                                            </button>
-                                                            <button 
-                                                                type="button" 
-                                                                className="admin-overlay-btn secondary"
-                                                                onClick={() => setFormData(prev => ({ ...prev, img: url }))}
-                                                            >
-                                                                Сделать обложкой
-                                                            </button>
-                                                        </div>
-                                                        <span className="admin-image-tag-label">{tag}</span>
+                        <form onSubmit={handleSave} className="admin-editor-form">
+                            <div className="editor-columns">
+                                <div className="editor-main">
+                                    {activeTab === 'articles' ? (
+                                        <div className="article-editor-split">
+                                            <div className="editor-form-pane">
+                                                <div className="form-group">
+                                                    <label>Заголовок статьи</label>
+                                                    <input type="text" name="title" value={articleForm.title} onChange={(e) => handleInputChange(e, 'article')} required placeholder="Например: Как выбрать идеальное кресло" />
+                                                </div>
+                                                <div className="form-row">
+                                                    <div className="form-group">
+                                                        <label>Slug (часть URL)</label>
+                                                        <input type="text" name="slug" value={articleForm.slug} onChange={(e) => handleInputChange(e, 'article')} required placeholder="kak-vybrat-kreslo" />
                                                     </div>
-                                                ))}
+                                                    <div className="form-group">
+                                                        <label>Категория</label>
+                                                        <input type="text" name="category" value={articleForm.category} onChange={(e) => handleInputChange(e, 'article')} placeholder="Тренды" />
+                                                    </div>
+                                                </div>
+                                                
+                                                <div className="article-toolbar">
+                                                    <button type="button" onClick={() => insertToTextarea('### ')} title="Заголовок">H3</button>
+                                                    <button type="button" onClick={() => insertToTextarea('- ')} title="Список">List</button>
+                                                    <button type="button" onClick={() => insertToTextarea('\nIMG1\n')} title="Вставить фото 1">IMG1</button>
+                                                    <button type="button" onClick={() => insertToTextarea('\nIMG2\n')} title="Вставить фото 2">IMG2</button>
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <textarea 
+                                                        ref={textareaRef}
+                                                        name="content" 
+                                                        value={articleForm.content} 
+                                                        onChange={(e) => handleInputChange(e, 'article')} 
+                                                        className="tall-textarea" 
+                                                        placeholder="Начните писать здесь..." 
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="editor-preview-pane">
+                                                <label>Предпросмотр:</label>
+                                                <div className="article-preview-content">
+                                                    <h1>{articleForm.title || 'Заголовок появится здесь'}</h1>
+                                                    {renderPreview()}
+                                                </div>
                                             </div>
                                         </div>
+                                    ) : (
+                                        <>
+                                            <div className="form-group">
+                                                <label>Название ЖК или объекта</label>
+                                                <input type="text" name="name" value={projectForm.name} onChange={(e) => handleInputChange(e, 'project')} required placeholder="Например: ЖК Archi Lilac" />
+                                            </div>
+                                            <div className="form-group">
+                                                <label>Slug (часть URL)</label>
+                                                <input type="text" name="slug" value={projectForm.slug} onChange={(e) => handleInputChange(e, 'project')} required placeholder="archi-lilac-project" />
+                                            </div>
+                                            <div className="form-group">
+                                                <label>Полное описание проекта</label>
+                                                <textarea name="desc" value={projectForm.desc} onChange={(e) => handleInputChange(e, 'project')} className="mid-textarea" placeholder="Опишите особенности проекта..." />
+                                            </div>
+                                            
+                                            <div className="project-details-editor">
+                                                <h3>Характеристики</h3>
+                                                {projectForm.details.map((detail, idx) => (
+                                                    <div key={idx} className="detail-row">
+                                                        <input placeholder="Параметр (напр. Объект)" value={detail.label} onChange={(e) => handleDetailChange(idx, 'label', e.target.value)} />
+                                                        <input placeholder="Значение" value={detail.value} onChange={(e) => handleDetailChange(idx, 'value', e.target.value)} />
+                                                        <button type="button" className="remove-btn" onClick={() => removeDetail(idx)}>✕</button>
+                                                    </div>
+                                                ))}
+                                                <button type="button" className="add-detail-btn" onClick={addDetail}>+ Добавить характеристику</button>
+                                            </div>
+                                        </>
                                     )}
+                                </div>
 
-                                    <div className="admin-toolbar">
-                                        <button type="button" className="admin-toolbar-btn" onClick={() => insertTag('### ')}>Заголовок</button>
-                                        <button type="button" className="admin-toolbar-btn" onClick={() => insertTag('- ')}>Список</button>
-                                        <button type="button" className="admin-toolbar-btn" onClick={() => insertTag('**текст**')}>Жирный</button>
-                                        <button type="button" className="admin-toolbar-btn" onClick={() => insertTag('\n---\n')}>Разделитель</button>
+                                <div className="editor-sidebar">
+                                    <button type="submit" className="save-btn" disabled={loading || uploading}>
+                                        {loading ? 'Сохранение...' : 'Опубликовать'}
+                                    </button>
+
+                                    <div className="image-manager">
+                                        <h3>Галерея</h3>
+                                        <div className="upload-box" onClick={() => fileInputRef.current.click()}>
+                                            <label>{uploading ? 'Загрузка...' : 'Загрузить фото'}</label>
+                                            <input type="file" ref={fileInputRef} style={{display:'none'}} onChange={handleImageUpload} multiple accept="image/*" />
+                                        </div>
+                                        <div className="admin-image-grid">
+                                            {activeTab === 'articles' ? (
+                                                Object.entries(articleForm.images).map(([tag, url]) => (
+                                                    <div key={tag} className="admin-thumb">
+                                                        <img src={url} alt={tag} />
+                                                        {articleForm.img === url && <span className="main-badge">Гл.</span>}
+                                                        <button type="button" className="set-main" onClick={() => setArticleForm({...articleForm, img: url})} title="Сделать главным">★</button>
+                                                        <button type="button" className="set-main" style={{right: '40px', background: 'rgba(255,0,0,0.5)'}} onClick={() => removeImage(tag)}>✕</button>
+                                                        <div style={{position:'absolute', bottom:0, left:0, right:0, background:'rgba(0,0,0,0.5)', fontSize:8, textAlign:'center'}}>{tag}</div>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                projectForm.images.map((url, i) => (
+                                                    <div key={i} className="admin-thumb">
+                                                        <img src={url} alt={`img-${i}`} />
+                                                        {i === 0 && <span className="main-badge">Гл.</span>}
+                                                        <button type="button" className="set-main" onClick={() => setProjectForm({...projectForm, images: [url, ...projectForm.images.filter(u => u !== url)]})} title="Сделать главным">★</button>
+                                                        <button type="button" className="set-main" style={{right: '40px', background: 'rgba(255,0,0,0.5)'}} onClick={() => removeImage(i)}>✕</button>
+                                                    </div>
+                                                ))
+                                            )}
+                                        </div>
                                     </div>
-
-                                    <div className="admin-form-group full">
-                                        <label>Текст статьи (Markdown-стиль)</label>
-                                        <textarea 
-                                            id="article-content-textarea"
-                                            name="content" value={formData.content} 
-                                            onChange={handleInputChange} className="admin-textarea content"
-                                            placeholder="Пишите здесь... Используйте [[IMG1]] для вставки картинок."
-                                        />
-                                    </div>
-
-                                    <div className="admin-form-group full" style={{marginTop:'20px'}}>
-                                        <label>Краткий анонс (для списка статей)</label>
-                                        <textarea 
-                                            name="excerpt" value={formData.excerpt} 
-                                            onChange={handleInputChange} className="admin-textarea"
-                                            placeholder="Пару предложений о чем статья..."
-                                        />
-                                    </div>
-
-                                    <div className="admin-form-actions" style={{marginTop:'30px'}}>
-                                        <button type="submit" className="admin-btn-save" disabled={loading || uploading}>
-                                            {loading ? 'Сохранение...' : (editingArticle ? 'Сохранить изменения' : 'Опубликовать статью')}
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div className="admin-preview-pane">
-                                <span className="admin-preview-label">Предпросмотр</span>
-                                <div className="admin-preview-content article-text-wrapper">
-                                    <h1 style={{color:'#fff', marginBottom:'20px'}}>{formData.title || 'Заголовок статьи'}</h1>
-                                    {formData.img && <img src={formData.img} alt="Main" style={{width:'100%', borderRadius:'8px', marginBottom:'30px'}} />}
-                                    {renderPreview()}
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             )}
