@@ -84,6 +84,7 @@ const Admin = () => {
                     name: item.name || '',
                     slug: item.slug || '',
                     desc: item.desc || '',
+                    result: item.result || '',
                     images: item.images || [],
                     type: 'portfolio',
                     details: (item.details && item.details.length > 0) ? item.details : [
@@ -95,7 +96,7 @@ const Admin = () => {
             } else {
                 setEditingItem(null);
                 setProjectForm({
-                    name: '', slug: '', desc: '', images: [], type: 'portfolio',
+                    name: '', slug: '', desc: '', result: '', images: [], type: 'portfolio',
                     details: [
                         { label: 'Объект', value: '' },
                         { label: 'Материалы', value: '' },
@@ -111,6 +112,7 @@ const Admin = () => {
                     slug: item.slug || '',
                     category: item.category || 'kitchens',
                     desc: item.desc || '',
+                    result: item.result || '',
                     images: item.images || [],
                     type: 'catalog',
                     details: item.details || []
@@ -118,7 +120,7 @@ const Admin = () => {
             } else {
                 setEditingItem(null);
                 setCatalogForm({
-                    name: '', slug: '', category: 'kitchens', desc: '', images: [], type: 'catalog',
+                    name: '', slug: '', category: 'kitchens', desc: '', result: '', images: [], type: 'catalog',
                     details: []
                 });
             }
@@ -396,7 +398,8 @@ const Admin = () => {
                                         <>
                                             <div className="form-group"><label>Название проекта</label><input type="text" name="name" value={projectForm.name} onChange={(e) => handleInputChange(e, 'project')} required /></div>
                                             <div className="form-group"><label>Slug</label><input type="text" name="slug" value={projectForm.slug} onChange={(e) => handleInputChange(e, 'project')} required /></div>
-                                            <div className="form-group"><label>Описание</label><textarea name="desc" value={projectForm.desc} onChange={(e) => handleInputChange(e, 'project')} className="mid-textarea" /></div>
+                                            <div className="form-group"><label>Описание (сверху)</label><textarea name="desc" value={projectForm.desc} onChange={(e) => handleInputChange(e, 'project')} className="mid-textarea" /></div>
+                                            <div className="form-group"><label>Результат (снизу)</label><textarea name="result" value={projectForm.result} onChange={(e) => handleInputChange(e, 'project')} className="mid-textarea" placeholder="Результат — мебель, которая выглядит дорого..." /></div>
                                             <div className="project-details-editor">
                                                 <h3>Характеристики</h3>
                                                 {projectForm.details.map((d, i) => (
@@ -424,7 +427,8 @@ const Admin = () => {
                                                 </select>
                                             </div>
                                             <div className="form-group"><label>Slug</label><input type="text" name="slug" value={catalogForm.slug} onChange={(e) => handleInputChange(e, 'catalog')} required /></div>
-                                            <div className="form-group"><label>Краткое описание</label><textarea name="desc" value={catalogForm.desc} onChange={(e) => handleInputChange(e, 'catalog')} className="mid-textarea" /></div>
+                                            <div className="form-group"><label>Описание (сверху)</label><textarea name="desc" value={catalogForm.desc} onChange={(e) => handleInputChange(e, 'catalog')} className="mid-textarea" /></div>
+                                            <div className="form-group"><label>Результат (снизу)</label><textarea name="result" value={catalogForm.result} onChange={(e) => handleInputChange(e, 'catalog')} className="mid-textarea" placeholder="Результат — мебель, которая выглядит дорого..." /></div>
                                         </>
                                     )}
                                 </div>

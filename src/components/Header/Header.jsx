@@ -68,7 +68,7 @@ const Header = () => {
 
         {/* Mobile Center: CTA Button */}
         <div className="header-center-mobile mobile-only">
-          <button 
+          <button
             className="btn-header-cta-mobile"
             onClick={() => openModal("Рассчитать стоимость", "Оставьте заявку, и мы подготовим расчет для вашего проекта")}
           >
@@ -78,20 +78,20 @@ const Header = () => {
 
         {/* Right Section */}
         <div className="header-right">
-          <button 
+          <button
             className="btn-header-cta desktop-only"
             onClick={() => openModal("Рассчитать стоимость", "Оставьте заявку, и мы подготовим расчет для вашего проекта")}
           >
             Рассчитать стоимость
           </button>
-          
+
           <div className="header-mobile-row mobile-only">
-             <button 
-               className="header-burger" 
-               onClick={() => setIsMenuOpen(!isMenuOpen)}
-             >
-               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-             </button>
+            <button
+              className="header-burger"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
       </div>
@@ -100,23 +100,23 @@ const Header = () => {
       <div className={`header-menu-overlay ${isMenuOpen ? 'is-open' : ''}`}>
         <div className="header-menu-content">
           <div className="header-menu-header mobile-only">
-             <span className="menu-title">Меню</span>
-             <button onClick={() => setIsMenuOpen(false)} className="close-btn"><X size={24}/></button>
+            <span className="menu-title">Меню</span>
+            <button onClick={() => setIsMenuOpen(false)} className="close-btn"><X size={24} /></button>
           </div>
           <nav className="header-nav-mobile">
             {navLinks.map((link) => (
               link.path ? (
-                <button 
-                  key={link.name} 
-                  onClick={() => handleNavClick(link)} 
+                <button
+                  key={link.name}
+                  onClick={() => handleNavClick(link)}
                   className="header-nav-link-mobile-btn"
                 >
                   {link.name}
                 </button>
               ) : (
-                <a 
-                  key={link.name} 
-                  href={link.href} 
+                <a
+                  key={link.name}
+                  href={link.href}
                   onClick={() => setIsMenuOpen(false)}
                   className="header-nav-link-mobile"
                 >

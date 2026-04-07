@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './CatalogPage.css';
 import Hero from '../../components/Hero/Hero';
+import catalogHero from '../../assets/catalog_hero.png';
+import ImageLightbox from '../../components/ImageLightbox/ImageLightbox';
 import { useModal } from '../../ModalContext';
 import { supabase } from '../../supabaseClient';
 
@@ -44,19 +46,24 @@ const CatalogPage = () => {
   const [sections, setSections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isSticky, setIsSticky] = useState(false);
+  const [lightboxData, setLightboxData] = useState(null); // { images, index }
 
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchProjects();
 
     const handleScroll = () => {
-      // Threshold depends on Hero height. 450px is safe for compact hero.
+      // Threshold depends on Hero height. 400px is safe for compact hero.
       setIsSticky(window.scrollY > 400);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const openLightbox = (images, index = 0) => {
+    setLightboxData({ images, index });
+  };
 
   const fetchProjects = async () => {
     setLoading(true);
@@ -95,12 +102,13 @@ const CatalogPage = () => {
 
   return (
     <div className="catalog-page-container">
-      <Hero 
+      <Hero
         title={<>КАТАЛОГ ИНДИВИДУАЛЬНЫХ<br />МЕБЕЛЬНЫХ РЕШЕНИЙ</>}
         subtitle=""
         rightText="Мы не продаём готовые изделия. Каждое решение проектируется под конкретные задачи, пространство и сценарии использования."
         showSlider={false}
         compact={true}
+        bgImage={catalogHero}
       />
 
       {/* Navigation */}
@@ -112,58 +120,101 @@ const CatalogPage = () => {
         </div>
       </div>
 
+
       {sections.map((section, idx) => (
         <section key={section.id} id={section.id} className="cp-section">
           <div className="container">
             <h2 className="cp-section-title">{section.title}</h2>
 
-            {section.projects.map((project, pIdx) => (
-              <div key={pIdx} className="cp-project">
-                <div className="cp-project-header">
-                  <h3 className="cp-project-name">{project.name}</h3>
-                  <button 
-                    className="cp-project-btn"
-                    onClick={() => navigate(`/project/${project.slug}`)}
-                  >
-                    Смотреть весь проект →
-                  </button>
-                </div>
-                <div className="cp-project-grid">
-                  {(project.images || []).slice(0, 3).map((img, i) => (
-                    <div 
-                      key={i} 
-                      className={`cp-project-img ${i === 0 ? 'cp-project-img--large' : ''}`} 
-                      style={{ backgroundImage: `url(${img})` }}
-                    ></div>
-                  ))}
-                  {(!project.images || project.images.length === 0) && (
-                    <div className="cp-project-img cp-project-img--large" style={{ backgroundColor: '#f0f0f0' }}></div>
-                  )}
-                </div>
-              </div>
-            ))}
+            <div className="cp-projects-list">
+              {section.projects.map((project, pIdx) => (
+                <div key={pIdx} className="cp-project">
+                  <div className="cp-project-header">
+                    <div className="cp-project-title-area">
+                      <h3 className="cp-project-name">
+                        {project.name} <span className="cp-project-category-suffix">по индивидуальному проекту</span>
+                      </h3>
+                    </div>
+                    <p className="cp-project-description-top">
+                      {project.desc?.substring(0, 160) || "Акцент на дизайне, который расширяет пространство и выглядит дорого. Кухня как арт-объект. Масштабные решения для любого пространства."}
+                    </p>
+                  </div>
 
-            <div className="cp-cta-block">
-              <div className="cp-cta-text">
-                <span className="cp-cta-label">Хотите похожее?</span>
-                <h3 className="cp-cta-title">{section.ctaTitle}</h3>
-                <p className="cp-cta-desc">{section.ctaDesc}</p>
+                  <div className="cp-project-image-grid">
+                    {(project.images || project.image_urls || []).slice(0, 4).map((url, i) => (
+                      <img
+                        key={i}
+                        src={url}
+                        alt={project.name}
+                        className="cp-grid-img"
+                        onClick={() => openLightbox(project.images || project.image_urls, i)}
+                        style={{ cursor: 'zoom-in' }}
+                      />
+                    ))}
+                  </div>
+
+                  <div className="cp-project-footer">
+                    <div className="cp-result-box">
+                      <div className="cp-result-header">
+                        <h4 className="cp-result-title">Результат</h4>
+                        <Link to={`/project/${project.id || project.slug}`} className="cp-details-link">
+                          Подробнее ↗
+                        </Link>
+                      </div>
+                      <p className="cp-result-text">
+                        {project.result || "Результат — мебель, которая выглядит дорого, работает безупречно и остаётся актуальной долгие годы."}
+                      </p>
+                    </div>
+
+                    <div className="cp-actions-area">
+                      <button
+                        className="cp-view-all-link"
+                        onClick={() => openLightbox(project.images || project.image_urls, 0)}
+                        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                      >
+                        Смотреть все фото →
+                      </button>
+                      <button
+                        className="btn-orange-pill"
+                        onClick={() => openModal(section.ctaTitle, section.ctaDesc)}
+                      >
+                        Рассчитать стоимость
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="cp-section-cta">
+              <div className="cp-cta-block">
+                <div className="cp-cta-text">
+                  <span className="cp-cta-label">Хотите похожее?</span>
+                  <h3 className="cp-cta-title">{section.ctaTitle}</h3>
+                  <p className="cp-cta-desc">{section.ctaDesc}</p>
+                </div>
+                <button
+                  className="btn-orange-pill"
+                  onClick={() => openModal(section.ctaTitle, section.ctaDesc)}
+                >
+                  Индивидуальный подбор
+                </button>
               </div>
-              <button 
-                className="btn-orange-pill" 
-                onClick={() => openModal("Рассчитать стоимость", section.ctaTitle)}
-              >
-                Рассчитать стоимость
-              </button>
             </div>
           </div>
         </section>
       ))}
-      
+
       {sections.length === 0 && (
-          <div className="container" style={{padding: '100px 0', textAlign: 'center'}}>
-              <p style={{color: '#666'}}>Добавьте проекты в каталог через админ-панель.</p>
-          </div>
+        <div className="container" style={{ padding: '100px 0', textAlign: 'center' }}>
+          <p style={{ color: '#666' }}>Добавьте проекты в каталог через админ-панель.</p>
+        </div>
+      )}
+      {lightboxData && (
+        <ImageLightbox
+          images={lightboxData.images}
+          initialIndex={lightboxData.index}
+          onClose={() => setLightboxData(null)}
+        />
       )}
     </div>
   );
