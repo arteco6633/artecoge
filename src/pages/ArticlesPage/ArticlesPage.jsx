@@ -3,16 +3,35 @@ import { useNavigate } from 'react-router-dom';
 import './ArticlesPage.css';
 import { articlesData as staticArticles } from '../../data/articlesData';
 import { supabase } from '../../supabaseClient';
+import LeadModal from '../../components/FinalForm/LeadModal';
 import Hero from '../../components/Hero/Hero';
+import heroBgArticles from '../../assets/articles_hero_bg.png';
 
 const ArticlesPage = () => {
     const navigate = useNavigate();
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [activeCategory, setActiveCategory] = useState('Все');
+    const [isSticky, setIsSticky] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalTitle, setModalTitle] = useState('');
+    const [modalDesc, setModalDesc] = useState('');
+
+    const openModal = (title, desc) => {
+        setModalTitle(title);
+        setModalDesc(desc);
+        setIsModalOpen(true);
+    };
 
     useEffect(() => {
         window.scrollTo(0, 0);
         fetchArticles();
+
+        const handleScroll = () => {
+            setIsSticky(window.scrollY > 300);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const fetchArticles = async () => {
@@ -26,7 +45,6 @@ const ArticlesPage = () => {
             console.error('Error fetching articles:', error);
             setArticles(staticArticles);
         } else {
-            // Priority to DB articles, then append unique static ones
             const dbSlugs = new Set((data || []).map(a => a.slug));
             const uniqueStatic = staticArticles.filter(a => !dbSlugs.has(a.slug));
             setArticles([...(data || []), ...uniqueStatic]);
@@ -34,12 +52,18 @@ const ArticlesPage = () => {
         setLoading(false);
     };
 
+    const categories = ['Все', ...new Set(articles.map(a => a.category).filter(Boolean))];
+    const filteredArticles = activeCategory === 'Все' 
+        ? articles 
+        : articles.filter(a => a.category === activeCategory);
+
     return (
         <div className="articles-page">
             <Hero 
                 title={<>ЗНАНИЯ И ВДОХНОВЕНИЕ<br />ДЛЯ ВАШЕГО ИНТЕРЬЕРА</>}
                 subtitle=""
                 rightText="Мы делимся профессиональным опытом в меблировке, рассказываем об австрийских материалах Egger и помогаем избежать ошибок при заказе мебели."
+                bgImage={heroBgArticles}
                 showSlider={false}
                 compact={true}
                 ctaText="Обсудить проект"
@@ -47,13 +71,27 @@ const ArticlesPage = () => {
                 modalDesc="Оставьте заявку, и мы свяжемся с вами для консультации"
             />
 
+            <div className={`ap-sticky-filter ${isSticky ? 'is-sticky' : ''}`}>
+                <div className="container ap-filter-inner">
+                    {categories.map(cat => (
+                        <button 
+                            key={cat} 
+                            onClick={() => setActiveCategory(cat)}
+                            className={`ap-filter-btn ${activeCategory === cat ? 'active' : ''}`}
+                        >
+                            {cat}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
             <section className="articles-content">
                 <div className="container">
                     {loading ? (
                         <div style={{color: '#fff', textAlign: 'center', padding: '100px 0'}}>Загрузка...</div>
                     ) : (
                         <div className="ap-grid">
-                            {articles.map(article => (
+                            {filteredArticles.map(article => (
                                 <div key={article.id || article.slug} className="ap-card" onClick={() => navigate(`/article/${article.slug}`)}>
                                     <div className="ap-card-image-wrap">
                                         <img src={article.img} alt={article.title} className="ap-card-img" />
@@ -62,7 +100,9 @@ const ArticlesPage = () => {
                                     <div className="ap-card-info">
                                         <span className="ap-card-date">{article.date}</span>
                                         <h3 className="ap-card-title">{article.title}</h3>
-                                        <p className="ap-card-excerpt">{article.excerpt}</p>
+                                        <p className="ap-card-excerpt">
+                                            {article.content ? article.content.replace(/<[^>]*>?/gm, '').substring(0, 150) + '...' : ''}
+                                        </p>
                                         <button className="ap-card-more">Читать полностью</button>
                                     </div>
                                 </div>
@@ -72,18 +112,32 @@ const ArticlesPage = () => {
                 </div>
             </section>
 
-      <section className="ap-newsletter">
-        <div className="container">
-          <div className="ap-newsletter-box">
-            <h2 className="ap-newsletter-title">Следите за новыми статьями</h2>
-            <p className="ap-newsletter-desc">Подпишитесь, чтобы первыми узнавать о новых проектах и трендах в мире мебели.</p>
-            <div className="ap-subscribe-form">
-              <input type="email" placeholder="Ваш e-mail" className="ap-input" />
-              <button className="ap-btn">Подписаться</button>
-            </div>
-          </div>
-        </div>
-      </section>
+            <section className="ap-cta-section">
+                <div className="container">
+                    <div className="ap-cta-anchor">
+                        <div className="ap-cta-info">
+                            <h2 className="ap-cta-title">ЕЩЁ БОЛЬШЕ ИДЕЙ ДЛЯ ВАШЕГО ИНТЕРЬЕРА</h2>
+                            <p className="ap-cta-desc">
+                                Оставьте заявку на индивидуальный подбор материалов и расчет стоимости проекта. 
+                                Мы поможем реализовать ваши самые смелые идеи.
+                            </p>
+                        </div>
+                        <button 
+                            className="btn-orange-pill"
+                            onClick={() => openModal('Индивидуальный подбор', 'Оставьте заявку на подбор материалов и расчет стоимости проекта.')}
+                        >
+                            Индивидуальный подбор
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <LeadModal 
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title={modalTitle}
+                subtitle={modalDesc}
+            />
     </div>
   );
 };

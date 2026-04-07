@@ -1,11 +1,50 @@
 .articles-page {
-  padding-top: 100px;
   background-color: var(--bg-light);
 }
 
-.articles-hero {
-  padding: 120px 0 80px 0;
-  text-align: center;
+/* ===== Sticky Filter ===== */
+.ap-sticky-filter {
+  padding: 30px 0;
+  position: sticky;
+  top: 65px;
+  z-index: 100;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.ap-sticky-filter.is-sticky {
+  padding: 10px 0 20px 0;
+}
+
+.ap-filter-inner {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ap-filter-btn {
+  background-color: #ffffff;
+  color: var(--text-primary);
+  border: 1px solid rgba(0,0,0,0.05);
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.ap-filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+}
+
+.ap-filter-btn.active {
+  background-color: var(--primary-orange);
+  color: #ffffff;
+  border-color: var(--primary-orange);
+  box-shadow: 0 6px 20px rgba(255, 122, 0, 0.2);
 }
 
 .ap-header {
@@ -38,6 +77,7 @@
 }
 
 .articles-content {
+  margin-top: 60px;
   padding-bottom: 120px;
 }
 
@@ -99,8 +139,8 @@
 }
 
 .ap-card-title {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 800;
   line-height: 1.3;
   margin-bottom: 16px;
   color: var(--text-primary);
@@ -150,83 +190,59 @@
   width: 100%;
 }
 
-.ap-newsletter {
+/* ===== CTA Anchor Section ===== */
+.ap-cta-section {
   padding: 80px 0 120px 0;
+  background-color: var(--bg-light);
 }
 
-.ap-newsletter-box {
-  background-color: #f7f7f7;
-  padding: 80px;
-  border-radius: 48px;
-  text-align: center;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.ap-newsletter-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 24px;
-  color: var(--text-primary);
-}
-
-.ap-newsletter-desc {
-  font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 40px;
-  max-width: 500px;
-  margin: 0 auto 40px auto;
-}
-
-.ap-subscribe-form {
+.ap-cta-anchor {
+  background-color: #1a1a1a;
+  border-radius: 60px;
+  padding: 80px 100px;
   display: flex;
-  gap: 16px;
-  max-width: 500px;
-  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.2);
 }
 
-.ap-input {
-  flex-grow: 1;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 50px;
-  padding: 16px 24px;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.3s;
+.ap-cta-info {
+  flex: 1;
 }
 
-.ap-input:focus {
-  border-color: var(--text-primary);
-}
-
-.ap-btn {
-  background-color: var(--text-primary);
+.ap-cta-title {
   color: #ffffff;
-  padding: 16px 32px;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 1rem;
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.1;
+  letter-spacing: -1px;
 }
 
-.ap-btn:hover {
-  background-color: #333;
+.ap-cta-desc {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 600px;
 }
 
-@media (max-width: 900px) {
-  .ap-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ap-newsletter-box {
-    padding: 40px 24px;
-  }
-
-  .ap-subscribe-form {
+@media (max-width: 1024px) {
+  .ap-cta-anchor {
     flex-direction: column;
+    text-align: center;
+    padding: 60px 40px;
+    gap: 40px;
   }
+}
 
-  .ap-btn {
-    width: 100%;
+@media (max-width: 768px) {
+  .ap-cta-title {
+    font-size: 28px;
+  }
+  .ap-cta-desc {
+    font-size: 16px;
   }
 }

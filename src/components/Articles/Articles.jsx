@@ -49,7 +49,9 @@ const Articles = () => {
                                 <div className="article-img" style={{backgroundImage: `url(${a.img})`}}></div>
                                 <div className="article-info">
                                     <h3 className="article-title">{a.title}</h3>
-                                    <p className="article-excerpt">{a.excerpt || (a.content ? a.content.substring(0, 100) + '...' : '')}</p>
+                                    <p className="article-excerpt">
+                                        {a.content ? a.content.replace(/<[^>]*>?/gm, '').substring(0, 100) + '...' : ''}
+                                    </p>
                                     <span className="article-date">{a.date}</span>
                                 </div>
                             </div>
