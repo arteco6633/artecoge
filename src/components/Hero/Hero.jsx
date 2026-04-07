@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Hero.css';
 import { useModal } from '../../ModalContext';
 import heroBg from '../../assets/hero_background.png';
@@ -16,8 +17,13 @@ const Hero = ({
   title = <>АВТОРСКАЯ <span className="highlight-text">МЕБЕЛЬ</span><br/>ПО ДИЗАЙН ПРОЕКТУ</>,
   showSlider = true,
   rightText = null,
-  compact = false
+  compact = false,
+  ctaText = "Перейти в каталог ↘",
+  modalTitle = "Перейти в каталог",
+  modalDesc = "Оставьте заявку для получения каталога мебели",
+  btnLink = null
 }) => {
+  const navigate = useNavigate();
   const [activeUsp, setActiveUsp] = useState(0);
   const scrollRef = useRef(null);
   const { openModal } = useModal();
@@ -58,9 +64,9 @@ const Hero = ({
             {/* Orange Button INSIDE the card - DESKTOP ONLY */}
             <button 
               className="btn-orange-pill hero-cta-btn desktop-only"
-              onClick={() => openModal("Перейти в каталог", "Оставьте заявку для получения каталога мебели")}
+              onClick={() => btnLink ? navigate(btnLink) : openModal(modalTitle, modalDesc)}
             >
-              Перейти в каталог ↘
+              {ctaText}
             </button>
           </div>
 
@@ -108,9 +114,9 @@ const Hero = ({
         {/* BUTTON OUTSIDE ON MOBILE */}
         <button 
           className="btn-orange-pill hero-cta-btn-mobile"
-          onClick={() => openModal("Перейти в каталог", "Оставьте заявку для получения каталога мебели")}
+          onClick={() => btnLink ? navigate(btnLink) : openModal(modalTitle, modalDesc)}
         >
-          Перейти в каталог ↘
+          {ctaText}
         </button>
 
         {showSlider && (

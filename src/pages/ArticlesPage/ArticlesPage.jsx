@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import './ArticlesPage.css';
 import { useNavigate } from 'react-router-dom';
+import './ArticlesPage.css';
 import { articlesData as staticArticles } from '../../data/articlesData';
 import { supabase } from '../../supabaseClient';
+import Hero from '../../components/Hero/Hero';
 
 const ArticlesPage = () => {
     const navigate = useNavigate();
@@ -35,17 +36,16 @@ const ArticlesPage = () => {
 
     return (
         <div className="articles-page">
-            <section className="articles-hero">
-                <div className="container">
-                    <div className="ap-header">
-                        <span className="small-label">/Блог и статьи о мебели в Грузии</span>
-                        <h1 className="ap-title">Знания и вдохновение для вашего интерьера в Тбилиси</h1>
-                        <p className="ap-subtitle">
-                            Мы делимся профессиональным опытом в меблировке, рассказываем об австрийских материалах Egger и помогаем избежать ошибок при заказе кухни в Грузии.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            <Hero 
+                title={<>ЗНАНИЯ И ВДОХНОВЕНИЕ<br />ДЛЯ ВАШЕГО ИНТЕРЬЕРА</>}
+                subtitle=""
+                rightText="Мы делимся профессиональным опытом в меблировке, рассказываем об австрийских материалах Egger и помогаем избежать ошибок при заказе мебели."
+                showSlider={false}
+                compact={true}
+                ctaText="Обсудить проект"
+                modalTitle="Обсудить проект"
+                modalDesc="Оставьте заявку, и мы свяжемся с вами для консультации"
+            />
 
             <section className="articles-content">
                 <div className="container">

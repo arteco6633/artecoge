@@ -19,6 +19,10 @@
   flex-direction: column;
 }
 
+.hero--compact .hero-card {
+  min-height: 480px;
+}
+
 .hero-bg {
   position: absolute;
   top: 0;
@@ -100,11 +104,7 @@
   padding: var(--btn-padding);
   border-radius: var(--btn-radius);
   font-weight: 700;
-<<<<<<< HEAD
-  font-size: var(--f-h3);
-=======
   font-size: 16px;
->>>>>>> 9487b67 (Standardization of Desktop typography and UI refinements (14/16/24/48px) across all major sections (Hero, Partners, Projects, HowWeWork, Faq, FinalForm, Footer). Finalized contact details and accent styling.)
   border: none;
   cursor: pointer;
   display: flex;

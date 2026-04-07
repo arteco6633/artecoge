@@ -112,7 +112,7 @@
   border-radius: var(--btn-radius);
   text-decoration: none;
   font-weight: 700;
-  font-size: var(--f-h3);
+  font-size: 16px;
   transition: opacity 0.3s;
 }
 

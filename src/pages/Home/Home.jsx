@@ -30,7 +30,7 @@ const Home = () => {
 
   return (
     <>
-      <Hero />
+      <Hero btnLink="/catalog" />
       <UspBanner />
       <Catalog />
       <CompanyInfo />

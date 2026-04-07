@@ -16,6 +16,7 @@ const Projects = () => {
     const { data } = await supabase
       .from('projects')
       .select('*')
+      .or('type.eq.portfolio,type.is.null')
       .order('created_at', { ascending: false });
     
     setProjects(data || []);

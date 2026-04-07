@@ -1,6 +1,6 @@
 .article-single-page {
   padding-top: 0;
-  background-color: #ffffff;
+  background-color: var(--bg-light);
 }
 
 .article-hero {

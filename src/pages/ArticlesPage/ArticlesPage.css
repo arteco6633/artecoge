@@ -1,6 +1,6 @@
 .articles-page {
   padding-top: 100px;
-  background-color: #ffffff;
+  background-color: var(--bg-light);
 }
 
 .articles-hero {
