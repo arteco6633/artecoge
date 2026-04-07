@@ -40,6 +40,8 @@ const SECTION_METADATA = {
   }
 };
 
+import { motion } from 'framer-motion';
+
 const CatalogPage = () => {
   const navigate = useNavigate();
   const { openModal } = useModal();
@@ -47,6 +49,17 @@ const CatalogPage = () => {
   const [loading, setLoading] = useState(true);
   const [isSticky, setIsSticky] = useState(false);
   const [lightboxData, setLightboxData] = useState(null); // { images, index }
+
+  const revealProps = {
+    initial: { opacity: 0, y: 60, scale: 0.98, filter: 'blur(10px)' },
+    whileInView: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
+    viewport: { once: false, amount: 0.15 },
+    transition: { 
+      duration: 1.0, 
+      ease: [0.16, 1, 0.3, 1],
+      delay: 0.1
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -122,7 +135,8 @@ const CatalogPage = () => {
 
 
       {sections.map((section, idx) => (
-        <section key={section.id} id={section.id} className="cp-section">
+        <motion.div key={section.id} {...revealProps}>
+          <section id={section.id} className="cp-section">
           <div className="container">
             <h2 className="cp-section-title">{section.title}</h2>
 
@@ -202,7 +216,8 @@ const CatalogPage = () => {
             </div>
           </div>
         </section>
-      ))}
+      </motion.div>
+    ))}
 
       {sections.length === 0 && (
         <div className="container" style={{ padding: '100px 0', textAlign: 'center' }}>

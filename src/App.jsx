@@ -9,11 +9,13 @@ import ArticlesPage from './pages/ArticlesPage/ArticlesPage';
 import ArticleSingle from './pages/ArticleSingle/ArticleSingle';
 import { ModalProvider } from './ModalContext';
 import Admin from './pages/Admin/Admin';
+import Preloader from './components/Preloader/Preloader';
 import './App.css';
 
 function App() {
   return (
     <ModalProvider>
+      <Preloader />
       <div className="app">
         <Header />
         <main>

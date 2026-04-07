@@ -1,12 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
+import { motion } from 'framer-motion';
 import './Projects.css';
 
 const Projects = () => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.95, filter: 'blur(10px)' },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1, 
+      filter: 'blur(0px)',
+      transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } 
+    }
+  };
 
   useEffect(() => {
     fetchProjects();
@@ -41,15 +64,22 @@ const Projects = () => {
         {loading ? (
             <div style={{color:'#666', textAlign:'center', padding:'50px'}}>Загрузка проектов...</div>
         ) : (
-            <div className="projects-grid">
+            <motion.div 
+              className="projects-grid"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.1 }}
+            >
             {projects.length === 0 ? (
                 <p style={{color:'#666', gridColumn:'span 3', textAlign:'center'}}>Проектов пока нет в базе.</p>
             ) : (
                 projects.map(proj => (
-                    <div 
-                    className="project-card" 
-                    key={proj.id} 
-                    onClick={() => navigate(`/project/${proj.slug}`)}
+                    <motion.div 
+                      key={proj.id} 
+                      variants={itemVariants}
+                      className="project-card" 
+                      onClick={() => navigate(`/project/${proj.slug}`)}
                     >
                     <div className="project-card-inner">
                         <img src={proj.images[0]} alt={proj.name} className="project-card-img" />
@@ -63,10 +93,10 @@ const Projects = () => {
                         </div>
                         </div>
                     </div>
-                    </div>
+                    </motion.div>
                 ))
             )}
-            </div>
+            </motion.div>
         )}
       </div>
     </section>

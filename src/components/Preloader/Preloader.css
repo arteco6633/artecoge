@@ -1,0 +1,77 @@
+/* ===== Preloader Styles ===== */
+
+.preloader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10000; /* Over everything */
+  background-color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.brand-letters {
+  display: flex;
+  gap: 8px;
+}
+
+.brand-char {
+  color: #ffffff;
+  font-size: 60px;
+  font-weight: 800;
+  letter-spacing: 5px;
+  line-height: 1;
+}
+
+.preloader-progress-wrap {
+  width: 300px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: visible;
+  margin-top: 20px;
+}
+
+.preloader-progress-bar {
+  height: 100%;
+  background-color: var(--primary-orange);
+  box-shadow: 0 0 15px var(--primary-orange);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.preloader-percent {
+  position: absolute;
+  top: -25px;
+  right: 0;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-main);
+}
+
+.preloader-footer {
+  color: #ffffff;
+  font-size: 12px;
+  letter-spacing: 4px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .brand-char {
+    font-size: 40px;
+  }
+}

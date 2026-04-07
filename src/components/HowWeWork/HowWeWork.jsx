@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useModal } from '../../ModalContext';
+import { motion, AnimatePresence } from 'framer-motion';
 import './HowWeWork.css';
 import stepBg from '../../assets/hero_background.png';
 
@@ -39,10 +40,20 @@ const HowWeWork = () => {
 
   const current = steps[activeStep];
 
+  const revealProps = {
+    initial: { opacity: 0, y: 80, scale: 0.95, filter: 'blur(10px)' },
+    whileInView: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
+    viewport: { once: false, amount: 0.2 },
+    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+  };
+
   return (
-    <section className="how-we-work">
+    <motion.section 
+      className="how-we-work" 
+      id="how-we-work"
+      {...revealProps}
+    >
       <div className="container">
-        
         <div className="work-grid">
           <div className="work-left">
             <span className="small-label">/Как мы работаем</span>
@@ -65,33 +76,53 @@ const HowWeWork = () => {
               </div>
             </div>
 
-            <h2 className="work-title anim-title" key={`title-${current.id}`}>{current.title}</h2>
+            <div className="step-content-box">
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={activeStep}
+                  initial={{ opacity: 0, x: -20, filter: 'blur(5px)' }}
+                  animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, x: 20, filter: 'blur(5px)' }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="step-content"
+                >
+                  <h3 className="step-title">{current.title}</h3>
+                  <p className="step-desc">{current.desc}</p>
+                  <button 
+                    className="btn-orange-pill"
+                    onClick={() => openModal('Начать проект', 'Обсудим ваш интерьер и рассчитаем стоимость уже сегодня.')}
+                  >
+                    Обсудить задачу
+                  </button>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-            <div className="work-arrows">
-              <button className="arrow-btn" onClick={prevStep}>←</button>
-              <button className="arrow-btn" onClick={nextStep}>→</button>
+            <div className="work-controls">
+              <button className="control-btn" onClick={prevStep}>←</button>
+              <button className="control-btn" onClick={nextStep}>→</button>
             </div>
           </div>
 
           <div className="work-right">
-            <div className="work-image-card anim-card" key={`card-${current.id}`} style={{ backgroundImage: `url(${current.image})` }}>
-              <div className="work-card-content">
-                <p className="anim-desc">{current.desc}</p>
-                <div className="work-card-bottom">
-                  <button 
-                    className="btn-light-solid anim-btn"
-                    onClick={() => openModal("Подобрать проект со специалистом", current.title)}
-                  >
-                    Подобрать проект со специалистом
-                  </button>
-                  <span className="giant-num anim-giant-num">{current.num}</span>
-                </div>
-              </div>
+            <div className="step-image-wrap">
+              <AnimatePresence mode="wait">
+                <motion.img 
+                  key={activeStep}
+                  initial={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
+                  animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  src={current.image} 
+                  alt={current.title} 
+                  className="step-image" 
+                />
+              </AnimatePresence>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

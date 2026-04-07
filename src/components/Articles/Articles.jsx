@@ -1,12 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import './Articles.css';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
+import { motion } from 'framer-motion';
+import './Articles.css';
 
 const Articles = () => {
     const navigate = useNavigate();
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.3
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30, scale: 0.98 },
+        visible: { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1,
+            transition: { 
+                duration: 0.8, 
+                ease: [0.16, 1, 0.3, 1] 
+            }
+        }
+    };
 
     useEffect(() => {
         fetchArticles();
@@ -43,9 +68,20 @@ const Articles = () => {
                 </div>
                 
                 <div className="articles-slider-wrapper">
-                    <div className="articles-grid">
+                    <motion.div 
+                        className="articles-grid"
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: false, amount: 0.2 }}
+                    >
                         {articles.map(a => (
-                            <div key={a.id} className="article-expanded-card" onClick={() => navigate(`/article/${a.slug}`)}>
+                            <motion.div 
+                                key={a.id} 
+                                variants={itemVariants}
+                                className="article-expanded-card" 
+                                onClick={() => navigate(`/article/${a.slug}`)}
+                            >
                                 <div className="article-img" style={{backgroundImage: `url(${a.img})`}}></div>
                                 <div className="article-info">
                                     <h3 className="article-title">{a.title}</h3>
@@ -54,9 +90,9 @@ const Articles = () => {
                                     </p>
                                     <span className="article-date">{a.date}</span>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>

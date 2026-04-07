@@ -27,12 +27,24 @@
   /* Fix vertical clipping */
   padding-right: 20px;
   /* Fix horizontal clipping of italic/large fonts */
-  letter-spacing: -3px;
+  letter-spacing: 20px;
   margin-bottom: 20px;
   background: linear-gradient(135deg, #fff 0%, #aaa 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  
+  /* Glass focus effect */
+  filter: blur(8px);
+  opacity: 0.3;
+  transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+  cursor: default;
+}
+
+.footer:hover .footer-brand {
+  filter: blur(0);
+  opacity: 1;
+  letter-spacing: -3px;
 }
 
 .footer-desc {

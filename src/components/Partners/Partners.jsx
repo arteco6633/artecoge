@@ -169,7 +169,13 @@ const Partners = () => {
             >
               
               {/* Tall Card (Index 0) */}
-              <div className="partner-card card-tall" style={{ backgroundImage: `url(${activeData.cards[0].image})` }}>
+              <motion.div 
+                className="partner-card card-tall" 
+                style={{ backgroundImage: `url(${activeData.cards[0].image})` }}
+                initial={{ opacity: 0, x: -50, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              >
                 <div className="partner-card-overlay"></div>
                 <div className="partner-card-content">
                   <div className="pc-top-area">
@@ -203,11 +209,17 @@ const Partners = () => {
                     </div>
                   )}
                 </div>
-              </div>
+              </motion.div>
 
               {/* Right Column with Short Card and Arrows */}
               <div className="partner-card-col-right">
-                <div className="partner-card card-short" style={{ backgroundImage: `url(${activeData.cards[1].image})` }}>
+                <motion.div 
+                  className="partner-card card-short" 
+                  style={{ backgroundImage: `url(${activeData.cards[1].image})` }}
+                  initial={{ opacity: 0, x: 50, filter: 'blur(10px)' }}
+                  animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                >
                   <div className="partner-card-overlay right-overlay"></div>
                   <div className="partner-card-content">
                     <div className="pc-top-area">
@@ -241,8 +253,8 @@ const Partners = () => {
                       </div>
                     )}
                   </div>
-                </div>
-
+                </motion.div>
+                
                 {/* Arrows */}
                 <div className="partners-arrows">
                   <button className="part-arrow-btn dark-ar" onClick={handlePrevTab}>

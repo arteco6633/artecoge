@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import './ArticlesPage.css';
 import { articlesData as staticArticles } from '../../data/articlesData';
 import { supabase } from '../../supabaseClient';
@@ -58,7 +59,12 @@ const ArticlesPage = () => {
         : articles.filter(a => a.category === activeCategory);
 
     return (
-        <div className="articles-page">
+        <motion.div 
+            className="articles-page"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+        >
             <Hero 
                 title={<>ЗНАНИЯ И ВДОХНОВЕНИЕ<br />ДЛЯ ВАШЕГО ИНТЕРЬЕРА</>}
                 subtitle=""
@@ -138,8 +144,8 @@ const ArticlesPage = () => {
                 title={modalTitle}
                 subtitle={modalDesc}
             />
-    </div>
-  );
+        </motion.div>
+    );
 };
 
 export default ArticlesPage;
