@@ -78,6 +78,7 @@
   margin-bottom: 16px;
   font-weight: 500;
 }
+
 .partners-bottom-content {
   margin-top: auto;
 }
@@ -315,12 +316,13 @@
     padding: 10px 20px;
     font-size: 16px;
     font-weight: 700;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     flex: 0 1 auto;
   }
 
   .partner-tab-btn:last-child {
-    flex: 1 1 100%; /* Make Corporate Projects take full width or be separate */
+    flex: 1 1 100%;
+    /* Make Corporate Projects take full width or be separate */
     text-align: center;
     max-width: fit-content;
     margin: 0 auto;
