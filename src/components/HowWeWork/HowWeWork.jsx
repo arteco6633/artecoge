@@ -2,32 +2,30 @@ import React, { useState } from 'react';
 import { useModal } from '../../ModalContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import './HowWeWork.css';
-import stepBg from '../../assets/hero_background.png';
-
 const steps = [
   {
     id: 1, num: '01',
     title: 'Обсуждение задачи и фиксация договорённостей',
     desc: 'Мы погружаемся в ваш проект, обсуждаем задачи, объём работ и бюджет, после чего фиксируем ключевые решения и сроки. Без размытых формулировок и «потом разберёмся».',
-    image: stepBg
+    image: '/images/work4.png'
   },
   {
     id: 2, num: '02',
     title: 'Создание проекта и инженерная проработка',
     desc: 'Проектируем мебель с учетом особенностей вашего помещения. Подбираем лучшие материалы и фурнитуру для обеспечения максимальной надежности.',
-    image: stepBg
+    image: '/images/work4.png'
   },
   {
     id: 3, num: '03',
     title: 'Производство на собственной фабрике',
     desc: 'Изготавливаем все элементы на высокоточном оборудовании. Многоступенчатый контроль качества гарантирует идеальную подгонку деталей.',
-    image: stepBg
+    image: '/images/work4.png'
   },
   {
     id: 4, num: '04',
     title: 'Установка и финальная сдача проекта',
     desc: 'Бережно доставляем мебель на объект. Монтажники собирают всё без зазоров, убирают за собой строительный мусор и сдают чистый результат.',
-    image: stepBg
+    image: '/images/work4.png'
   }
 ];
 
@@ -87,36 +85,43 @@ const HowWeWork = () => {
                   className="step-content"
                 >
                   <h3 className="step-title">{current.title}</h3>
-                  <p className="step-desc">{current.desc}</p>
-                  <button 
-                    className="btn-orange-pill"
-                    onClick={() => openModal('Начать проект', 'Обсудим ваш интерьер и рассчитаем стоимость уже сегодня.')}
-                  >
-                    Обсудить задачу
-                  </button>
                 </motion.div>
               </AnimatePresence>
             </div>
-
+            
             <div className="work-controls">
-              <button className="control-btn" onClick={prevStep}>←</button>
-              <button className="control-btn" onClick={nextStep}>→</button>
+              <button className="arrow-btn" onClick={prevStep}>←</button>
+              <button className="arrow-btn" onClick={nextStep}>→</button>
             </div>
           </div>
 
           <div className="work-right">
-            <div className="step-image-wrap">
+            <div className="work-image-card">
               <AnimatePresence mode="wait">
-                <motion.img 
+                <motion.div 
                   key={activeStep}
-                  initial={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
-                  animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  src={current.image} 
-                  alt={current.title} 
-                  className="step-image" 
-                />
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.1 }}
+                  transition={{ duration: 0.8 }}
+                  className="work-image-inner"
+                >
+                  <img src={current.image} alt="" className="card-bg-img" />
+                  <div className="work-card-content">
+                    <div className="work-card-top">
+                      <p className="card-desc-top">{current.desc}</p>
+                    </div>
+                    <div className="work-card-bottom">
+                      <button 
+                        className="btn-light-solid"
+                        onClick={() => openModal('Начать проект', 'Обсудим ваш интерьер и рассчитаем стоимость уже сегодня.')}
+                      >
+                        Обсудить задачу
+                      </button>
+                      <span className="giant-num">{current.num}</span>
+                    </div>
+                  </div>
+                </motion.div>
               </AnimatePresence>
             </div>
           </div>
