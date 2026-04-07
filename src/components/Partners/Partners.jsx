@@ -172,9 +172,9 @@ const Partners = () => {
               <motion.div 
                 className="partner-card card-tall" 
                 style={{ backgroundImage: `url(${activeData.cards[0].image})` }}
-                initial={{ opacity: 0, x: -50, filter: 'blur(10px)' }}
+                initial={{ opacity: 0, x: -30, filter: 'blur(4px)' }}
                 animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               >
                 <div className="partner-card-overlay"></div>
                 <div className="partner-card-content">
@@ -216,9 +216,9 @@ const Partners = () => {
                 <motion.div 
                   className="partner-card card-short" 
                   style={{ backgroundImage: `url(${activeData.cards[1].image})` }}
-                  initial={{ opacity: 0, x: 50, filter: 'blur(10px)' }}
+                  initial={{ opacity: 0, x: 30, filter: 'blur(4px)' }}
                   animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                 >
                   <div className="partner-card-overlay right-overlay"></div>
                   <div className="partner-card-content">
