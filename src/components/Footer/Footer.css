@@ -142,28 +142,58 @@
   }
 
   .footer-brand {
-    font-size: 3.5rem;
-    letter-spacing: -1px;
-    margin-bottom: 12px;
+    font-size: 36px !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 20px;
+    filter: blur(0) !important;
+    opacity: 1 !important;
+    font-weight: 800;
   }
 
   .footer-desc {
-    font-size: 1rem;
-    line-height: 1.4;
+    font-size: 16px !important;
+    line-height: 1.5;
   }
 
   .footer-grid {
     flex-direction: column;
-    gap: 32px;
+    gap: 40px;
+  }
+
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 
   .footer-title {
-    font-size: 1.15rem;
-    margin-bottom: 16px;
+    font-size: 20px !important;
+    margin-bottom: 24px;
+    font-weight: 600;
+    text-align: center;
   }
 
   .footer-nav {
     gap: 12px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-nav a,
+  .contact-link,
+  .contact-address {
+    font-size: 16px !important;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .footer-contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
   }
 
   .footer-bottom {

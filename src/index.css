@@ -185,6 +185,13 @@ button {
   font-weight: 500;
 }
 
+@media (max-width: 900px) {
+  .small-label {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+}
+
 /* Utility classes */
 .text-center { text-align: center; }
 .mb-1 { margin-bottom: 1rem; }

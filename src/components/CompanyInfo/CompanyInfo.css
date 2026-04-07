@@ -175,19 +175,20 @@
   }
 
   .company-title {
-    font-size: var(--f-h2);
-    line-height: 1.2;
+    font-size: 28px;
+    line-height: 1.15;
+    font-weight: 800;
   }
 
   .company-subtitle {
-    margin: 16px 0 0 0;
+    margin: 28px 0 0 0;
     max-width: 100%;
-    font-size: 0.9rem;
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   .company-title br {
-    display: none;
-    /* Allow natural wrapping on mobile */
+    display: block;
   }
 
   .company-content-grid {
@@ -206,17 +207,33 @@
   }
 
   .quote-main-text {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .quote-subtitle {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .quote-tag {
+    font-size: 16px;
   }
 
   .quote-mark,
   .quote-mark-end {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
+  }
+
+  .author-role {
+    font-size: 14px;
+    margin-bottom: 4px;
   }
 
   .author-name {
-    font-size: var(--f-h3);
+    font-size: 20px;
+    font-weight: 700;
   }
 
   .author-avatar {

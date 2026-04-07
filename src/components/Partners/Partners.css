@@ -202,6 +202,11 @@
   line-height: 1.25;
 }
 
+.pc-accent {
+  color: var(--primary-orange);
+  font-style: italic;
+}
+
 .pc-text {
   font-size: 16px;
   color: #ffffff !important;
@@ -307,8 +312,8 @@
   .partner-tab-btn {
     background-color: #ffffff;
     border-radius: 30px;
-    padding: 12px 24px;
-    font-size: var(--f-h3);
+    padding: 10px 20px;
+    font-size: 16px;
     font-weight: 700;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     flex: 0 1 auto;
@@ -326,7 +331,8 @@
   }
 
   .partners-intro-text {
-    font-size: 0.9rem;
+    font-size: 16px;
+    line-height: 1.5;
     margin-bottom: 30px;
     max-width: 100%;
   }
@@ -348,7 +354,14 @@
   }
 
   .partners-main-title {
-    font-size: var(--f-h2);
+    font-size: 28px;
+    line-height: 1.15;
+    font-weight: 800;
+  }
+
+  .small-label {
+    font-size: 14px !important;
+    margin-bottom: 20px !important;
   }
 
   .partners-arrows {
@@ -362,6 +375,13 @@
     height: 44px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   }
+
+  .btn-primary-orange {
+    font-size: 20px;
+    padding: 22px;
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 768px) {
@@ -372,11 +392,32 @@
   }
 
   .pc-title {
-    font-size: 0.9rem;
+    font-size: 20px;
     font-weight: 800;
+    line-height: 1.25;
+    max-width: 210px;
+    word-break: keep-all;
+    margin-bottom: 0;
   }
 
   .pc-text {
-    font-size: 0.9rem;
+    display: none;
+  }
+
+  .pc-text.pc-text-large {
+    display: block !important;
+    font-size: 16px !important;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .pc-btn-white {
+    font-size: 16px;
+    padding: 16px 28px;
+    width: 100%;
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

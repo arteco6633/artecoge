@@ -77,12 +77,15 @@
   }
 
   .usp-title {
-    font-size: var(--f-h3);
-    margin-bottom: 8px;
+    font-size: 20px;
+    margin-bottom: 6px;
+    line-height: 1.2;
   }
 
   .usp-text {
-    font-size: 0.9rem;
+    font-size: 16px;
+    line-height: 1.4;
+    color: rgba(0, 0, 0, 0.7);
   }
 }
 

@@ -21,11 +21,10 @@ const Projects = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.99, filter: 'blur(2px)' },
+    hidden: { opacity: 0, y: 20, filter: 'blur(2px)' },
     visible: { 
       opacity: 1, 
       y: 0, 
-      scale: 1, 
       filter: 'blur(0px)',
       transition: { duration: 0.7, ease: "easeOut" } 
     }

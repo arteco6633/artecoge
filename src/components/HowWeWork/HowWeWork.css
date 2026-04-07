@@ -248,19 +248,38 @@
     height: 480px;
   }
 
+  .how-we-work .small-label {
+    font-size: 14px !important;
+    margin-bottom: 20px !important;
+    text-align: left;
+    display: block;
+  }
+
   .work-left {
     max-width: 100%;
-    text-align: center;
+    text-align: left;
+    align-items: flex-start;
   }
 
   .work-nav, .work-controls {
-    justify-content: center;
+    justify-content: flex-start;
+  }
+
+  .step-content-box {
+    min-height: auto !important;
+  }
+
+  .work-controls {
+    margin-top: 8px !important;
   }
 }
 
 @media (max-width: 768px) {
   .step-title {
-    font-size: 2rem;
+    font-size: 28px;
+    text-align: left;
+    line-height: 1.15;
+    margin-bottom: 12px !important;
   }
 
   .work-right {
@@ -272,12 +291,14 @@
   }
 
   .card-desc-top {
-    font-size: 1rem;
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   .btn-light-solid {
-    padding: 14px 24px;
-    font-size: 0.85rem;
+    padding: 18px 24px;
+    font-size: 16px;
+    font-weight: 700;
   }
 
   .giant-num {

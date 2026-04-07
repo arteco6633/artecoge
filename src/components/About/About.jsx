@@ -8,6 +8,7 @@ const About = () => {
       <div className="container">
         <div className="about-grid">
           <div className="about-text">
+            <span className="small-label">/О компании</span>
             <h2 className="section-title">Наша философия</h2>
             <p className="about-desc">
               Мы не просто создаем мебель, мы формируем качественную среду для жизни. Каждый шкаф и кухня, созданные ARTECO, индивидуальны и подстроены под стиль жизни наших клиентов.

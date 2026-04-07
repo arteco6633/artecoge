@@ -83,9 +83,31 @@
 }
 
 .flip-card-back {
-  background-color: #2b2723;
+  background: rgba(43, 39, 35, 0.75);
+  backdrop-filter: blur(25px) saturate(150%);
+  -webkit-backdrop-filter: blur(25px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transform: rotateY(180deg);
   z-index: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.flip-card-back::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  animation: shimmer 12s infinite linear;
+  pointer-events: none;
 }
 
 /* Ensure back side is on top when flipped */
@@ -129,11 +151,7 @@
 
 .card-top-title {
   color: white;
-<<<<<<< HEAD
-  font-size: var(--f-h3);
-=======
   font-size: 24px;
->>>>>>> 9487b67 (Standardization of Desktop typography and UI refinements (14/16/24/48px) across all major sections (Hero, Partners, Projects, HowWeWork, Faq, FinalForm, Footer). Finalized contact details and accent styling.)
   font-weight: 800;
   line-height: 1.25;
   margin-top: 4px;
@@ -142,13 +160,17 @@
 
 .card-bottom-icon {
   align-self: flex-end;
-  background-color: white;
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
   width: 48px; height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
 }
 
 .catalog-card-hidden {
@@ -209,14 +231,17 @@
   }
 
   .catalog-main-title {
-    font-size: var(--f-h2);
-    margin-bottom: 8px;
+    font-size: 28px;
+    line-height: 1.15;
+    font-weight: 800;
+    margin-bottom: 12px;
   }
 
   .catalog-subtitle {
     margin: 0;
     max-width: 100%;
-    font-size: 0.9rem;
+    font-size: 16px;
+    line-height: 1.5;
     color: var(--text-secondary);
   }
 
@@ -234,7 +259,9 @@
   }
 
   .card-top-title {
-    font-size: var(--f-h3);
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.25;
   }
 }
 

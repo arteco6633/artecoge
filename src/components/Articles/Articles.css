@@ -153,7 +153,19 @@
   }
 
   .articles-main-title {
-    font-size: var(--f-h2);
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.15;
+  }
+
+  .view-all-btn {
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    padding: 16px 24px;
+    display: block;
+    box-sizing: border-box;
+    font-weight: 700;
   }
 
   .articles-grid {
@@ -165,7 +177,30 @@
     display: none;
   }
 
+  .article-info {
+    padding: 30px 20px;
+  }
+
+  .article-excerpt {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .article-title {
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+
   .article-img {
     height: 240px;
+  }
+
+  .article-date {
+    font-size: 14px !important;
+    font-weight: 500;
+    color: #999999;
   }
 }
