@@ -18,7 +18,7 @@ const Hero = ({
   showSlider = true,
   rightText = null,
   compact = false,
-  ctaText = "Перейти в каталог ↘",
+  ctaText = "Перейти в каталог",
   modalTitle = "Перейти в каталог",
   modalDesc = "Оставьте заявку для получения каталога мебели",
   btnLink = null,
@@ -68,6 +68,10 @@ const Hero = ({
               onClick={() => btnLink ? navigate(btnLink) : openModal(modalTitle, modalDesc)}
             >
               {ctaText}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: '10px', verticalAlign: 'middle', display: 'inline-block' }}>
+                <line x1="7" y1="7" x2="17" y2="17"></line>
+                <polyline points="17 7 17 17 7 17"></polyline>
+              </svg>
             </button>
           </div>
 
@@ -116,6 +120,10 @@ const Hero = ({
           onClick={() => btnLink ? navigate(btnLink) : openModal(modalTitle, modalDesc)}
         >
           {ctaText}
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: '10px', verticalAlign: 'middle', display: 'inline-block' }}>
+            <line x1="7" y1="7" x2="17" y2="17"></line>
+            <polyline points="17 7 17 17 7 17"></polyline>
+          </svg>
         </button>
 
         {showSlider && (
