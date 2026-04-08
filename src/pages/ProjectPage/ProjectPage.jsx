@@ -120,16 +120,25 @@ const ProjectPage = () => {
         <div className="pp-content-layout">
           <div className="pp-header">
             <h1 className="pp-title">{project.name}</h1>
-            <div className="pp-intro-block">
-              <p className="pp-desc">{project.desc}</p>
-              {project.details && project.details.length > 0 && (
-                <div className="pp-details">
-                  {project.details.map((item, idx) => (
-                    <div key={idx} className="pp-detail-item">
-                      <span className="pp-detail-label">{item.label}</span>
-                      <span className="pp-detail-value">{item.value}</span>
-                    </div>
-                  ))}
+            <div className="pp-intro-grid">
+              <div className="pp-intro-block main">
+                <p className="pp-desc">{project.desc}</p>
+                {project.details && project.details.length > 0 && (
+                  <div className="pp-details">
+                    {project.details.map((item, idx) => (
+                      <div key={idx} className="pp-detail-item">
+                        <span className="pp-detail-label">{item.label}</span>
+                        <span className="pp-detail-value">{item.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              {project.result && (
+                <div className="pp-result-block">
+                  <div className="pp-result-badge">Результат</div>
+                  <p className="pp-result-text">{project.result}</p>
                 </div>
               )}
             </div>
