@@ -53,6 +53,12 @@ const LeadModal = ({ isOpen, onClose, title = "Бесплатная консул
       });
 
       if (response.ok) {
+        if (window.gtag) {
+          window.gtag('event', 'generate_lead', {
+            'event_category': 'form',
+            'event_label': title
+          });
+        }
         setIsSubmitted(true);
       } else {
         alert('Что-то пошло не так. Пожалуйста, попробуйте еще раз или свяжитесь с нами по телефону.');

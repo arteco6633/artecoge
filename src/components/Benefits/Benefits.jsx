@@ -32,7 +32,7 @@ const Benefits = () => {
   return (
     <section className="benefits" id="about">
       <div className="container">
-        <h2 className="section-title">Почему выбирают NOTIS</h2>
+        <h2 className="section-title">Почему выбирают ARTECO</h2>
         <div className="benefits-grid">
           {benefitsList.map(benefit => (
             <div className="benefit-card" key={benefit.id}>

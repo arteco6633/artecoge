@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
@@ -13,11 +13,14 @@ import Preloader from './components/Preloader/Preloader';
 import './App.css';
 
 function App() {
+  const location = useLocation();
+  const isAdminPath = location.pathname.startsWith('/admin-panel-secret');
+
   return (
     <ModalProvider>
       <Preloader />
       <div className="app">
-        <Header />
+        {!isAdminPath && <Header />}
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -28,7 +31,7 @@ function App() {
             <Route path="/admin-panel-secret" element={<Admin />} />
           </Routes>
         </main>
-        <Footer />
+        {!isAdminPath && <Footer />}
       </div>
     </ModalProvider>
   );

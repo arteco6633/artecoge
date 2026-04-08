@@ -11,6 +11,11 @@ const Admin = () => {
     const [editingItem, setEditingItem] = useState(null);
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
+    const [saveError, setSaveError] = useState(null);
+    const [deleteConfirmId, setDeleteConfirmId] = useState(null);
+    const [isAuthorized, setIsAuthorized] = useState(localStorage.getItem('admin_auth') === 'true');
+    const [loginForm, setLoginForm] = useState({ username: '', password: '' });
+    const [authError, setAuthError] = useState('');
     const fileInputRef = useRef(null);
     const textareaRef = useRef(null);
 
@@ -36,8 +41,26 @@ const Admin = () => {
     });
 
     useEffect(() => {
-        fetchData();
-    }, [activeTab]);
+        if (isAuthorized) {
+            fetchData();
+        }
+    }, [activeTab, isAuthorized]);
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        if (loginForm.username === 'arteco' && loginForm.password === '8926416s') {
+            setIsAuthorized(true);
+            localStorage.setItem('admin_auth', 'true');
+            setAuthError('');
+        } else {
+            setAuthError('Неверный логин или пароль');
+        }
+    };
+
+    const handleLogout = () => {
+        setIsAuthorized(false);
+        localStorage.removeItem('admin_auth');
+    };
 
     const fetchData = async () => {
         setLoading(true);
@@ -45,10 +68,18 @@ const Admin = () => {
             const { data } = await supabase.from('articles').select('*').order('created_at', { ascending: false });
             setArticles(data || []);
         } else if (activeTab === 'projects') {
-            const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
+            const { data } = await supabase
+                .from('projects')
+                .select('*')
+                .neq('type', 'catalog')
+                .order('created_at', { ascending: false });
             setProjects(data || []);
         } else if (activeTab === 'catalog') {
-            const { data } = await supabase.from('projects').select('*').eq('type', 'catalog').order('created_at', { ascending: false });
+            const { data } = await supabase
+                .from('projects')
+                .select('*')
+                .eq('type', 'catalog')
+                .order('created_at', { ascending: false });
             setCatalogItems(data || []);
         }
         setLoading(false);
@@ -131,6 +162,7 @@ const Admin = () => {
     const handleCloseModal = () => {
         setIsModalOpen(false);
         setEditingItem(null);
+        setSaveError(null);
     };
 
     const handleInputChange = (e, formType) => {
@@ -248,38 +280,86 @@ const Admin = () => {
     const handleSave = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setSaveError(null);
         const table = activeTab === 'articles' ? 'articles' : 'projects';
         
-        let payload;
-        if (activeTab === 'articles') {
-            payload = { ...articleForm, slug: generateSlug(articleForm.slug) };
-        } else if (activeTab === 'projects') {
-            payload = { ...projectForm, slug: generateSlug(projectForm.slug) };
-        } else {
-            payload = { ...catalogForm, slug: generateSlug(catalogForm.slug) };
-        }
+        try {
+            let payload = {};
+            
+            if (activeTab === 'articles') {
+                payload = {
+                    title: articleForm.title,
+                    slug: generateSlug(articleForm.slug || articleForm.title),
+                    category: articleForm.category,
+                    date: articleForm.date || new Date().toLocaleDateString('ru-RU'),
+                    img: articleForm.img || (Object.values(articleForm.images)[0] || ''),
+                    excerpt: articleForm.excerpt,
+                    content: articleForm.content,
+                    images: articleForm.images || {}
+                };
+            } else if (activeTab === 'projects') {
+                payload = {
+                    name: projectForm.name,
+                    slug: generateSlug(projectForm.slug || projectForm.name),
+                    desc: projectForm.desc,
+                    result: projectForm.result,
+                    images: projectForm.images || [],
+                    type: 'portfolio',
+                    details: projectForm.details || []
+                };
+            } else if (activeTab === 'catalog') {
+                payload = {
+                    name: catalogForm.name,
+                    slug: generateSlug(catalogForm.slug || catalogForm.name),
+                    category: catalogForm.category || 'kitchens',
+                    desc: catalogForm.desc,
+                    result: catalogForm.result,
+                    images: catalogForm.images || [],
+                    type: 'catalog',
+                    details: catalogForm.details || []
+                };
+            }
 
-        let result;
-        if (editingItem) {
-            result = await supabase.from(table).update(payload).eq('id', editingItem.id);
-        } else {
-            result = await supabase.from(table).insert([payload]);
-        }
+            console.log("SENDING TO", table, ":", payload);
 
-        if (result.error) {
-            alert("Ошибка сохранения: " + result.error.message);
-        } else {
-            handleCloseModal();
-            fetchData();
+            let result;
+            if (editingItem) {
+                result = await supabase.from(table).update(payload).eq('id', editingItem.id);
+            } else {
+                result = await supabase.from(table).insert([payload]);
+            }
+
+            if (result.error) {
+                console.error("Supabase Error Context:", result.error);
+                setSaveError(`Ошибка базы: ${result.error.message} (${result.error.code})`);
+            } else {
+                console.log("Success!");
+                handleCloseModal();
+                fetchData();
+            }
+        } catch (err) {
+            console.error("Critical Exception:", err);
+            setSaveError("Критическая ошибка. Подробности в консоли.");
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Вы уверены, что хотите удалить этот элемент?')) return;
+        setDeleteConfirmId(id);
+    };
+
+    const confirmDelete = async () => {
+        if (!deleteConfirmId) return;
+        const id = deleteConfirmId;
+        setDeleteConfirmId(null);
+        setLoading(true);
         const table = activeTab === 'articles' ? 'articles' : 'projects';
         const { error } = await supabase.from(table).delete().eq('id', id);
-        if (error) alert("Ошибка удаления: " + error.message);
+        if (error) {
+            console.error("Delete error:", error);
+            setSaveError("Ошибка удаления: " + error.message);
+        }
         fetchData();
     };
 
@@ -312,9 +392,45 @@ const Admin = () => {
         });
     };
 
+    if (!isAuthorized) {
+        return (
+            <div className="admin-login-screen">
+                <form className="login-box" onSubmit={handleLogin}>
+                    <div className="login-logo">ARTECO</div>
+                    <h2>Вход в панель управления</h2>
+                    <div className="form-group">
+                        <label>Логин</label>
+                        <input 
+                            type="text" 
+                            value={loginForm.username} 
+                            onChange={(e) => setLoginForm({...loginForm, username: e.target.value})} 
+                            required 
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Пароль</label>
+                        <input 
+                            type="password" 
+                            value={loginForm.password} 
+                            onChange={(e) => setLoginForm({...loginForm, password: e.target.value})} 
+                            required 
+                        />
+                    </div>
+                    {authError && <p className="auth-error-msg">{authError}</p>}
+                    <button type="submit" className="login-btn">Войти</button>
+                    <a href="/" className="back-to-site">На главную сайта</a>
+                </form>
+            </div>
+        );
+    }
+
     return (
         <div className="admin-container">
             <div className="container">
+                <div className="admin-top-bar">
+                    <div className="admin-logo-small">ARTECO Admin</div>
+                    <button className="logout-link" onClick={handleLogout}>Выйти</button>
+                </div>
                 <div className="admin-tabs">
                     <button className={activeTab === 'articles' ? 'active' : ''} onClick={() => setActiveTab('articles')}>Статьи</button>
                     <button className={activeTab === 'projects' ? 'active' : ''} onClick={() => setActiveTab('projects')}>Портфолио</button>
@@ -434,7 +550,16 @@ const Admin = () => {
                                     )}
                                 </div>
                                 <div className="editor-sidebar">
-                                    <button type="submit" className="save-btn" disabled={loading || uploading}>{loading ? '...' : 'Опубликовать'}</button>
+                                    <button type="submit" className="save-btn" disabled={loading || uploading}>
+                                        {loading ? '...' : (editingItem ? 'Сохранить изменения' : 'Опубликовать')}
+                                    </button>
+                                    
+                                    {saveError && (
+                                        <div className="admin-status-error">
+                                            {saveError}
+                                        </div>
+                                    )}
+
                                     <div className="image-manager">
                                         <h3>Фото</h3>
                                         <div className="upload-box" onClick={() => fileInputRef.current.click()}>{uploading ? '...' : 'Загрузить'}<input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={handleImageUpload} multiple accept="image/*" /></div>
@@ -451,6 +576,18 @@ const Admin = () => {
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            )}
+            {deleteConfirmId && (
+                <div className="admin-modal-overlay prompt">
+                    <div className="admin-modal prompt-modal">
+                        <h3>Удалить этот элемент?</h3>
+                        <p>Это действие нельзя будет отменить.</p>
+                        <div className="prompt-actions">
+                            <button className="confirm-btn" onClick={confirmDelete}>Да, удалить</button>
+                            <button className="cancel-btn" onClick={() => setDeleteConfirmId(null)}>Отмена</button>
+                        </div>
                     </div>
                 </div>
             )}

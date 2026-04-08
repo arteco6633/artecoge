@@ -42,6 +42,12 @@ const FinalForm = () => {
       });
 
       if (response.ok) {
+        if (window.gtag) {
+          window.gtag('event', 'generate_lead', {
+            'event_category': 'form',
+            'event_label': 'footer_form'
+          });
+        }
         setIsSubmitted(true);
         setFormData({ name: '', phone: '' });
       } else {
