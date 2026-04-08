@@ -9,7 +9,7 @@
 }
 
 .projects-header {
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 
 .projects .small-label {
@@ -55,7 +55,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin-top: 40px;
+  margin-top: 0;
 }
 
 .project-card {
