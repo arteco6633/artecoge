@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Hero from '../../components/Hero/Hero';
 import UspBanner from '../../components/UspBanner/UspBanner';
-import UnifiedPortfolio from '../../components/UnifiedPortfolio/UnifiedPortfolio';
+import Catalog from '../../components/Catalog/Catalog';
+import Projects from '../../components/Projects/Projects';
 import CompanyInfo from '../../components/CompanyInfo/CompanyInfo';
 import Partners from '../../components/Partners/Partners';
 import CtaAnchor from '../../components/CtaAnchor/CtaAnchor';
@@ -48,10 +49,11 @@ const Home = () => {
     >
       <Hero btnLink="/catalog" />
       <motion.div {...revealProps}><UspBanner /></motion.div>
-      <motion.div {...revealProps}><UnifiedPortfolio /></motion.div>
+      <motion.div {...revealProps}><Catalog isMinimal={false} /></motion.div>
       <motion.div {...revealProps}><CompanyInfo /></motion.div>
       <motion.div {...revealProps}><Partners /></motion.div>
       <motion.div {...revealProps}><CtaAnchor /></motion.div>
+      <motion.div {...revealProps}><Projects isMinimal={false} /></motion.div>
       <motion.div {...revealProps}><HowWeWork /></motion.div>
       <motion.div {...revealProps}><Articles /></motion.div>
       <motion.div {...revealProps}><Faq /></motion.div>
