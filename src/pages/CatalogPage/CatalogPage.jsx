@@ -173,7 +173,7 @@ const CatalogPage = () => {
                     <div className="cp-result-box">
                       <div className="cp-result-header">
                         <h4 className="cp-result-title">Результат</h4>
-                        <Link to={`/project/${project.id || project.slug}`} className="cp-details-link">
+                        <Link to={`/catalog/${project.slug || project.id}`} className="cp-details-link">
                           Подробнее ↗
                         </Link>
                       </div>

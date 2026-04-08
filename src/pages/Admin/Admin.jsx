@@ -460,7 +460,7 @@ const Admin = () => {
                                 </div>
                                 <div className="admin-item-info">
                                     <h3>{item.title || item.name}</h3>
-                                    <p>URL: /{item.slug}</p>
+                                    <p>URL: {activeTab === 'articles' ? '/article/' : activeTab === 'projects' ? '/project/' : '/catalog/'}{item.slug}</p>
                                     {activeTab === 'catalog' && <p>Категория: <strong>{item.category}</strong></p>}
                                 </div>
                                 <div className="admin-item-actions">

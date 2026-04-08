@@ -201,7 +201,7 @@ const ProjectPage = () => {
                 <div 
                   key={other.id} 
                   className="pp-other-card" 
-                  onClick={() => navigate(`/project/${other.slug}`)}
+                  onClick={() => navigate(other.type === 'catalog' ? `/catalog/${other.slug}` : `/project/${other.slug}`)}
                 >
                   <div className="pp-other-img" style={{ backgroundImage: `url(${other.images[0]})` }}></div>
                   <div className="pp-other-info">
