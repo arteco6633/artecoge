@@ -51,11 +51,11 @@ const CatalogPage = () => {
   const [lightboxData, setLightboxData] = useState(null); // { images, index }
 
   const revealProps = {
-    initial: { opacity: 0, y: 30, scale: 0.98, filter: 'blur(10px)' },
-    whileInView: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
-    viewport: { once: true, amount: 0.1 }, /* Reduced amount and changed once to true for faster trigger */
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.01 }, /* Trigger as soon as 1% is visible */
     transition: { 
-      duration: 0.7, 
+      duration: 0.5, 
       ease: [0.16, 1, 0.3, 1],
       delay: 0.1
     }
