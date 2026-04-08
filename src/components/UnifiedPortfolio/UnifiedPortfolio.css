@@ -30,23 +30,6 @@
   color: #a0a0a0;
 }
 
-.portfolio-divider-title {
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 1.15;
-  color: #1a1a1a;
-  margin: 0 0 16px 0;
-}
-
-.portfolio-divider-desc {
-  font-size: 16px;
-  line-height: 1.5;
-  color: #1a1a1a;
-  max-width: 440px;
-  margin: 0;
-  font-weight: 500;
-}
-
 /* Ensure smooth flow without huge gaps between merged components */
 .portfolio-content .catalog {
   padding-bottom: 0 !important;
@@ -68,9 +51,5 @@
   
   .portfolio-main-title {
     font-size: 32px;
-  }
-
-  .portfolio-divider-title {
-    font-size: 24px;
   }
 }

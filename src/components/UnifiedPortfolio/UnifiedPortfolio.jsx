@@ -19,14 +19,23 @@ const UnifiedPortfolio = () => {
         {/* Часть 1: Категории (Каталог) */}
         <Catalog isMinimal={true} />
         
-        {/* Разделитель или подзаголовок между ними */}
-        <div className="container" style={{ marginTop: '100px', marginBottom: '60px' }}>
-            <h3 className="portfolio-divider-title">Реализованные проекты</h3>
-            <p className="portfolio-divider-desc">Как наши решения оживают в интерьерах клиентов</p>
+        {/* Часть 2: Проекты с восстановленным оригинальным заголовком */}
+        <div className="projects" style={{ background: 'transparent', paddingTop: '100px' }}>
+          <div className="container">
+            <div className="projects-header">
+              <span className="small-label">/Реализованные проекты</span>
+              <div className="projects-header-grid">
+                <h2 className="projects-title">
+                  Проекты, которые доходят до конца <span className="text-gray">— без переделок, срывов сроков и потери качества</span>
+                </h2>
+                <p className="projects-desc">
+                  Каждый из этих проектов — результат полного контроля всех этапов производства и установки. Здесь нет демонстрационных работ, только реальные объекты и реальные задачи.
+                </p>
+              </div>
+            </div>
+          </div>
+          <Projects isMinimal={true} />
         </div>
-
-        {/* Часть 2: Проекты */}
-        <Projects isMinimal={true} />
       </div>
     </section>
   );
