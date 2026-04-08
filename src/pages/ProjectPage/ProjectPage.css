@@ -358,14 +358,15 @@
 @media (max-width: 768px) {
   .pp-gallery-grid {
     grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 10px;
   }
 
   .pp-gallery-item,
-  .pp-gallery-item--featured,
-  .pp-gallery-item:nth-child(2),
-  .pp-gallery-item:nth-child(3) {
-    grid-column: span 1;
-    height: 400px;
+  .pp-gallery-item.featured {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+    height: 300px; /* Reduced for better mobile fit */
   }
 
   .pp-lightbox-nav {
@@ -380,6 +381,10 @@
 
   .pp-lightbox-nav.next {
     right: 10px;
+  }
+  
+  .pp-other-grid {
+    grid-template-columns: 1fr;
   }
 }
 
