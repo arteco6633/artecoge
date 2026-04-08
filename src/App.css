@@ -1,1 +1,15 @@
-/* Empty App CSS */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+@media (max-width: 900px) {
+  .app {
+    padding-bottom: 80px;
+  }
+}
