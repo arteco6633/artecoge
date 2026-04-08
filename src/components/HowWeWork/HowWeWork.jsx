@@ -106,7 +106,7 @@ const HowWeWork = () => {
                   transition={{ duration: 0.8 }}
                   className="work-image-inner"
                 >
-                  <img src={current.image} alt="" className="card-bg-img" />
+                  <img src={current.image} alt={`ARTECO - Этап: ${current.title}`} className="card-bg-img" />
                   <div className="work-card-content">
                     <div className="work-card-top">
                       <p className="card-desc-top">{current.desc}</p>
