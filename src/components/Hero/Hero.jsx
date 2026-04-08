@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Hero.css';
 import { useModal } from '../../ModalContext';
-import heroBg from '../../assets/hero_background.png';
+import heroBg from '../../assets/hero_background_new.jpg';
 import bg1 from '../../assets/catalog_kitchen.png';
 import bg2 from '../../assets/catalog_storage.png';
-import bg3 from '../../assets/hero_background.png';
+import bg3 from '../../assets/hero_background_new.jpg';
 
 const usps = [
   { num: '01', title: 'Работаем по договору', img: bg1 },
