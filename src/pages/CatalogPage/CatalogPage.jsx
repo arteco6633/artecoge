@@ -11,32 +11,32 @@ const SECTION_METADATA = {
   kitchens: {
     title: "КУХНИ",
     ctaTitle: "Проект кухни",
-    ctaDesc: "Спроектируем функциональное пространство под вас."
+    ctaDesc: <>Спроектируем&nbsp;функциональное<br/>пространство под вас.</>
   },
   wardrobes: {
     title: "ШКАФЫ",
     ctaTitle: "Проект шкафа",
-    ctaDesc: "Создадим идеальную систему хранения вещей."
+    ctaDesc: <>Создадим&nbsp;идеальную<br/>систему&nbsp;хранения&nbsp;вещей.</>
   },
   cabinet: {
     title: "КАБИНЕТЫ",
     ctaTitle: "Мебель в кабинет",
-    ctaDesc: "Индивидуальный дизайн для рабочей атмосферы."
+    ctaDesc: <>Индивидуальный дизайн<br/>для рабочей атмосферы.</>
   },
   shelves: {
     title: "СТЕЛЛАЖИ",
     ctaTitle: "Проект стеллажа",
-    ctaDesc: "Спроектируем стеллаж под ваше пространство и задачи."
+    ctaDesc: <>Спроектируем стеллаж под<br/>ваше пространство и задачи.</>
   },
   panels: {
     title: "СТЕНОВЫЕ ПАНЕЛИ",
     ctaTitle: "Стеновые панели",
-    ctaDesc: "Подберём материал и рисунок под ваш интерьер."
+    ctaDesc: <>Подберём материал и<br/>рисунок под ваш интерьер.</>
   },
   bathrooms: {
     title: "САНУЗЛЫ",
     ctaTitle: "Мебель для санузла",
-    ctaDesc: "Функциональные решения для ванной комнаты."
+    ctaDesc: <>Функциональные решения<br/>для ванной комнаты.</>
   }
 };
 
@@ -51,11 +51,11 @@ const CatalogPage = () => {
   const [lightboxData, setLightboxData] = useState(null); // { images, index }
 
   const revealProps = {
-    initial: { opacity: 0, y: 60, scale: 0.98, filter: 'blur(10px)' },
+    initial: { opacity: 0, y: 30, scale: 0.98, filter: 'blur(10px)' },
     whileInView: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
-    viewport: { once: false, amount: 0.15 },
+    viewport: { once: true, amount: 0.1 }, /* Reduced amount and changed once to true for faster trigger */
     transition: { 
-      duration: 1.0, 
+      duration: 0.7, 
       ease: [0.16, 1, 0.3, 1],
       delay: 0.1
     }
@@ -116,11 +116,13 @@ const CatalogPage = () => {
   return (
     <div className="catalog-page-container">
       <Hero
-        title={<>КАТАЛОГ ИНДИВИДУАЛЬНЫХ<br />МЕБЕЛЬНЫХ РЕШЕНИЙ</>}
+        title={<>КАТАЛОГ <span className="highlight-orange-italic">ИНДИВИДУАЛЬНЫХ</span><br />МЕБЕЛЬНЫХ РЕШЕНИЙ</>}
         subtitle=""
         rightText="Мы не продаём готовые изделия. Каждое решение проектируется под конкретные задачи, пространство и сценарии использования."
         showSlider={false}
         compact={true}
+        ctaText="Обсудить проект"
+        modalTitle="Обсудить проект"
         bgImage={catalogHero}
       />
 
@@ -210,7 +212,7 @@ const CatalogPage = () => {
                   className="btn-orange-pill"
                   onClick={() => openModal(section.ctaTitle, section.ctaDesc)}
                 >
-                  Индивидуальный подбор
+                  Обсудить проект
                 </button>
               </div>
             </div>

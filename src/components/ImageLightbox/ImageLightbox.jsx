@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import './ImageLightbox.css';
 
 const ImageLightbox = ({ images, initialIndex = 0, onClose }) => {
@@ -23,17 +24,23 @@ const ImageLightbox = ({ images, initialIndex = 0, onClose }) => {
 
   return (
     <div className="lightbox-overlay" onClick={onClose}>
-      <button className="lightbox-close" onClick={onClose}>&times;</button>
+      <button className="lightbox-close" onClick={onClose}>
+        <X size={40} />
+      </button>
       
       <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-        <button className="lightbox-arrow lightbox-prev" onClick={prev}>&#8592;</button>
+        <button className="lightbox-arrow lightbox-prev" onClick={prev}>
+          <ChevronLeft size={32} />
+        </button>
         
         <div className="lightbox-image-container">
           <img src={images[currentIndex]} alt={`Slide ${currentIndex}`} className="lightbox-image" />
           <div className="lightbox-counter">{currentIndex + 1} / {images.length}</div>
         </div>
 
-        <button className="lightbox-arrow lightbox-next" onClick={next}>&#8594;</button>
+        <button className="lightbox-arrow lightbox-next" onClick={next}>
+          <ChevronRight size={32} />
+        </button>
       </div>
 
       <div className="lightbox-thumbnails">

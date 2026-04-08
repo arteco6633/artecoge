@@ -57,11 +57,15 @@ const Catalog = () => {
         <div className="catalog-header">
           <div className="title-wrapper">
             <span className="small-label">/Каталог</span>
-            <h2 className="catalog-main-title">
-              Мы проектируем и изготавливаем<br/>
-              мебель под конкретные задачи,<br/>
-              <span className="text-gray">а не по шаблонам</span>
-            </h2>
+             <h2 className="catalog-main-title desktop-only">
+               Мы проектируем и изготавливаем<br/>
+               мебель под конкретные задачи,<br/>
+               <span className="text-gray">а не по шаблонам</span>
+             </h2>
+             <h2 className="catalog-main-title mobile-only">
+               КАТАЛОГ <span className="highlight-orange-italic">ИНДИВИДУАЛЬНЫХ</span><br/>
+               МЕБЕЛЬНЫХ РЕШЕНИЙ
+             </h2>
           </div>
           <p className="catalog-subtitle">
             Ниже — основные категории мебели, с которыми мы работаем на постоянной основе. Все изделия проектируются индивидуально, с учётом нагрузок, условий эксплуатации и архитектуры пространства.
@@ -113,7 +117,7 @@ const Catalog = () => {
                     </ul>
                     <div className="hidden-footer">
                       <span className="hidden-link">
-                        Смотреть категорию 
+                        Перейти в каталог 
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{marginLeft: '12px', verticalAlign: 'middle', marginTop: '-2px'}}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                       </span>
                     </div>

@@ -282,6 +282,16 @@
     justify-content: center;
   }
 
+  .hero--compact {
+    min-height: auto;
+    padding-bottom: 10px !important;
+  }
+
+  .hero--compact .hero-card {
+    min-height: 350px;
+    margin-bottom: 0 !important;
+  }
+
   .hero-card-content {
     padding: 60px 24px;
     align-items: center;
@@ -301,7 +311,7 @@
   }
 
   .hero-title {
-    font-size: 36px;
+    font-size: 28px;
     line-height: 1.15;
     margin-bottom: 0;
     font-weight: 800;
@@ -360,6 +370,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 40px !important;
     margin-bottom: 30px;
     cursor: pointer;
     letter-spacing: 0.2px;
@@ -446,16 +457,14 @@
     border: none;
     cursor: pointer;
   }
-}
 
-@media (min-width: 901px) {
-  .mobile-only {
+  .desktop-only {
     display: none !important;
   }
 }
 
-@media (max-width: 900px) {
-  .desktop-only {
+@media (min-width: 901px) {
+  .mobile-only {
     display: none !important;
   }
 }

@@ -202,4 +202,9 @@ button {
 @media (max-width: 768px) {
   .mb-4 { margin-bottom: 2.5rem; }
   .mt-4 { margin-top: 2.5rem; }
+  
+  .highlight-orange-italic {
+    color: var(--primary-orange);
+    font-style: italic;
+  }
 }
