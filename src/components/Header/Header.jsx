@@ -27,10 +27,26 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (link) => {
+  const handleNavClick = (e, link) => {
     setIsMenuOpen(false);
-    if (link.path) {
-      navigate(link.path);
+    
+    // Check if it's an anchor link on the current page
+    if (link.path.includes('#')) {
+      const [path, hash] = link.path.split('#');
+      const isHome = window.location.pathname === '/' || window.location.pathname === '';
+      const targetPath = path === '/' ? '' : path;
+      const currentPath = window.location.pathname === '/' ? '' : window.location.pathname;
+
+      if (targetPath === currentPath) {
+        // We are on the target page, manually scroll if hash exists
+        const element = document.getElementById(hash);
+        if (element) {
+          e.preventDefault();
+          element.scrollIntoView({ behavior: 'smooth' });
+          // Update URL hash without reload
+          window.history.pushState(null, null, `#${hash}`);
+        }
+      }
     }
   };
 
@@ -58,7 +74,7 @@ const Header = () => {
               key={link.name} 
               to={link.path} 
               className="nav-link"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={(e) => handleNavClick(e, link)}
             >
               {link.name}
             </Link>
@@ -107,7 +123,7 @@ const Header = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => handleNavClick(e, link)}
                 className="header-nav-link-mobile-btn"
               >
                 {link.name}
