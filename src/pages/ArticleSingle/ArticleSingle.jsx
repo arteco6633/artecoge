@@ -35,7 +35,7 @@ const ArticleSingle = () => {
         }
 
         setArticle(currentArticle);
-        
+
         // Fetch related from Supabase + static
         if (currentArticle) {
             const { data: dbRelated } = await supabase
@@ -43,16 +43,16 @@ const ArticleSingle = () => {
                 .select('*')
                 .neq('slug', slug)
                 .limit(3);
-            
+
             const combinedRelated = [...(dbRelated || []), ...staticArticles.filter(a => a.slug !== slug)].slice(0, 3);
             setRelated(combinedRelated);
         }
-        
+
         setLoading(false);
     };
 
     if (loading) {
-        return <div style={{color: '#fff', textAlign: 'center', padding: '100px 0'}}>Загрузка...</div>;
+        return <div style={{ color: '#fff', textAlign: 'center', padding: '100px 0' }}>Загрузка...</div>;
     }
 
     if (!article) {
@@ -90,11 +90,11 @@ const ArticleSingle = () => {
                                 {article.content.split('\n').map((line, idx) => {
                                     const trimmed = line.trim();
                                     if (!trimmed) return <br key={idx} />;
-                                    
+
                                     if (trimmed.startsWith('###')) {
                                         return <h3 key={idx} className="article-sub-h3">{trimmed.replace('###', '').trim()}</h3>;
                                     }
-                                    
+
                                     if (trimmed.startsWith('-')) {
                                         return <li key={idx} className="article-li">{trimmed.replace('-', '').trim()}</li>;
                                     }
@@ -115,7 +115,7 @@ const ArticleSingle = () => {
                                     return <p key={idx}>{trimmed}</p>;
                                 })}
                             </div>
-                            
+
                             <div className="article-cta-box">
                                 <h3>Нужна консультация по мелировке в Тбилиси?</h3>
                                 <p>Наши эксперты помогут подобрать материалы и рассчитать стоимость вашего проекта.</p>

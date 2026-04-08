@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import './Header.css';
 import { useModal } from '../../ModalContext';
@@ -13,10 +13,10 @@ const Header = () => {
 
   const navLinks = [
     { name: 'Каталог', path: '/catalog' },
-    { name: 'Проекты', href: '#projects' },
-    { name: 'О нас', href: '#about' },
+    { name: 'Проекты', path: '/#projects' },
+    { name: 'О нас', path: '/#about' },
     { name: 'Статьи', path: '/articles' },
-    { name: 'Контакты', href: '#contact' }
+    { name: 'Контакты', path: '/#contacts' }
   ];
 
   useEffect(() => {
@@ -54,15 +54,14 @@ const Header = () => {
         {/* Desktop Center: Navigation Pill */}
         <nav className="header-nav-pill desktop-only">
           {navLinks.map((link) => (
-            link.path ? (
-              <button key={link.name} onClick={() => handleNavClick(link)} className="nav-link">
-                {link.name}
-              </button>
-            ) : (
-              <a key={link.name} href={link.href} className="nav-link">
-                {link.name}
-              </a>
-            )
+            <Link 
+              key={link.name} 
+              to={link.path} 
+              className="nav-link"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {link.name}
+            </Link>
           ))}
         </nav>
 
@@ -105,24 +104,14 @@ const Header = () => {
           </div>
           <nav className="header-nav-mobile">
             {navLinks.map((link) => (
-              link.path ? (
-                <button
-                  key={link.name}
-                  onClick={() => handleNavClick(link)}
-                  className="header-nav-link-mobile-btn"
-                >
-                  {link.name}
-                </button>
-              ) : (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="header-nav-link-mobile"
-                >
-                  {link.name}
-                </a>
-              )
+              <Link
+                key={link.name}
+                to={link.path}
+                onClick={() => setIsMenuOpen(false)}
+                className="header-nav-link-mobile-btn"
+              >
+                {link.name}
+              </Link>
             ))}
           </nav>
         </div>

@@ -25,19 +25,19 @@
 .ap-filter-btn {
   background-color: #ffffff;
   color: var(--text-primary);
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   padding: 10px 24px;
   border-radius: 50px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
 }
 
 .ap-filter-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
 }
 
 .ap-filter-btn.active {
@@ -229,20 +229,85 @@
   max-width: 600px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
+  .articles-content {
+    margin-top: 40px;
+    padding-bottom: 60px;
+  }
+
+  .ap-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .ap-card-image-wrap {
+    margin-bottom: 20px;
+    border-radius: 24px;
+  }
+
+  .ap-card-title {
+    font-size: 20px;
+  }
+
+  .ap-card-excerpt {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .ap-cta-section {
+    padding: 60px 0 80px 0;
+  }
+
   .ap-cta-anchor {
+    padding: 40px 24px;
+    border-radius: 40px;
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(20px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05) !important;
     flex-direction: column;
     text-align: center;
-    padding: 60px 40px;
-    gap: 40px;
+    gap: 30px;
+  }
+
+  .ap-cta-title {
+    color: #121212 !important;
+    font-size: 28px !important;
+    margin-bottom: 16px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+
+  .ap-cta-desc {
+    color: rgba(18, 18, 18, 0.7) !important;
+    font-size: 16px !important;
+    line-height: 1.5;
+  }
+
+  .ap-filter-inner {
+    justify-content: flex-start;
+    padding: 0 20px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ap-filter-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hero Title Override */
+  .articles-page .hero-content h1 {
+    font-size: 36px !important;
+    line-height: 1.1 !important;
+    letter-spacing: -1px !important;
   }
 }
 
-@media (max-width: 768px) {
-  .ap-cta-title {
-    font-size: 28px;
-  }
-  .ap-cta-desc {
-    font-size: 16px;
-  }
+.ap-highlight {
+  color: var(--primary-orange);
+  font-style: italic;
+  font-family: inherit;
 }

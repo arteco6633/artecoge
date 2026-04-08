@@ -55,7 +55,7 @@ const FinalForm = () => {
   };
 
   return (
-    <section className="final-form" id="contacts">
+    <section className="final-form">
       <div className="container">
         <div className="ff-wrapper" style={{ backgroundImage: `url(${bgImage})` }}>
           <div className="ff-overlay"></div>

@@ -10,7 +10,7 @@ const Footer = () => {
             <h2 className="footer-brand">ARTECO</h2>
             <p className="footer-desc">Премиальная мебель и интерьеры, доведенные до совершенства.</p>
           </div>
-          
+
           <div className="footer-grid">
             <div className="footer-col">
               <h4 className="footer-title">Навигация</h4>
@@ -21,7 +21,7 @@ const Footer = () => {
                 <a href="#faq">FAQ</a>
               </nav>
             </div>
-            
+
             <div className="footer-col">
               <h4 className="footer-title">Контакты</h4>
               <div className="footer-contact-info">
@@ -32,7 +32,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="footer-bottom">
           <p>&copy; 2026 ARTECO. Все права защищены.</p>
           <div className="footer-social">

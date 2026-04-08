@@ -24,7 +24,7 @@ const Home = () => {
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100);
+      }, 500);
     } else {
       window.scrollTo(0, 0);
     }

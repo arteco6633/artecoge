@@ -54,19 +54,19 @@ const ArticlesPage = () => {
     };
 
     const categories = ['Все', ...new Set(articles.map(a => a.category).filter(Boolean))];
-    const filteredArticles = activeCategory === 'Все' 
-        ? articles 
+    const filteredArticles = activeCategory === 'Все'
+        ? articles
         : articles.filter(a => a.category === activeCategory);
 
     return (
-        <motion.div 
+        <motion.div
             className="articles-page"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
         >
-            <Hero 
-                title={<>ЗНАНИЯ И ВДОХНОВЕНИЕ<br />ДЛЯ ВАШЕГО ИНТЕРЬЕРА</>}
+            <Hero
+                title={<>ЗНАНИЯ И <span className="ap-highlight">ВДОХНОВЕНИЕ</span><br />ДЛЯ ВАШЕГО ИНТЕРЬЕРА</>}
                 subtitle=""
                 rightText="Мы делимся профессиональным опытом в меблировке, рассказываем об австрийских материалах Egger и помогаем избежать ошибок при заказе мебели."
                 bgImage={heroBgArticles}
@@ -80,8 +80,8 @@ const ArticlesPage = () => {
             <div className={`ap-sticky-filter ${isSticky ? 'is-sticky' : ''}`}>
                 <div className="container ap-filter-inner">
                     {categories.map(cat => (
-                        <button 
-                            key={cat} 
+                        <button
+                            key={cat}
                             onClick={() => setActiveCategory(cat)}
                             className={`ap-filter-btn ${activeCategory === cat ? 'active' : ''}`}
                         >
@@ -94,7 +94,7 @@ const ArticlesPage = () => {
             <section className="articles-content">
                 <div className="container">
                     {loading ? (
-                        <div style={{color: '#fff', textAlign: 'center', padding: '100px 0'}}>Загрузка...</div>
+                        <div style={{ color: '#fff', textAlign: 'center', padding: '100px 0' }}>Загрузка...</div>
                     ) : (
                         <div className="ap-grid">
                             {filteredArticles.map(article => (
@@ -124,21 +124,21 @@ const ArticlesPage = () => {
                         <div className="ap-cta-info">
                             <h2 className="ap-cta-title">ЕЩЁ БОЛЬШЕ ИДЕЙ ДЛЯ ВАШЕГО ИНТЕРЬЕРА</h2>
                             <p className="ap-cta-desc">
-                                Оставьте заявку на индивидуальный подбор материалов и расчет стоимости проекта. 
+                                Оставьте заявку на индивидуальный подбор материалов и расчет стоимости проекта.
                                 Мы поможем реализовать ваши самые смелые идеи.
                             </p>
                         </div>
-                        <button 
+                        <button
                             className="btn-orange-pill"
-                            onClick={() => openModal('Индивидуальный подбор', 'Оставьте заявку на подбор материалов и расчет стоимости проекта.')}
+                            onClick={() => openModal('Обсудить проект', 'Оставьте заявку на индивидуальный подбор материалов и расчет стоимости проекта.')}
                         >
-                            Индивидуальный подбор
+                            Обсудить проект
                         </button>
                     </div>
                 </div>
             </section>
 
-            <LeadModal 
+            <LeadModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 title={modalTitle}
