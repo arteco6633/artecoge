@@ -144,6 +144,7 @@
 
   .header.scrolled {
     bottom: 5px;
+    top: auto !important;
   }
 
   .header-container {
