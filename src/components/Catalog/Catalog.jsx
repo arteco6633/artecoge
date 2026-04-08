@@ -38,7 +38,7 @@ const catalogItems = [
   }
 ];
 
-const Catalog = () => {
+const Catalog = ({ isMinimal = false }) => {
   const navigate = useNavigate();
   const [flippedId, setFlippedId] = useState(null);
 
@@ -54,23 +54,25 @@ const Catalog = () => {
     <section className="catalog" id="catalog">
       <div className="container">
         
-        <div className="catalog-header">
-          <div className="title-wrapper">
-            <span className="small-label">/Каталог</span>
-             <h2 className="catalog-main-title desktop-only">
-               Мы проектируем и изготавливаем<br/>
-               мебель под конкретные задачи,<br/>
-               <span className="text-gray">а не по шаблонам</span>
-             </h2>
-             <h2 className="catalog-main-title mobile-only">
-               КАТАЛОГ <span className="highlight-orange-italic">ИНДИВИДУАЛЬНЫХ</span><br/>
-               МЕБЕЛЬНЫХ РЕШЕНИЙ
-             </h2>
+        {!isMinimal && (
+          <div className="catalog-header">
+            <div className="title-wrapper">
+              <span className="small-label">/Каталог</span>
+               <h2 className="catalog-main-title desktop-only">
+                 Мы проектируем и изготавливаем<br/>
+                 мебель под конкретные задачи,<br/>
+                 <span className="text-gray">а не по шаблонам</span>
+               </h2>
+               <h2 className="catalog-main-title mobile-only">
+                 КАТАЛОГ <span className="highlight-orange-italic">ИНДИВИДУАЛЬНЫХ</span><br/>
+                 МЕБЕЛЬНЫХ РЕШЕНИЙ
+               </h2>
+            </div>
+            <p className="catalog-subtitle">
+              Ниже — основные категории мебели, с которыми мы работаем на постоянной основе. Все изделия проектируются индивидуально, с учётом нагрузок, условий эксплуатации и архитектуры пространства.
+            </p>
           </div>
-          <p className="catalog-subtitle">
-            Ниже — основные категории мебели, с которыми мы работаем на постоянной основе. Все изделия проектируются индивидуально, с учётом нагрузок, условий эксплуатации и архитектуры пространства.
-          </p>
-        </div>
+        )}
         
         <div className="catalog-grid-1to1">
           {catalogItems.map((item) => (

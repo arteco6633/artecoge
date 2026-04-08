@@ -4,7 +4,7 @@ import { supabase } from '../../supabaseClient';
 import { motion } from 'framer-motion';
 import './Projects.css';
 
-const Projects = () => {
+const Projects = ({ isMinimal = false }) => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,17 +48,19 @@ const Projects = () => {
   return (
     <section className="projects" id="projects">
       <div className="container">
-        <div className="projects-header">
-          <span className="small-label">/Реализованные проекты</span>
-          <div className="projects-header-grid">
-            <h2 className="projects-title">
-              Проекты, которые доходят до конца <span className="text-gray">— без переделок, срывов сроков и потери качества</span>
-            </h2>
-            <p className="projects-desc">
-              Каждый из этих проектов — результат полного контроля всех этапов производства и установки. Здесь нет демонстрационных работ, только реальные объекты и реальные задачи.
-            </p>
+        {!isMinimal && (
+          <div className="projects-header">
+            <span className="small-label">/Реализованные проекты</span>
+            <div className="projects-header-grid">
+              <h2 className="projects-title">
+                Проекты, которые доходят до конца <span className="text-gray">— без переделок, срывов сроков и потери качества</span>
+              </h2>
+              <p className="projects-desc">
+                Каждый из этих проектов — результат полного контроля всех этапов производства и установки. Здесь нет демонстрационных работ, только реальные объекты и реальные задачи.
+              </p>
+            </div>
           </div>
-        </div>
+        )}
 
         {loading ? (
             <div style={{color:'#666', textAlign:'center', padding:'50px'}}>Загрузка проектов...</div>

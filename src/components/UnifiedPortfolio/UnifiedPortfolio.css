@@ -1,0 +1,72 @@
+.unified-portfolio {
+  padding-top: 10rem;
+  padding-bottom: 5rem;
+  background-color: var(--bg-light);
+}
+
+.portfolio-header-top {
+  margin-bottom: 40px;
+}
+
+.portfolio-header-top .small-label {
+  display: block;
+  font-size: 14px;
+  color: #a0a0a0;
+  margin-bottom: 15px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.portfolio-main-title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #1a1a1a;
+  margin: 0;
+  max-width: 900px;
+}
+
+.portfolio-main-title .text-gray {
+  color: #a0a0a0;
+}
+
+.portfolio-divider-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.portfolio-divider-desc {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+/* Ensure smooth flow without huge gaps between merged components */
+.portfolio-content .catalog {
+  padding-bottom: 0 !important;
+}
+
+/* Ensure child components fit tight */
+.portfolio-content .catalog, 
+.portfolio-content .projects {
+  padding-top: 0 !important;
+  background: transparent !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .unified-portfolio {
+    padding-top: 6rem;
+  }
+  
+  .portfolio-main-title {
+    font-size: 32px;
+  }
+
+  .portfolio-divider-title {
+    font-size: 24px;
+  }
+}

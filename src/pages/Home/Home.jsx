@@ -2,11 +2,10 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Hero from '../../components/Hero/Hero';
 import UspBanner from '../../components/UspBanner/UspBanner';
-import Catalog from '../../components/Catalog/Catalog';
+import UnifiedPortfolio from '../../components/UnifiedPortfolio/UnifiedPortfolio';
 import CompanyInfo from '../../components/CompanyInfo/CompanyInfo';
 import Partners from '../../components/Partners/Partners';
 import CtaAnchor from '../../components/CtaAnchor/CtaAnchor';
-import Projects from '../../components/Projects/Projects';
 import HowWeWork from '../../components/HowWeWork/HowWeWork';
 import Articles from '../../components/Articles/Articles';
 import Faq from '../../components/Faq/Faq';
@@ -49,11 +48,10 @@ const Home = () => {
     >
       <Hero btnLink="/catalog" />
       <motion.div {...revealProps}><UspBanner /></motion.div>
-      <motion.div {...revealProps}><Catalog /></motion.div>
+      <motion.div {...revealProps}><UnifiedPortfolio /></motion.div>
       <motion.div {...revealProps}><CompanyInfo /></motion.div>
       <motion.div {...revealProps}><Partners /></motion.div>
       <motion.div {...revealProps}><CtaAnchor /></motion.div>
-      <motion.div {...revealProps}><Projects /></motion.div>
       <motion.div {...revealProps}><HowWeWork /></motion.div>
       <motion.div {...revealProps}><Articles /></motion.div>
       <motion.div {...revealProps}><Faq /></motion.div>
