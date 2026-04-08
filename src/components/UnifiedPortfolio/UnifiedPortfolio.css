@@ -36,12 +36,17 @@
 }
 
 /* Ensure child components fit tight */
-.portfolio-content .catalog, 
-.portfolio-content .projects {
+.portfolio-content .catalog {
   padding-top: 0 !important;
   background: transparent !important;
   margin: 0 !important;
   border-radius: 0 !important;
+}
+
+.portfolio-content .projects {
+  padding-top: 140px !important; /* Proper offset as requested */
+  background: transparent !important;
+  margin: 0 !important;
 }
 
 @media (max-width: 900px) {

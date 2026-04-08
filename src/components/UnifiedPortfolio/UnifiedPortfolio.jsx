@@ -20,7 +20,7 @@ const UnifiedPortfolio = () => {
         <Catalog isMinimal={true} />
         
         {/* Часть 2: Проекты с восстановленным оригинальным заголовком */}
-        <div className="projects" style={{ background: 'transparent', paddingTop: '100px' }}>
+        <div className="projects" style={{ background: 'transparent', paddingTop: '120px' }}>
           <div className="container">
             <div className="projects-header">
               <span className="small-label">/Реализованные проекты</span>
