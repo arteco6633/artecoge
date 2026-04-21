@@ -8,8 +8,9 @@ const Projects = ({ isMinimal = false }) => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
-  const containerVariants = {
+  const containerVariants = isMobile ? {} : {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -20,7 +21,7 @@ const Projects = ({ isMinimal = false }) => {
     }
   };
 
-  const itemVariants = {
+  const itemVariants = isMobile ? {} : {
     hidden: { opacity: 0, y: 20, filter: 'blur(2px)' },
     visible: { 
       opacity: 1, 
@@ -35,13 +36,19 @@ const Projects = ({ isMinimal = false }) => {
   }, []);
 
   const fetchProjects = async () => {
-    const { data } = await supabase
-      .from('projects')
-      .select('*')
-      .order('created_at', { ascending: false });
-    
-    setProjects(data || []);
-    setLoading(false);
+    try {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      setProjects(data || []);
+    } catch (err) {
+      console.error('Error fetching projects:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -82,7 +89,11 @@ const Projects = ({ isMinimal = false }) => {
                       onClick={() => navigate(`/project/${proj.slug}`)}
                     >
                     <div className="project-card-inner">
-                        <img src={proj.images[0]} alt={proj.name} className="project-card-img" />
+                        {proj.images && proj.images.length > 0 ? (
+                          <img src={proj.images[0]} alt={proj.name} className="project-card-img" />
+                        ) : (
+                          <div className="project-card-img-placeholder"></div>
+                        )}
                         <div className="project-card-overlay">
                         <h3 className="pc-title">{proj.name}</h3>
                         <div className="pc-icon">

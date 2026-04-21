@@ -38,7 +38,9 @@ const HowWeWork = () => {
 
   const current = steps[activeStep];
 
-  const revealProps = {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  
+  const revealProps = isMobile ? {} : {
     initial: { opacity: 0, y: 30, scale: 0.99, filter: 'blur(2px)' },
     whileInView: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
     viewport: { once: true, amount: 0.1 },

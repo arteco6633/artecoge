@@ -30,14 +30,16 @@ const Home = () => {
     }
   }, [hash]);
 
-  const revealProps = {
-    initial: { opacity: 0, y: 80, scale: 0.95, filter: 'blur(10px)' },
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  
+  const revealProps = isMobile ? {} : {
+    initial: { opacity: 0, y: 40, scale: 0.98, filter: 'blur(5px)' },
     whileInView: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
-    viewport: { once: false, amount: 0.15 },
+    viewport: { once: true, amount: 0.1 },
     transition: { 
-      duration: 1.2, 
-      ease: [0.16, 1, 0.3, 1], // Quintic easeOut for a "premium silk" feel
-      delay: 0.1
+      duration: 0.8, 
+      ease: [0.16, 1, 0.3, 1],
+      delay: 0.05
     }
   };
 
