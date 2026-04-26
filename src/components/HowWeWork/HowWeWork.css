@@ -110,9 +110,9 @@
 }
 
 .btn-orange-pill:hover {
-  background-color: #92522D;
+  background-color: #2D4373;
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(179, 103, 57, 0.25);
+  box-shadow: 0 10px 30px rgba(59, 89, 152, 0.25);
 }
 
 .work-controls {

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --primary-orange: #B36739;
+  --primary-orange: #3B5998;
   --bg-dark: #121212;
   --bg-light: #F0EDE9;
   --text-primary: #121212;
@@ -51,7 +51,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #92522D;
+  background: #2D4373;
 }
 
 * {
@@ -144,9 +144,9 @@ button {
 }
 
 .btn-primary:hover {
-  background-color: #92522D;
+  background-color: #2D4373;
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(255, 138, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(59, 89, 152, 0.2);
 }
 
 @media (max-width: 768px) {

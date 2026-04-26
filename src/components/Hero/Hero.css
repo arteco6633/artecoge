@@ -119,7 +119,7 @@
 
 .btn-orange-pill:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(230, 125, 0, 0.3);
+  box-shadow: 0 10px 20px rgba(59, 89, 152, 0.3);
 }
 
 /* DESKTOP MINI SLIDER */
@@ -348,7 +348,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 8px 24px rgba(230, 125, 0, 0.4);
+    box-shadow: 0 8px 24px rgba(59, 89, 152, 0.4);
   }
 
   .hero-social-mobile-inner {
