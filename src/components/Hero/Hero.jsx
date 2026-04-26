@@ -14,7 +14,7 @@ const usps = [
 ];
 
 const Hero = ({ 
-  title = <>АВТОРСКАЯ <span className="highlight-text">МЕБЕЛЬ</span><br/>ПО ДИЗАЙН ПРОЕКТУ</>,
+  title = <>ДИЗАЙНЕРСКАЯ <span className="highlight-text">МЕБЕЛЬ</span><br/>НА ЗАКАЗ В ТБИЛИСИ</>,
   showSlider = true,
   rightText = null,
   compact = false,
