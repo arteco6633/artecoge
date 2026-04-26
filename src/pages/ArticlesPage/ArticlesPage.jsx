@@ -7,16 +7,19 @@ import { supabase } from '../../supabaseClient';
 import LeadModal from '../../components/FinalForm/LeadModal';
 import Hero from '../../components/Hero/Hero';
 import heroBgArticles from '../../assets/articles_hero_bg.png';
+import { useLang } from '../../i18n/context';
 
 const ArticlesPage = () => {
     const navigate = useNavigate();
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [activeCategory, setActiveCategory] = useState('Все');
+    const [activeCategory, setActiveCategory] = useState(null);
     const [isSticky, setIsSticky] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalTitle, setModalTitle] = useState('');
     const [modalDesc, setModalDesc] = useState('');
+    const { t } = useLang();
+    const ap = t.articlesPage;
 
     const openModal = (title, desc) => {
         setModalTitle(title);
@@ -27,13 +30,15 @@ const ArticlesPage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         fetchArticles();
-
-        const handleScroll = () => {
-            setIsSticky(window.scrollY > 300);
-        };
+        const handleScroll = () => setIsSticky(window.scrollY > 300);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Reset active category when language changes
+    useEffect(() => {
+        setActiveCategory(null);
+    }, [t]);
 
     const fetchArticles = async () => {
         setLoading(true);
@@ -43,7 +48,6 @@ const ArticlesPage = () => {
             .order('created_at', { ascending: false });
 
         if (error) {
-            console.error('Error fetching articles:', error);
             setArticles(staticArticles);
         } else {
             const dbSlugs = new Set((data || []).map(a => a.slug));
@@ -53,10 +57,12 @@ const ArticlesPage = () => {
         setLoading(false);
     };
 
-    const categories = ['Все', ...new Set(articles.map(a => a.category).filter(Boolean))];
-    const filteredArticles = activeCategory === 'Все'
-        ? articles
-        : articles.filter(a => a.category === activeCategory);
+    const categories = [...new Set(articles.map(a => a.category).filter(Boolean))];
+    const filteredArticles = activeCategory
+        ? articles.filter(a => a.category === activeCategory)
+        : articles;
+
+    const heroTitle = <>{ap.heroTitle1} <span className="ap-highlight">{ap.heroHighlight}</span><br />{ap.heroTitle2}</>;
 
     return (
         <motion.div
@@ -66,19 +72,22 @@ const ArticlesPage = () => {
             transition={{ duration: 1, ease: "easeOut" }}
         >
             <Hero
-                title={<>ЗНАНИЯ И <span className="ap-highlight">ВДОХНОВЕНИЕ</span><br />ДЛЯ ВАШЕГО ИНТЕРЬЕРА</>}
+                title={heroTitle}
                 subtitle=""
-                rightText="Мы делимся профессиональным опытом в меблировке, рассказываем об австрийских материалах Egger и помогаем избежать ошибок при заказе мебели."
+                rightText={ap.heroRight}
                 bgImage={heroBgArticles}
                 showSlider={false}
                 compact={true}
-                ctaText="Обсудить проект"
-                modalTitle="Обсудить проект"
-                modalDesc="Оставьте заявку, и мы свяжемся с вами для консультации"
             />
 
             <div className={`ap-sticky-filter ${isSticky ? 'is-sticky' : ''}`}>
                 <div className="container ap-filter-inner">
+                    <button
+                        onClick={() => setActiveCategory(null)}
+                        className={`ap-filter-btn ${!activeCategory ? 'active' : ''}`}
+                    >
+                        {ap.filterAll}
+                    </button>
                     {categories.map(cat => (
                         <button
                             key={cat}
@@ -94,7 +103,7 @@ const ArticlesPage = () => {
             <section className="articles-content">
                 <div className="container">
                     {loading ? (
-                        <div style={{ color: '#fff', textAlign: 'center', padding: '100px 0' }}>Загрузка...</div>
+                        <div style={{ color: '#fff', textAlign: 'center', padding: '100px 0' }}>{ap.loading}</div>
                     ) : (
                         <div className="ap-grid">
                             {filteredArticles.map(article => (
@@ -109,7 +118,7 @@ const ArticlesPage = () => {
                                         <p className="ap-card-excerpt">
                                             {article.content ? article.content.replace(/<[^>]*>?/gm, '').substring(0, 150) + '...' : ''}
                                         </p>
-                                        <button className="ap-card-more">Читать полностью</button>
+                                        <button className="ap-card-more">{ap.readMore}</button>
                                     </div>
                                 </div>
                             ))}
@@ -122,17 +131,14 @@ const ArticlesPage = () => {
                 <div className="container">
                     <div className="ap-cta-anchor">
                         <div className="ap-cta-info">
-                            <h2 className="ap-cta-title">ЕЩЁ БОЛЬШЕ ИДЕЙ ДЛЯ ВАШЕГО ИНТЕРЬЕРА</h2>
-                            <p className="ap-cta-desc">
-                                Оставьте заявку на индивидуальный подбор материалов и расчет стоимости проекта.
-                                Мы поможем реализовать ваши самые смелые идеи.
-                            </p>
+                            <h2 className="ap-cta-title">{ap.ctaTitle}</h2>
+                            <p className="ap-cta-desc">{ap.ctaDesc}</p>
                         </div>
                         <button
                             className="btn-orange-pill"
-                            onClick={() => openModal('Обсудить проект', 'Оставьте заявку на индивидуальный подбор материалов и расчет стоимости проекта.')}
+                            onClick={() => openModal(ap.ctaBtn, ap.ctaDesc)}
                         >
-                            Обсудить проект
+                            {ap.ctaBtn}
                         </button>
                     </div>
                 </div>

@@ -3,39 +3,15 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useModal } from '../../ModalContext';
 import { supabase } from '../../supabaseClient';
 import './ProjectPage.css';
-
-const SECTION_METADATA = {
-  kitchens: {
-    ctaTitle: "Проект кухни",
-    ctaDesc: "Спроектируем функциональное пространство под вас."
-  },
-  wardrobes: {
-    ctaTitle: "Проект шкафа",
-    ctaDesc: "Создадим идеальную систему хранения вещей."
-  },
-  cabinet: {
-    ctaTitle: "Мебель в кабинет",
-    ctaDesc: "Индивидуальный дизайн для рабочей атмосферы."
-  },
-  shelves: {
-    ctaTitle: "Проект стеллажа",
-    ctaDesc: "Спроектируем стеллаж под ваше пространство и задачи."
-  },
-  panels: {
-    ctaTitle: "Стеновые панели",
-    ctaDesc: "Подберём материал и рисунок под ваш интерьер."
-  },
-  bathrooms: {
-    ctaTitle: "Мебель для санузла",
-    ctaDesc: "Функциональные решения для ванной комнаты."
-  }
-};
+import { useLang } from '../../i18n/context';
 
 const ProjectPage = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
   const { openModal } = useModal();
-  
+  const { t } = useLang();
+  const pp = t.projectPage;
+
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeImageIdx, setActiveImageIdx] = useState(0);
@@ -65,23 +41,10 @@ const ProjectPage = () => {
   };
 
   const fetchOtherProjects = async (currentSlug, type, category) => {
-    let query = supabase
-      .from('projects')
-      .select('*')
-      .neq('slug', currentSlug)
-      .eq('type', type);
-    
-    if (category) {
-      query = query.eq('category', category);
-    }
-
-    const { data, error } = await query.limit(2);
-    
-    if (error) {
-      console.error("Error fetching other projects:", error);
-    } else {
-      setOtherProjects(data || []);
-    }
+    let query = supabase.from('projects').select('*').neq('slug', currentSlug).eq('type', type);
+    if (category) query = query.eq('category', category);
+    const { data } = await query.limit(2);
+    setOtherProjects(data || []);
   };
 
   const openLightbox = (idx) => {
@@ -107,14 +70,20 @@ const ProjectPage = () => {
     setActiveImageIdx((prev) => (prev - 1 + project.images.length) % project.images.length);
   };
 
-  if (loading) return <div className="admin-loading" style={{padding: '200px 0', textAlign:'center', color: '#fff'}}>Загрузка проекта...</div>;
-  if (!project) return <div style={{padding: '200px 0', textAlign:'center', color: '#fff'}}>Проект не найден. <button onClick={() => navigate('/')}>На главную</button></div>;
+  if (loading) return <div className="admin-loading" style={{padding: '200px 0', textAlign:'center', color: '#fff'}}>{pp.loading}</div>;
+  if (!project) return (
+    <div style={{padding: '200px 0', textAlign:'center', color: '#fff'}}>
+      {pp.notFound} <button onClick={() => navigate('/')}>{pp.goHome}</button>
+    </div>
+  );
+
+  const sectionMeta = pp.sections[project.category] || {};
 
   return (
     <div className="project-page">
       <div className="container">
         <button className="pp-back-btn" onClick={() => navigate(-1)}>
-          ← Назад в каталог
+          {pp.back}
         </button>
 
         <div className="pp-content-layout">
@@ -134,10 +103,10 @@ const ProjectPage = () => {
                   </div>
                 )}
               </div>
-              
+
               {project.result && (
                 <div className="pp-result-block">
-                  <div className="pp-result-badge">Результат</div>
+                  <div className="pp-result-badge">{pp.resultBadge}</div>
                   <p className="pp-result-text">{project.result}</p>
                 </div>
               )}
@@ -148,8 +117,8 @@ const ProjectPage = () => {
             <div className="pp-gallery-section">
               <div className="pp-gallery-grid">
                 {project.images.map((img, idx) => (
-                  <div 
-                    key={idx} 
+                  <div
+                    key={idx}
                     className={`pp-gallery-item ${idx === 0 ? 'featured' : ''}`}
                     onClick={() => openLightbox(idx)}
                   >
@@ -168,19 +137,19 @@ const ProjectPage = () => {
               <div className="pp-main-cta-wrapper">
                 <div className="cp-cta-block">
                   <div className="cp-cta-text" style={{ textAlign: 'left' }}>
-                    <span className="cp-cta-label">Хотите похожее?</span>
+                    <span className="cp-cta-label">{pp.wantSimilar}</span>
                     <h3 className="cp-cta-title">
-                      {SECTION_METADATA[project.category]?.ctaTitle || "Индивидуальный проект"}
+                      {sectionMeta.ctaTitle || pp.individualProject}
                     </h3>
                     <p className="cp-cta-desc">
-                      {SECTION_METADATA[project.category]?.ctaDesc || "Спроектируем мебель под ваше пространство и бюджет."}
+                      {sectionMeta.ctaDesc || pp.defaultCtaDesc}
                     </p>
                   </div>
-                  <button 
-                    className="btn-orange-pill" 
-                    onClick={() => openModal("Рассчитать стоимость", project.name)}
+                  <button
+                    className="btn-orange-pill"
+                    onClick={() => openModal(pp.calcPrice, project.name)}
                   >
-                    Рассчитать стоимость
+                    {pp.calcPrice}
                   </button>
                 </div>
               </div>
@@ -204,18 +173,18 @@ const ProjectPage = () => {
 
         {otherProjects.length > 0 && (
           <div className="pp-other-projects">
-            <h2 className="pp-other-title">Смотрите также</h2>
+            <h2 className="pp-other-title">{pp.seeAlso}</h2>
             <div className="pp-other-grid">
               {otherProjects.map((other) => (
-                <div 
-                  key={other.id} 
-                  className="pp-other-card" 
+                <div
+                  key={other.id}
+                  className="pp-other-card"
                   onClick={() => navigate(other.type === 'catalog' ? `/catalog/${other.slug}` : `/project/${other.slug}`)}
                 >
                   <div className="pp-other-img" style={{ backgroundImage: `url(${other.images[0]})` }}></div>
                   <div className="pp-other-info">
                     <h3 className="pp-other-name">{other.name}</h3>
-                    <span className="pp-other-link">Перейти →</span>
+                    <span className="pp-other-link">{pp.goTo}</span>
                   </div>
                 </div>
               ))}
@@ -224,19 +193,18 @@ const ProjectPage = () => {
         )}
 
         <div className="pp-cta" style={{ backgroundImage: `url(${project.images[0]})` }}>
-          <h2 className="pp-cta-title">Понравился проект?</h2>
-          <p className="pp-cta-desc">Оставьте заявку, и мы адаптируем подобное решение под ваши размеры и бюджет.</p>
-          <button 
-            className="btn-orange-pill" 
-            onClick={() => openModal("Обсудить проект", project.name)}
+          <h2 className="pp-cta-title">{pp.ctaTitle}</h2>
+          <p className="pp-cta-desc">{pp.ctaDesc}</p>
+          <button
+            className="btn-orange-pill"
+            onClick={() => openModal(pp.discussProject, project.name)}
           >
-            Обсудить мой проект
+            {pp.ctaBtn}
           </button>
         </div>
       </div>
     </div>
   );
 };
-
 
 export default ProjectPage;

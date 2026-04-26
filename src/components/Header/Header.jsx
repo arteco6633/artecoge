@@ -47,9 +47,9 @@ const Header = () => {
   };
 
   const languages = [
-    { code: 'ru', label: 'RU' },
-    { code: 'en', label: 'EN' },
-    { code: 'ka', label: 'ქა' },
+    { code: 'ru', label: 'RU', flag: '🇷🇺' },
+    { code: 'en', label: 'EN', flag: '🇬🇧' },
+    { code: 'ka', label: 'GE', flag: '🇬🇪' },
   ];
 
   return (
@@ -100,8 +100,10 @@ const Header = () => {
                 key={l.code}
                 className={`lang-btn ${lang === l.code ? 'active' : ''}`}
                 onClick={() => changeLang(l.code)}
+                title={l.label}
               >
-                {l.label}
+                <span className="lang-flag">{l.flag}</span>
+                <span className="lang-label">{l.label}</span>
               </button>
             ))}
           </div>
@@ -150,8 +152,10 @@ const Header = () => {
                 key={l.code}
                 className={`lang-btn ${lang === l.code ? 'active' : ''}`}
                 onClick={() => { changeLang(l.code); setIsMenuOpen(false); }}
+                title={l.label}
               >
-                {l.label}
+                <span className="lang-flag">{l.flag}</span>
+                <span className="lang-label">{l.label}</span>
               </button>
             ))}
           </div>

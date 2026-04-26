@@ -6,41 +6,8 @@ import catalogHero from '../../assets/catalog_hero.png';
 import ImageLightbox from '../../components/ImageLightbox/ImageLightbox';
 import { useModal } from '../../ModalContext';
 import { supabase } from '../../supabaseClient';
-
-const SECTION_METADATA = {
-  kitchens: {
-    title: "КУХНИ",
-    ctaTitle: "Проект кухни",
-    ctaDesc: <>Спроектируем&nbsp;функциональное<br/>пространство под вас.</>
-  },
-  wardrobes: {
-    title: "ШКАФЫ",
-    ctaTitle: "Проект шкафа",
-    ctaDesc: <>Создадим&nbsp;идеальную<br/>систему&nbsp;хранения&nbsp;вещей.</>
-  },
-  cabinet: {
-    title: "КАБИНЕТЫ",
-    ctaTitle: "Мебель в кабинет",
-    ctaDesc: <>Индивидуальный дизайн<br/>для рабочей атмосферы.</>
-  },
-  shelves: {
-    title: "СТЕЛЛАЖИ",
-    ctaTitle: "Проект стеллажа",
-    ctaDesc: <>Спроектируем стеллаж под<br/>ваше пространство и задачи.</>
-  },
-  panels: {
-    title: "СТЕНОВЫЕ ПАНЕЛИ",
-    ctaTitle: "Стеновые панели",
-    ctaDesc: <>Подберём материал и<br/>рисунок под ваш интерьер.</>
-  },
-  bathrooms: {
-    title: "САНУЗЛЫ",
-    ctaTitle: "Мебель для санузла",
-    ctaDesc: <>Функциональные решения<br/>для ванной комнаты.</>
-  }
-};
-
 import { motion } from 'framer-motion';
+import { useLang } from '../../i18n/context';
 
 const CatalogPage = () => {
   const navigate = useNavigate();
@@ -48,35 +15,28 @@ const CatalogPage = () => {
   const [sections, setSections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isSticky, setIsSticky] = useState(false);
-  const [lightboxData, setLightboxData] = useState(null); // { images, index }
+  const [lightboxData, setLightboxData] = useState(null);
+  const { t } = useLang();
+  const cp = t.catalogPage;
+
+  const SECTION_ORDER = ['kitchens', 'wardrobes', 'cabinet', 'shelves', 'panels', 'bathrooms'];
 
   const revealProps = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.01 }, /* Trigger as soon as 1% is visible */
-    transition: { 
-      duration: 0.5, 
-      ease: [0.16, 1, 0.3, 1],
-      delay: 0.1
-    }
+    viewport: { once: true, amount: 0.01 },
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchProjects();
-
-    const handleScroll = () => {
-      // Threshold depends on Hero height. 400px is safe for compact hero.
-      setIsSticky(window.scrollY > 400);
-    };
-
+    const handleScroll = () => setIsSticky(window.scrollY > 400);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const openLightbox = (images, index = 0) => {
-    setLightboxData({ images, index });
-  };
+  const openLightbox = (images, index = 0) => setLightboxData({ images, index });
 
   const fetchProjects = async () => {
     setLoading(true);
@@ -86,10 +46,7 @@ const CatalogPage = () => {
       .eq('type', 'catalog')
       .order('created_at', { ascending: false });
 
-    if (error) {
-      console.error("Error fetching projects:", error);
-    } else {
-      // Group projects by category
+    if (!error && data) {
       const grouped = data.reduce((acc, project) => {
         const cat = project.category || 'kitchens';
         if (!acc[cat]) acc[cat] = [];
@@ -97,32 +54,27 @@ const CatalogPage = () => {
         return acc;
       }, {});
 
-      // Build sections array based on SECTION_METADATA keys to preserve order
-      const finalSections = Object.keys(SECTION_METADATA).map(key => ({
-        id: key,
-        ...SECTION_METADATA[key],
-        projects: grouped[key] || []
-      })).filter(s => s.projects.length > 0);
+      const finalSections = SECTION_ORDER
+        .filter(key => grouped[key] && grouped[key].length > 0)
+        .map(key => ({ id: key, projects: grouped[key] }));
 
       setSections(finalSections);
     }
     setLoading(false);
   };
 
-  if (loading) {
-    return <div className="loading-state">Загрузка каталога...</div>;
-  }
+  if (loading) return <div className="loading-state">{cp.loading}</div>;
+
+  const heroTitle = <>{cp.heroTitle1} <span className="highlight-orange-italic">{cp.heroHighlight}</span><br />{cp.heroTitle2}</>;
 
   return (
     <div className="catalog-page-container">
       <Hero
-        title={<>КАТАЛОГ <span className="highlight-orange-italic">ИНДИВИДУАЛЬНЫХ</span><br />МЕБЕЛЬНЫХ РЕШЕНИЙ</>}
+        title={heroTitle}
         subtitle=""
-        rightText="Мы не продаём готовые изделия. Каждое решение проектируется под конкретные задачи, пространство и сценарии использования."
+        rightText={cp.heroRight}
         showSlider={false}
         compact={true}
-        ctaText="Обсудить проект"
-        modalTitle="Обсудить проект"
         bgImage={catalogHero}
       />
 
@@ -130,102 +82,108 @@ const CatalogPage = () => {
       <div className={`cp-sticky-nav ${isSticky ? 'is-sticky' : ''}`}>
         <div className="container cp-nav-inner">
           {sections.map(s => (
-            <a key={s.id} href={`#${s.id}`} className="cp-nav-link">{s.title}</a>
+            <a key={s.id} href={`#${s.id}`} className="cp-nav-link">
+              {cp.sections[s.id]?.title || s.id.toUpperCase()}
+            </a>
           ))}
         </div>
       </div>
 
+      {sections.map((section) => {
+        const meta = cp.sections[section.id] || {};
+        return (
+          <motion.div key={section.id} {...revealProps}>
+            <section id={section.id} className="cp-section">
+              <div className="container">
+                <h2 className="cp-section-title">{meta.title || section.id.toUpperCase()}</h2>
 
-      {sections.map((section, idx) => (
-        <motion.div key={section.id} {...revealProps}>
-          <section id={section.id} className="cp-section">
-          <div className="container">
-            <h2 className="cp-section-title">{section.title}</h2>
-
-            <div className="cp-projects-list">
-              {section.projects.map((project, pIdx) => (
-                <div key={pIdx} className="cp-project">
-                  <div className="cp-project-header">
-                    <div className="cp-project-title-area">
-                      <h3 className="cp-project-name">
-                        {project.name} <span className="cp-project-category-suffix">по индивидуальному проекту</span>
-                      </h3>
-                    </div>
-                    <p className="cp-project-description-top">
-                      {project.desc?.substring(0, 160) || "Акцент на дизайне, который расширяет пространство и выглядит дорого. Кухня как арт-объект. Масштабные решения для любого пространства."}
-                    </p>
-                  </div>
-
-                  <div className="cp-project-image-grid">
-                    {(project.images || project.image_urls || []).slice(0, 4).map((url, i) => (
-                      <img
-                        key={i}
-                        src={url}
-                        alt={project.name}
-                        className="cp-grid-img"
-                        onClick={() => openLightbox(project.images || project.image_urls, i)}
-                        style={{ cursor: 'zoom-in' }}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="cp-project-footer">
-                    <div className="cp-result-box">
-                      <div className="cp-result-header">
-                        <h4 className="cp-result-title">Результат</h4>
-                        <Link to={`/catalog/${project.slug || project.id}`} className="cp-details-link">
-                          Подробнее ↗
-                        </Link>
+                <div className="cp-projects-list">
+                  {section.projects.map((project, pIdx) => (
+                    <div key={pIdx} className="cp-project">
+                      <div className="cp-project-header">
+                        <div className="cp-project-title-area">
+                          <h3 className="cp-project-name">
+                            {project.name} <span className="cp-project-category-suffix">{cp.projectSuffix}</span>
+                          </h3>
+                        </div>
+                        <p className="cp-project-description-top">
+                          {project.desc?.substring(0, 160) || cp.defaultDesc}
+                        </p>
                       </div>
-                      <p className="cp-result-text">
-                        {project.result || "Результат — мебель, которая выглядит дорого, работает безупречно и остаётся актуальной долгие годы."}
-                      </p>
-                    </div>
 
-                    <div className="cp-actions-area">
-                      <button
-                        className="cp-view-all-link"
-                        onClick={() => openLightbox(project.images || project.image_urls, 0)}
-                        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
-                      >
-                        Смотреть все фото →
-                      </button>
-                      <button
-                        className="btn-orange-pill"
-                        onClick={() => openModal(section.ctaTitle, section.ctaDesc)}
-                      >
-                        Рассчитать стоимость
-                      </button>
+                      <div className="cp-project-image-grid">
+                        {(project.images || project.image_urls || []).slice(0, 4).map((url, i) => (
+                          <img
+                            key={i}
+                            src={url}
+                            alt={project.name}
+                            className="cp-grid-img"
+                            onClick={() => openLightbox(project.images || project.image_urls, i)}
+                            style={{ cursor: 'zoom-in' }}
+                          />
+                        ))}
+                      </div>
+
+                      <div className="cp-project-footer">
+                        <div className="cp-result-box">
+                          <div className="cp-result-header">
+                            <h4 className="cp-result-title">{cp.resultTitle}</h4>
+                            <Link to={`/catalog/${project.slug || project.id}`} className="cp-details-link">
+                              {cp.detailsLink}
+                            </Link>
+                          </div>
+                          <p className="cp-result-text">
+                            {project.result || cp.defaultResult}
+                          </p>
+                        </div>
+
+                        <div className="cp-actions-area">
+                          <button
+                            className="cp-view-all-link"
+                            onClick={() => openLightbox(project.images || project.image_urls, 0)}
+                            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                          >
+                            {cp.viewPhotos}
+                          </button>
+                          <button
+                            className="btn-orange-pill"
+                            onClick={() => openModal(meta.ctaTitle, meta.ctaDesc)}
+                          >
+                            {cp.calcPrice}
+                          </button>
+                        </div>
+                      </div>
                     </div>
+                  ))}
+                </div>
+
+                <div className="cp-section-cta">
+                  <div className="cp-cta-block">
+                    <div className="cp-cta-text">
+                      <span className="cp-cta-label">{cp.wantSimilar}</span>
+                      <h3 className="cp-cta-title">{meta.ctaTitle}</h3>
+                      <p className="cp-cta-desc">{meta.ctaDesc}</p>
+                    </div>
+                    <button
+                      className="btn-orange-pill"
+                      onClick={() => openModal(meta.ctaTitle, meta.ctaDesc)}
+                    >
+                      {cp.discussProject}
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
-            <div className="cp-section-cta">
-              <div className="cp-cta-block">
-                <div className="cp-cta-text">
-                  <span className="cp-cta-label">Хотите похожее?</span>
-                  <h3 className="cp-cta-title">{section.ctaTitle}</h3>
-                  <p className="cp-cta-desc">{section.ctaDesc}</p>
-                </div>
-                <button
-                  className="btn-orange-pill"
-                  onClick={() => openModal(section.ctaTitle, section.ctaDesc)}
-                >
-                  Обсудить проект
-                </button>
               </div>
-            </div>
-          </div>
-        </section>
-      </motion.div>
-    ))}
+            </section>
+          </motion.div>
+        );
+      })}
 
       {sections.length === 0 && (
         <div className="container" style={{ padding: '100px 0', textAlign: 'center' }}>
-          <p style={{ color: '#666' }}>Добавьте проекты в каталог через админ-панель.</p>
+          <p style={{ color: '#666' }}>{cp.empty}</p>
         </div>
       )}
+
       {lightboxData && (
         <ImageLightbox
           images={lightboxData.images}

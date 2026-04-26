@@ -252,6 +252,82 @@ const en = {
     faq: 'FAQ',
     rights: '© 2026 ARTECO. All rights reserved.',
   },
+  // Articles component (home section)
+  articlesSection: {
+    title: 'Journal',
+    viewAll: 'All Articles',
+    loading: 'Loading articles...',
+  },
+
+  // Articles Page
+  articlesPage: {
+    heroTitle1: 'KNOWLEDGE &',
+    heroHighlight: 'INSPIRATION',
+    heroTitle2: 'FOR YOUR INTERIOR',
+    heroRight: 'We share professional insights on furniture, covering Austrian Egger materials and helping you avoid common mistakes when ordering bespoke pieces.',
+    heroCta: 'Discuss a Project',
+    filterAll: 'All',
+    loading: 'Loading...',
+    readMore: 'Read Full Article',
+    ctaTitle: 'MORE IDEAS FOR YOUR INTERIOR',
+    ctaDesc: 'Submit a request for an individual material selection and cost estimate. We will help bring your boldest ideas to life.',
+    ctaBtn: 'Discuss a Project',
+  },
+
+  // Catalog Page
+  catalogPage: {
+    heroTitle1: 'CATALOG OF',
+    heroHighlight: 'BESPOKE',
+    heroTitle2: 'FURNITURE SOLUTIONS',
+    heroRight: 'We do not sell off-the-shelf products. Every solution is designed for specific tasks, spaces, and usage scenarios.',
+    heroCta: 'Discuss a Project',
+    loading: 'Loading catalog...',
+    projectSuffix: 'custom-made',
+    defaultDesc: 'A focus on design that expands the space and looks premium.',
+    resultTitle: 'Result',
+    detailsLink: 'View Details ↗',
+    viewPhotos: 'View All Photos →',
+    calcPrice: 'Get a Quote',
+    wantSimilar: 'Want something similar?',
+    discussProject: 'Discuss a Project',
+    empty: 'Add projects to the catalog via the admin panel.',
+    defaultResult: 'The result — furniture that looks premium, performs flawlessly, and stays relevant for years.',
+    sections: {
+      kitchens: { title: 'KITCHENS', ctaTitle: 'Kitchen Project', ctaDesc: 'We will design a functional space tailored to you.' },
+      wardrobes: { title: 'WARDROBES', ctaTitle: 'Wardrobe Project', ctaDesc: 'We will create the ideal storage system for your belongings.' },
+      cabinet: { title: 'OFFICES', ctaTitle: 'Office Furniture', ctaDesc: 'Bespoke design for a productive atmosphere.' },
+      shelves: { title: 'SHELVING', ctaTitle: 'Shelving Project', ctaDesc: 'We will design shelving for your space and needs.' },
+      panels: { title: 'WALL PANELS', ctaTitle: 'Wall Panels', ctaDesc: 'We will select the right material and pattern for your interior.' },
+      bathrooms: { title: 'BATHROOMS', ctaTitle: 'Bathroom Furniture', ctaDesc: 'Functional solutions for your bathroom.' },
+    },
+  },
+
+  // Project Page
+  projectPage: {
+    loading: 'Loading project...',
+    notFound: 'Project not found.',
+    goHome: 'Back to Home',
+    back: '← Back to Catalog',
+    resultBadge: 'Result',
+    wantSimilar: 'Want something similar?',
+    individualProject: 'Bespoke Project',
+    defaultCtaDesc: 'We will design furniture for your space and budget.',
+    calcPrice: 'Get a Quote',
+    goTo: 'View →',
+    seeAlso: 'See Also',
+    ctaTitle: 'Like this project?',
+    ctaDesc: 'Submit a request and we will adapt a similar solution to your dimensions and budget.',
+    ctaBtn: 'Discuss My Project',
+    discussProject: 'Discuss a Project',
+    sections: {
+      kitchens: { ctaTitle: 'Kitchen Project', ctaDesc: 'We will design a functional space tailored to you.' },
+      wardrobes: { ctaTitle: 'Wardrobe Project', ctaDesc: 'We will create the ideal storage system for your belongings.' },
+      cabinet: { ctaTitle: 'Office Furniture', ctaDesc: 'Bespoke design for a productive atmosphere.' },
+      shelves: { ctaTitle: 'Shelving Project', ctaDesc: 'We will design shelving for your space and needs.' },
+      panels: { ctaTitle: 'Wall Panels', ctaDesc: 'We will select the right material and pattern for your interior.' },
+      bathrooms: { ctaTitle: 'Bathroom Furniture', ctaDesc: 'Functional solutions for your bathroom.' },
+    },
+  },
 };
 
 export default en;
