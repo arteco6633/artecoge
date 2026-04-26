@@ -16,7 +16,7 @@
   backdrop-filter: blur(15px) saturate(180%);
   -webkit-backdrop-filter: blur(15px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 30px;
+  border-radius: 15px;
   padding: 40px;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 

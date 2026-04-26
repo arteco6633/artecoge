@@ -8,7 +8,7 @@
 
 .ff-wrapper {
   position: relative;
-  border-radius: 40px;
+  border-radius: 15px;
   overflow: hidden;
   background-size: cover;
   background-position: center;
@@ -96,7 +96,7 @@
   background-color: var(--bg-light);
   display: flex;
   align-items: center;
-  border-radius: 40px;
+  border-radius: 15px;
   padding: 8px 16px;
   gap: 16px;
 }
@@ -112,7 +112,7 @@
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 30px;
+  border-radius: 15px;
   padding: 40px;
   color: #ffffff;
 }
@@ -140,7 +140,7 @@
 .ff-input {
   width: 100%;
   padding: 16px 20px;
-  border-radius: 12px;
+  border-radius: 15px;
   border: none;
   background-color: #f9f9f9;
   font-size: 1rem;
@@ -166,7 +166,7 @@
   width: 100% !important;
   height: 56px !important;
   padding: 16px 20px 16px 60px !important;
-  border-radius: 12px !important;
+  border-radius: 15px !important;
   border: none !important;
   background-color: #f9f9f9 !important;
   font-size: 1rem !important;
@@ -183,7 +183,7 @@
 .ff-phone-button {
   background: transparent !important;
   border: none !important;
-  border-radius: 12px 0 0 12px !important;
+  border-radius: 15px 0 0 12px !important;
   padding-left: 15px !important;
 }
 
@@ -192,7 +192,7 @@
 }
 
 .ff-phone-dropdown {
-  border-radius: 12px !important;
+  border-radius: 15px !important;
   overflow: hidden !important;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
   border: 1px solid rgba(0,0,0,0.1) !important;

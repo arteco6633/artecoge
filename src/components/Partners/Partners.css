@@ -28,7 +28,7 @@
 .partners-tabs {
   display: flex;
   background-color: var(--bg-light);
-  border-radius: 30px;
+  border-radius: 15px;
   padding: 4px;
   margin-bottom: 30px;
   width: max-content;
@@ -36,7 +36,7 @@
 
 .partner-tab-btn {
   padding: 12px 24px;
-  border-radius: 30px;
+  border-radius: 15px;
   font-size: 14px;
   font-weight: 500;
   color: #121212;
@@ -145,7 +145,7 @@
 
 .partner-card {
   position: relative;
-  border-radius: 30px;
+  border-radius: 15px;
   overflow: hidden;
   background-size: cover;
   background-position: center;

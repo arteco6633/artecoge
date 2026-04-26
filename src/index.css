@@ -7,13 +7,13 @@
   --text-primary: #121212;
   --text-secondary: rgba(18, 18, 18, 0.6);
   --text-light: #F0EDE9;
-  --border-radius-lg: 40px;
-  --border-radius-md: 20px;
+  --border-radius-lg: 15px;
+  --border-radius-md: 15px;
   --header-height: 80px;
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --f-btn: 16px;
   --btn-padding: 18px 40px;
-  --btn-radius: 50px;
+  --btn-radius: 15px;
 
   /* Typography Design System - Desktop */
   --f-h1: 4rem;

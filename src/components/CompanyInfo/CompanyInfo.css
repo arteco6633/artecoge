@@ -2,7 +2,7 @@
   padding-top: 60px;
   padding-bottom: 60px;
   background-color: var(--bg-light);
-  border-radius: 50px;
+  border-radius: 15px;
   margin-top: -50px;
   position: relative;
   z-index: 10;
@@ -47,7 +47,7 @@
 }
 
 .company-image-card {
-  border-radius: 20px;
+  border-radius: 15px;
   background-size: cover;
   background-position: center;
   min-height: 280px;
@@ -55,7 +55,7 @@
 
 .company-quote-card {
   background-color: #f4f4f4;
-  border-radius: 20px;
+  border-radius: 15px;
   padding: 40px;
   display: flex;
   flex-direction: column;
