@@ -9,6 +9,7 @@ import logoMobile from '../../assets/logo-mobile.png';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
   const { openModal } = useModal();
   const navigate = useNavigate();
   const { lang, t, changeLang } = useLang();
@@ -28,6 +29,14 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (!isLangOpen) return;
+    const handleClickOutside = () => setIsLangOpen(false);
+    window.addEventListener('click', handleClickOutside);
+    return () => window.removeEventListener('click', handleClickOutside);
+  }, [isLangOpen]);
 
   const handleNavClick = (e, link) => {
     setIsMenuOpen(false);
@@ -51,6 +60,8 @@ const Header = () => {
     { code: 'en', label: 'EN', flag: '🇬🇧' },
     { code: 'ka', label: 'GE', flag: '🇬🇪' },
   ];
+
+  const currentLang = languages.find(l => l.code === lang) || languages[0];
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
@@ -93,19 +104,34 @@ const Header = () => {
 
         {/* Right Section */}
         <div className="header-right">
-          {/* Language Switcher */}
-          <div className="lang-switcher">
-            {languages.map((l) => (
-              <button
-                key={l.code}
-                className={`lang-btn ${lang === l.code ? 'active' : ''}`}
-                onClick={() => changeLang(l.code)}
-                title={l.label}
-              >
-                <span className="lang-flag">{l.flag}</span>
-                <span className="lang-label">{l.label}</span>
-              </button>
-            ))}
+          {/* Language Switcher Dropdown */}
+          <div className="lang-dropdown" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className={`lang-trigger ${isLangOpen ? 'active' : ''}`}
+              onClick={() => setIsLangOpen(!isLangOpen)}
+            >
+              <span className="lang-flag">{currentLang.flag}</span>
+              <span className="lang-label">{currentLang.label}</span>
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" className={`lang-arrow ${isLangOpen ? 'open' : ''}`}>
+                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+            
+            <div className={`lang-list ${isLangOpen ? 'is-open' : ''}`}>
+              {languages.map((l) => (
+                <button
+                  key={l.code}
+                  className={`lang-item ${lang === l.code ? 'selected' : ''}`}
+                  onClick={() => {
+                    changeLang(l.code);
+                    setIsLangOpen(false);
+                  }}
+                >
+                  <span className="lang-flag">{l.flag}</span>
+                  <span className="lang-label">{l.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
 
           <button
@@ -145,19 +171,37 @@ const Header = () => {
               </Link>
             ))}
           </nav>
-          {/* Language switcher inside mobile menu */}
-          <div className="lang-switcher lang-switcher-mobile">
-            {languages.map((l) => (
-              <button
-                key={l.code}
-                className={`lang-btn ${lang === l.code ? 'active' : ''}`}
-                onClick={() => { changeLang(l.code); setIsMenuOpen(false); }}
-                title={l.label}
-              >
-                <span className="lang-flag">{l.flag}</span>
-                <span className="lang-label">{l.label}</span>
-              </button>
-            ))}
+
+          {/* Mobile Language Dropdown */}
+          <div className="mobile-lang-section">
+            <button 
+              className={`mobile-lang-trigger ${isLangOpen ? 'active' : ''}`}
+              onClick={() => setIsLangOpen(!isLangOpen)}
+            >
+              <div className="trigger-left">
+                <span className="lang-flag">{currentLang.flag}</span>
+                <span className="lang-label">{currentLang.label}</span>
+              </div>
+              <svg width="12" height="8" viewBox="0 0 10 6" fill="none" className={`lang-arrow ${isLangOpen ? 'open' : ''}`}>
+                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+            <div className={`mobile-lang-list ${isLangOpen ? 'is-open' : ''}`}>
+              {languages.map((l) => (
+                <button
+                  key={l.code}
+                  className={`mobile-lang-item ${lang === l.code ? 'selected' : ''}`}
+                  onClick={() => {
+                    changeLang(l.code);
+                    setIsLangOpen(false);
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  <span className="lang-flag">{l.flag}</span>
+                  <span className="lang-label">{l.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
