@@ -93,7 +93,7 @@
 }
 
 .ff-social-pill {
-  background-color: #ffffff;
+  background-color: var(--bg-light);
   display: flex;
   align-items: center;
   border-radius: 40px;
@@ -150,7 +150,7 @@
 
 .ff-input:focus {
   outline: none;
-  background-color: #ffffff;
+  background-color: var(--bg-light);
 }
 
 .ff-phone-selector {
@@ -176,7 +176,7 @@
 }
 
 .ff-phone-input-field:focus {
-  background-color: #ffffff !important;
+  background-color: var(--bg-light) !important;
   box-shadow: none !important;
 }
 
@@ -229,7 +229,7 @@
 }
 
 .ff-submit-btn {
-  background-color: #ffffff;
+  background-color: var(--bg-light);
   color: #121212;
   font-size: var(--f-btn);
   font-weight: 700;
@@ -252,7 +252,7 @@
     margin-top: -30px;
   }
   .ff-wrapper {
-    border-radius: 30px;
+    border-radius: 15px !important;
   }
   .ff-content-grid {
     grid-template-columns: 1fr;
@@ -287,6 +287,9 @@
     font-weight: 600;
     color: #ffffff;
   }
+  .ff-social-pill {
+    border-radius: 15px !important;
+  }
   .ff-social-label {
     font-size: 16px !important;
     color: rgba(255,255,255,0.7);
@@ -294,7 +297,7 @@
   .ff-form-box {
     margin: 0 16px 40px;
     padding: 30px 24px;
-    border-radius: 24px;
+    border-radius: 15px !important;
   }
   .ff-form-title {
     font-size: 20px !important;
@@ -302,10 +305,13 @@
     color: #ffffff !important;
   }
   .ff-form-subtitle {
-    font-size: 16px !important;
+    font-size: 14px !important;
     margin-bottom: 24px !important;
     color: rgba(255,255,255,0.8) !important;
     line-height: 1.5;
+  }
+  .ff-input, .ff-phone-input-field, .ff-submit-btn {
+    border-radius: 15px !important;
   }
   .ff-checkbox-text {
     font-size: 14px !important;

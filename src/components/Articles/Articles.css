@@ -53,7 +53,7 @@
 }
 
 .article-expanded-card {
-  background-color: #ffffff;
+  background-color: var(--bg-light);
   border-radius: 30px;
   overflow: hidden;
   display: flex;
@@ -111,7 +111,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: var(--bg-light);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
@@ -142,7 +142,8 @@
 
 @media (max-width: 900px) {
   .articles {
-    padding: 60px 0;
+    padding: 0 0 40px 0;
+    margin-top: -20px;
   }
 
   .articles-top {
@@ -158,14 +159,26 @@
     line-height: 1.15;
   }
 
+  .article-expanded-card {
+    border-radius: 15px !important;
+    transform: none !important;
+    margin-bottom: 0;
+  }
+
   .view-all-btn {
-    font-size: 16px;
+    font-size: 14px;
     width: 100%;
     text-align: center;
     padding: 16px 24px;
     display: block;
     box-sizing: border-box;
     font-weight: 700;
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid #ddd;
+    border-radius: 15px !important;
+    text-decoration: none;
+    box-shadow: none;
   }
 
   .articles-grid {
@@ -178,17 +191,22 @@
   }
 
   .article-info {
-    padding: 30px 20px;
+    padding: 24px 20px;
+  }
+
+  .article-img {
+    border-radius: 15px 15px 0 0 !important;
   }
 
   .article-excerpt {
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.4;
     margin-bottom: 24px;
+    color: #666;
   }
 
   .article-title {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 800;
     line-height: 1.25;
     margin-bottom: 12px;

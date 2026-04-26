@@ -1,6 +1,6 @@
 .faq {
   padding: 100px 0;
-  background-color: #ffffff;
+  background-color: var(--bg-light);
   border-radius: 50px;
   position: relative;
   z-index: 10;
@@ -60,9 +60,9 @@
 
 @media (max-width: 900px) {
   .faq {
-    padding: 60px 0;
-    border-radius: 40px;
-    margin-top: -40px;
+    padding: 40px 0 60px 0; /* Reduced internal top padding */
+    border-radius: 15px !important;
+    margin-top: 0; /* Removed overlap for more space */
   }
 
   .faq-q {
@@ -70,16 +70,18 @@
     font-weight: 700;
     line-height: 1.4;
     gap: 10px;
+    color: #121212;
   }
 
   .faq .section-title {
     font-size: 28px !important;
     margin-bottom: 30px !important;
     text-align: left;
+    font-style: normal; /* Keep it straight */
   }
 
   .faq-a p {
-    font-size: 16px !important;
+    font-size: 14px !important; /* Standardized body text */
     line-height: 1.5;
   }
 
@@ -88,6 +90,6 @@
   }
 
   .faq-item.open .faq-a {
-    max-height: 400px;
+    max-height: 500px;
   }
 }

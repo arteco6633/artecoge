@@ -27,7 +27,7 @@
 
 .partners-tabs {
   display: flex;
-  background-color: #ffffff;
+  background-color: var(--bg-light);
   border-radius: 30px;
   padding: 4px;
   margin-bottom: 30px;
@@ -221,7 +221,7 @@
 }
 
 .pc-btn-white {
-  background-color: white;
+  background-color: var(--bg-light);
   color: #121212;
   border: none;
   padding: var(--btn-padding);
@@ -272,7 +272,7 @@
 }
 
 .part-arrow-btn.white-ar {
-  background-color: white;
+  background-color: var(--bg-light);
   color: #121212;
 }
 
@@ -301,31 +301,36 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     background-color: transparent;
     padding: 0;
     border-radius: 0;
     box-shadow: none;
-    gap: 8px;
-    margin: 0 auto 24px auto;
+    gap: 12px;
+    margin: 0 auto 16px auto;
     width: 100%;
   }
 
   .partner-tab-btn {
-    background-color: #ffffff;
-    border-radius: 30px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: 700;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    flex: 0 1 auto;
+    background-color: var(--bg-light);
+    border-radius: 15px !important;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    flex: 0 0 auto;
+    color: #121212;
+    border: none;
+  }
+
+  .partner-tab-btn.active {
+    background-color: #1a1a1a;
+    color: #ffffff;
   }
 
   .partner-tab-btn:last-child {
-    flex: 1 1 100%;
-    /* Make Corporate Projects take full width or be separate */
-    text-align: center;
-    max-width: fit-content;
-    margin: 0 auto;
+    flex: 0 0 auto;
+    margin: 0;
   }
 
   .tab-name {
@@ -333,10 +338,11 @@
   }
 
   .partners-intro-text {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.5;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
     max-width: 100%;
+    color: #555;
   }
 
   .partners-right-custom {
@@ -348,6 +354,7 @@
   .card-short {
     height: auto;
     min-height: 480px;
+    border-radius: 15px !important;
   }
 
   .partners-arrows {
@@ -359,6 +366,7 @@
     font-size: 28px;
     line-height: 1.15;
     font-weight: 800;
+    font-style: normal;
   }
 
   .small-label {
@@ -379,10 +387,19 @@
   }
 
   .btn-primary-orange {
-    font-size: 20px;
-    padding: 22px;
     width: 100%;
+    background-color: var(--primary-orange);
+    color: #ffffff;
+    padding: 16px 24px;
+    border-radius: 15px !important;
+    border: none;
+    font-size: 16px !important;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(179, 103, 57, 0.3);
     justify-content: center;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
   }
 }
 
@@ -391,15 +408,21 @@
   .card-tall,
   .card-short {
     min-height: 420px;
+    border-radius: 15px !important;
+  }
+
+  .partner-card-content {
+    padding: 24px 24px 16px; /* Tighter padding to push content/button lower */
   }
 
   .pc-title {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 800;
     line-height: 1.25;
     max-width: 210px;
     word-break: keep-all;
-    margin-bottom: 0;
+    margin-bottom: 8px;
+    color: #ffffff !important;
   }
 
   .pc-text {
@@ -408,18 +431,22 @@
 
   .pc-text.pc-text-large {
     display: block !important;
-    font-size: 16px !important;
-    line-height: 1.5;
+    font-size: 14px !important;
+    line-height: 1.4;
     margin-bottom: 24px;
+    color: #ffffff !important;
+    opacity: 0.9;
   }
 
   .pc-btn-white {
-    font-size: 16px;
-    padding: 16px 28px;
-    width: 100%;
-    margin-top: 24px;
+    font-size: 16px !important;
+    padding: 16px 24px !important;
+    width: 100%; /* Back to full width */
+    margin: 80px auto 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 15px !important;
+    font-weight: 700;
   }
 }

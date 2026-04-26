@@ -219,7 +219,7 @@
 
 @media (max-width: 900px) {
   .catalog {
-    padding: 60px 0;
+    padding: 24px 0 60px;
   }
 
   .catalog-header {
@@ -234,14 +234,14 @@
     font-size: 28px;
     line-height: 1.15;
     font-weight: 800;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
 
   .catalog-subtitle {
     margin: 0;
     max-width: 100%;
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.4;
     color: var(--text-secondary);
   }
 
@@ -254,19 +254,23 @@
     height: 520px; /* More compact on mobile */
   }
 
+  .flip-card-inner, .flip-card-front, .flip-card-back {
+    border-radius: 15px !important;
+  }
+
   .catalog-card-default {
     padding: 24px;
   }
 
   .card-top-title {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 800;
     line-height: 1.25;
   }
 
   .highlight-orange-italic {
     color: var(--primary-orange);
-    font-style: italic;
+    font-style: normal !important;
   }
 
   .hidden-link {

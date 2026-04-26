@@ -128,7 +128,7 @@
 .modal-input:focus {
   outline: none;
   border-color: var(--text-primary);
-  background: #ffffff;
+  background: var(--bg-light);
 }
 
 /* Phone Input Custom Styles */
@@ -152,7 +152,7 @@
 
 .modal-phone-input:focus {
   border-color: var(--text-primary) !important;
-  background: #ffffff !important;
+  background: var(--bg-light) !important;
   box-shadow: none !important;
 }
 

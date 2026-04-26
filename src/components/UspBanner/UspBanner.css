@@ -84,7 +84,7 @@
 
 @media (max-width: 900px) {
   .usp-banner {
-    padding: 10px 0 40px;
+    padding: 0 0 24px;
   }
 
   .usp-grid {
@@ -98,6 +98,14 @@
     text-align: left;
     flex-direction: column;
     gap: 16px;
+    border-radius: 15px;
+  }
+
+  .usp-card:hover {
+    transform: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
   }
 
   .usp-icon-wrap {
@@ -105,13 +113,13 @@
   }
 
   .usp-title {
-    font-size: 20px;
+    font-size: 16px;
     margin-bottom: 6px;
     line-height: 1.2;
   }
 
   .usp-text {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.4;
     color: rgba(0, 0, 0, 0.7);
   }

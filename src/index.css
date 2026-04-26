@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --primary-orange: #FF8A00;
+  --primary-orange: #B36739;
   --bg-dark: #121212;
-  --bg-light: #F5F5F5;
+  --bg-light: #F0EDE9;
   --text-primary: #121212;
   --text-secondary: rgba(18, 18, 18, 0.6);
-  --text-light: #FFFFFF;
+  --text-light: #F0EDE9;
   --border-radius-lg: 40px;
   --border-radius-md: 20px;
   --header-height: 80px;
@@ -51,7 +51,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #e67d00;
+  background: #92522D;
 }
 
 * {
@@ -144,7 +144,7 @@ button {
 }
 
 .btn-primary:hover {
-  background-color: #e67d00;
+  background-color: #92522D;
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(255, 138, 0, 0.2);
 }
@@ -205,6 +205,31 @@ button {
   
   .highlight-orange-italic {
     color: var(--primary-orange);
-    font-style: italic;
+    font-style: normal !important;
+  }
+}
+
+/* ============================================
+   MOBILE PERFORMANCE: Disable all animations
+   on screens ≤ 900px for smooth scrolling
+   ============================================ */
+@media (max-width: 900px) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Keep essential UI transitions that are needed for usability */
+  .lang-list,
+  .mobile-lang-list,
+  .header-menu-overlay,
+  .header-menu-content {
+    transition-duration: 0.2s !important;
+    animation-duration: 0.01ms !important;
   }
 }

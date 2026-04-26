@@ -1,7 +1,7 @@
 .company-info {
   padding-top: 60px;
   padding-bottom: 60px;
-  background-color: #ffffff;
+  background-color: var(--bg-light);
   border-radius: 50px;
   margin-top: -50px;
   position: relative;
@@ -9,7 +9,7 @@
 }
 
 .company-white-block {
-  background-color: #ffffff;
+  background-color: var(--bg-light);
   border-radius: 0;
   padding: 80px 0 80px 0;
 }
@@ -160,17 +160,17 @@
 
 @media (max-width: 900px) {
   .company-info {
-    border-radius: 40px;
-    margin-top: -40px;
+    border-radius: 15px;
+    margin-top: 8px;
     padding-bottom: 40px;
   }
 
   .company-white-block {
-    padding: 60px 0;
+    padding: 4px 0 60px;
   }
 
   .company-header-centered {
-    margin-bottom: 40px;
+    margin-bottom: 24px;
     text-align: left;
   }
 
@@ -181,10 +181,10 @@
   }
 
   .company-subtitle {
-    margin: 28px 0 0 0;
+    margin: 16px 0 0 0;
     max-width: 100%;
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.4;
   }
 
   .company-title br {
@@ -198,12 +198,12 @@
 
   .company-image-card {
     min-height: 280px;
-    border-radius: 30px;
+    border-radius: 15px;
   }
 
   .company-quote-card {
     padding: 30px 24px;
-    border-radius: 30px;
+    border-radius: 15px;
   }
 
   .quote-main-text {

@@ -60,7 +60,7 @@
 }
 
 .admin-add-btn {
-    background: #ffffff;
+    background: var(--bg-light);
     color: #000000 !important;
     border: none;
     padding: 12px 24px;

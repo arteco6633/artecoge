@@ -9,6 +9,7 @@ import logoMobile from '../../assets/logo-mobile.png';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const { openModal } = useModal();
   const navigate = useNavigate();
@@ -23,10 +24,24 @@ const Header = () => {
   ];
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+    const isMobile = () => window.innerWidth <= 900;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentY = window.scrollY;
+      setIsScrolled(currentY > 50);
+
+      if (isMobile()) {
+        // Hide when scrolling down (past 80px), show when scrolling up
+        if (currentY > lastScrollY && currentY > 80) {
+          setIsHidden(true);
+        } else {
+          setIsHidden(false);
+        }
+      }
+      lastScrollY = currentY;
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -64,8 +79,9 @@ const Header = () => {
   const currentLang = languages.find(l => l.code === lang) || languages[0];
 
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`header ${isScrolled ? 'scrolled' : ''} ${isHidden ? 'header-hidden' : ''}`}>
       <div className="header-container">
+        <div className="header-bg-shimmer" />
         {/* Desktop Left: Full Logo */}
         <div className="header-left desktop-only">
           <a href="/" className="header-logo">ARTECO</a>
@@ -92,20 +108,12 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* Mobile Center: CTA Button */}
-        <div className="header-center-mobile mobile-only">
-          <button
-            className="btn-header-cta-mobile"
-            onClick={() => openModal(t.header.ctaModalTitle, t.header.ctaModalDesc)}
-          >
-            {t.header.ctaMobile}
-          </button>
-        </div>
+
 
         {/* Right Section */}
         <div className="header-right">
           {/* Language Switcher Dropdown */}
-          <div className="lang-dropdown" onClick={(e) => e.stopPropagation()}>
+          <div className="lang-dropdown desktop-only" onClick={(e) => e.stopPropagation()}>
             <button 
               className={`lang-trigger ${isLangOpen ? 'active' : ''}`}
               onClick={() => setIsLangOpen(!isLangOpen)}
@@ -143,6 +151,16 @@ const Header = () => {
 
           <div className="header-mobile-row mobile-only">
             <button
+              className="btn-header-cta-mobile"
+              onClick={() => openModal(t.header.ctaModalTitle, t.header.ctaModalDesc)}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="cta-icon-mobile">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+              {t.header.ctaMobile}
+            </button>
+            <button
               className="header-burger"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
@@ -173,7 +191,7 @@ const Header = () => {
           </nav>
 
           {/* Mobile Language Dropdown */}
-          <div className="mobile-lang-section">
+          <div className="mobile-lang-section" onClick={(e) => e.stopPropagation()}>
             <button 
               className={`mobile-lang-trigger ${isLangOpen ? 'active' : ''}`}
               onClick={() => setIsLangOpen(!isLangOpen)}

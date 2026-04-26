@@ -175,7 +175,7 @@
     padding: 40px 0 60px 0;
     margin-top: -30px;
     margin-bottom: -30px;
-    border-radius: 40px;
+    border-radius: 15px;
   }
   .projects .small-label {
     font-size: 14px !important;
@@ -189,6 +189,7 @@
     line-height: 1.15;
     margin-bottom: 0;
     max-width: 100%;
+    font-style: normal;
   }
 
   .projects-header-grid {
@@ -197,21 +198,70 @@
     gap: 16px;
     margin-bottom: 40px;
   }
+
   .projects-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
     gap: 16px;
+    padding-bottom: 30px; /* Space for scrollbar */
+    margin: 0 -20px;
+    padding: 0 20px 30px 20px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .projects-grid::-webkit-scrollbar {
+    display: block;
+    height: 2px; /* Very thin premium line */
+  }
+  .projects-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05); /* Subtle track */
+    margin: 0 40px;
+    border-radius: 2px;
+  }
+  .projects-grid::-webkit-scrollbar-thumb {
+    background: var(--primary-orange); /* Highlighted thumb */
+    border-radius: 2px;
+  }
+  .project-card {
+    flex: 0 0 92%; /* Wider cards */
+    scroll-snap-align: center;
+    border-radius: 15px !important;
+    transform: none !important;
+  }
+  .project-card-inner {
+    aspect-ratio: 1 / 1.4 !important; /* Made cards significantly taller */
+  }
+  .project-card-overlay {
+    border-radius: 15px !important;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    padding: 16px;
+    opacity: 1 !important; /* Always visible on mobile */
+    transform: translateY(0) !important; /* Always visible on mobile */
+    pointer-events: auto;
   }
   .pc-title {
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 16px !important;
+    font-weight: 800;
     line-height: 1.25;
+    margin: 0;
+  }
+  .pc-icon {
+    background: transparent !important;
+    border: none !important;
+    backdrop-filter: none !important;
+    width: auto;
+    height: auto;
+    padding: 0;
   }
 
   .projects-desc {
     max-width: 100%;
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.4;
     margin-top: 0;
+    color: #666;
   }
 }
 

@@ -12,7 +12,9 @@ const Articles = () => {
     const { t } = useLang();
     const a = t.articlesSection;
 
-    const containerVariants = {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+    const containerVariants = isMobile ? {} : {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -20,7 +22,7 @@ const Articles = () => {
         }
     };
 
-    const itemVariants = {
+    const itemVariants = isMobile ? {} : {
         hidden: { opacity: 0, y: 30, scale: 0.98 },
         visible: {
             opacity: 1, y: 0, scale: 1,
