@@ -1,55 +1,51 @@
 import React from 'react';
 import './CompanyInfo.css';
-import aboutImage from '../../assets/catalog_kitchen.png'; // Example placeholder
-import avatarImage from '../../assets/salavat_final.jpg'; 
+import aboutImage from '../../assets/catalog_kitchen.png';
+import avatarImage from '../../assets/salavat_final.jpg';
+import { useLang } from '../../i18n/context';
 
 const CompanyInfo = () => {
+  const { t } = useLang();
+  const c = t.company;
+
   return (
     <section className="company-info" id="about">
       <div className="container">
         <div className="company-white-block">
-          
           <div className="company-header-centered">
-            <span className="small-label">/О компании</span>
+            <span className="small-label">{c.label}</span>
             <h2 className="company-title">
-              Мы не передаём ключевые этапы подрядчикам<br/>
-              <span className="text-gray">и не перекладываем ответственность</span>
+              {c.title1}<br/>
+              <span className="text-gray">{c.titleGray}</span>
             </h2>
-            <p className="company-subtitle">
-              — весь путь от идеи до установленной мебели мы контролируем внутри компании
-            </p>
+            <p className="company-subtitle">{c.subtitle}</p>
           </div>
 
           <div className="company-content-grid">
-            <div className="company-image-card" style={{ backgroundImage: `url(${aboutImage})` }}>
-            </div>
-            
+            <div className="company-image-card" style={{ backgroundImage: `url(${aboutImage})` }}></div>
             <div className="company-quote-card">
               <div className="quote-card-top">
                 <div className="quote-subtitle">
-                  <span className="quote-mark">“</span>
-                  <p>В мебельном сегменте<br/>продается не материал.</p>
+                  <span className="quote-mark">{c.quoteStart}</span>
+                  <p>{c.quotePart1}<br/>{c.quotePart2}</p>
                 </div>
-                <span className="quote-tag">Принципы</span>
+                <span className="quote-tag">{c.quoteTag}</span>
               </div>
-              
               <p className="quote-main-text">
-                Продаётся предсказуемость,<br/>
-                контроль и ответственность<br/>
-                за финальный результат.
-                <span className="quote-mark-end">”</span>
+                {c.quoteMain1}<br/>
+                {c.quoteMain2}<br/>
+                {c.quoteMain3}
+                <span className="quote-mark-end">{c.quoteEnd}</span>
               </p>
-              
               <div className="quote-card-bottom">
                 <div className="quote-author">
-                  <span className="author-role">Генеральный директор</span>
-                  <h4 className="author-name">Сулейманов Салават</h4>
+                  <span className="author-role">{c.authorRole}</span>
+                  <h4 className="author-name">{c.authorName}</h4>
                 </div>
                 <div className="author-avatar" style={{ backgroundImage: `url(${avatarImage})` }}></div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

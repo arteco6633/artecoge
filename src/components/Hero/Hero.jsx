@@ -2,25 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Hero.css';
 import { useModal } from '../../ModalContext';
+import { useLang } from '../../i18n/context';
 import heroBg from '../../assets/hero_background_new.jpg';
 import bg1 from '../../assets/catalog_kitchen.png';
 import bg2 from '../../assets/catalog_storage.png';
 import bg3 from '../../assets/hero_background_new.jpg';
 
-const usps = [
-  { num: '01', title: 'Работаем по договору', img: bg1 },
-  { num: '02', title: 'Собственная установка', img: bg2 },
-  { num: '03', title: 'Собственное производство', img: bg3 }
-];
-
 const Hero = ({ 
-  title = <>ДИЗАЙНЕРСКАЯ <span className="highlight-text">МЕБЕЛЬ</span><br/>НА ЗАКАЗ В ТБИЛИСИ</>,
   showSlider = true,
   rightText = null,
   compact = false,
-  ctaText = "Перейти в каталог",
-  modalTitle = "Перейти в каталог",
-  modalDesc = "Оставьте заявку для получения каталога мебели",
   btnLink = null,
   bgImage = heroBg
 }) => {
@@ -28,6 +19,11 @@ const Hero = ({
   const [activeUsp, setActiveUsp] = useState(0);
   const scrollRef = useRef(null);
   const { openModal } = useModal();
+  const { t } = useLang();
+  const h = t.hero;
+  const uspImages = [bg1, bg2, bg3];
+  const usps = h.usps.map((u, i) => ({ ...u, img: uspImages[i] }));
+  const title = <>{h.titleLine1} <span className="highlight-text">{h.titleHighlight}</span><br/>{h.titleLine2}</>;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -65,9 +61,9 @@ const Hero = ({
             {/* Orange Button INSIDE the card - DESKTOP ONLY */}
             <button 
               className="btn-orange-pill hero-cta-btn desktop-only"
-              onClick={() => btnLink ? navigate(btnLink) : openModal(modalTitle, modalDesc)}
+              onClick={() => btnLink ? navigate(btnLink) : openModal(h.cta, '')}
             >
-              {ctaText}
+              {h.cta}
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: '10px', verticalAlign: 'middle', display: 'inline-block' }}>
                 <line x1="7" y1="7" x2="17" y2="17"></line>
                 <polyline points="17 7 17 17 7 17"></polyline>
@@ -117,9 +113,9 @@ const Hero = ({
         {/* BUTTON OUTSIDE ON MOBILE */}
         <button 
           className="btn-orange-pill hero-cta-btn-mobile"
-          onClick={() => btnLink ? navigate(btnLink) : openModal(modalTitle, modalDesc)}
+          onClick={() => btnLink ? navigate(btnLink) : openModal(h.cta, '')}
         >
-          {ctaText}
+          {h.cta}
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: '10px', verticalAlign: 'middle', display: 'inline-block' }}>
             <line x1="7" y1="7" x2="17" y2="17"></line>
             <polyline points="17 7 17 17 7 17"></polyline>

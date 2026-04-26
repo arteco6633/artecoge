@@ -1,44 +1,20 @@
 import React from 'react';
 import './UspBanner.css';
 import { Warehouse, Users, Wrench, Clock } from 'lucide-react';
+import { useLang } from '../../i18n/context';
 
-const usps = [
-  {
-    id: 1,
-    icon: <Warehouse size={28} />,
-    title: "Внутри компании",
-    text: "Все этапы — внутри компании, без перекладывания ответственности"
-  },
-  {
-    id: 2,
-    icon: <Users size={28} />,
-    title: "Ручное управление",
-    text: "Минимальные подрядчики и ручное управление процессом"
-  },
-  {
-    id: 3,
-    icon: <Wrench size={28} />,
-    title: "Установка",
-    text: "Собственная установка — без потерь качества на конечном этапе"
-  },
-  {
-    id: 4,
-    icon: <Clock size={28} />,
-    title: "Контроль сроков",
-    text: "Контроль сроков так же важен, как и качество мебели"
-  }
-];
+const icons = [<Warehouse size={28} />, <Users size={28} />, <Wrench size={28} />, <Clock size={28} />];
 
 const UspBanner = () => {
+  const { t } = useLang();
+
   return (
     <section className="usp-banner">
       <div className="container">
         <div className="usp-grid">
-          {usps.map((usp) => (
-            <div className="usp-card" key={usp.id}>
-              <div className="usp-icon-wrap">
-                {usp.icon}
-              </div>
+          {t.usp.items.map((usp, idx) => (
+            <div className="usp-card" key={idx}>
+              <div className="usp-icon-wrap">{icons[idx]}</div>
               <div className="usp-content">
                 <h3 className="usp-title">{usp.title}</h3>
                 <p className="usp-text">{usp.text}</p>

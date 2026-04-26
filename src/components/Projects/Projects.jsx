@@ -1,33 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './Projects.css';
+import { useLang } from '../../i18n/context';
 
 const Projects = ({ isMinimal = false }) => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useLang();
+  const p = t.projects;
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   const containerVariants = isMobile ? {} : {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
+      transition: { staggerChildren: 0.15, delayChildren: 0.2 }
     }
   };
 
   const itemVariants = isMobile ? {} : {
     hidden: { opacity: 0, y: 20, filter: 'blur(2px)' },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      filter: 'blur(0px)',
-      transition: { duration: 0.7, ease: "easeOut" } 
+    visible: {
+      opacity: 1, y: 0, filter: 'blur(0px)',
+      transition: { duration: 0.7, ease: 'easeOut' }
     }
   };
 
@@ -41,7 +40,6 @@ const Projects = ({ isMinimal = false }) => {
         .from('projects')
         .select('*')
         .order('created_at', { ascending: false });
-      
       if (error) throw error;
       setProjects(data || []);
     } catch (err) {
@@ -56,58 +54,56 @@ const Projects = ({ isMinimal = false }) => {
       <div className="container">
         {!isMinimal && (
           <div className="projects-header">
-            <span className="small-label">/Реализованные проекты</span>
+            <span className="small-label">{p.label}</span>
             <div className="projects-header-grid">
               <h2 className="projects-title">
-                Проекты, которые доходят до конца <span className="text-gray">— без переделок, срывов сроков и потери качества</span>
+                {p.title} <span className="text-gray">{p.titleGray}</span>
               </h2>
-              <p className="projects-desc">
-                Каждый из этих проектов — результат полного контроля всех этапов производства и установки. Здесь нет демонстрационных работ, только реальные объекты и реальные задачи.
-              </p>
+              <p className="projects-desc">{p.subtitle}</p>
             </div>
           </div>
         )}
 
         {loading ? (
-            <div style={{color:'#666', textAlign:'center', padding:'50px'}}>Загрузка проектов...</div>
+          <div style={{color:'#666', textAlign:'center', padding:'50px'}}>{p.loading}</div>
         ) : (
-            <motion.div 
-              className="projects-grid"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
-            >
+          <motion.div
+            className="projects-grid"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+          >
             {projects.length === 0 ? (
-                <p style={{color:'#666', gridColumn:'span 3', textAlign:'center'}}>Проектов пока нет в базе.</p>
+              <p style={{color:'#666', gridColumn:'span 3', textAlign:'center'}}>{p.empty}</p>
             ) : (
-                projects.map(proj => (
-                    <motion.div 
-                      key={proj.id} 
-                      variants={itemVariants}
-                      className="project-card" 
-                      onClick={() => navigate(`/project/${proj.slug}`)}
-                    >
-                    <div className="project-card-inner">
-                        {proj.images && proj.images.length > 0 ? (
-                          <img src={proj.images[0]} alt={proj.name} className="project-card-img" />
-                        ) : (
-                          <div className="project-card-img-placeholder"></div>
-                        )}
-                        <div className="project-card-overlay">
-                        <h3 className="pc-title">{proj.name}</h3>
-                        <div className="pc-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <line x1="7" y1="17" x2="17" y2="7"></line>
-                            <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
-                        </div>
-                        </div>
+              projects.map(proj => (
+                <motion.div
+                  key={proj.id}
+                  variants={itemVariants}
+                  className="project-card"
+                  onClick={() => navigate(`/project/${proj.slug}`)}
+                >
+                  <div className="project-card-inner">
+                    {proj.images && proj.images.length > 0 ? (
+                      <img src={proj.images[0]} alt={proj.name} className="project-card-img" />
+                    ) : (
+                      <div className="project-card-img-placeholder"></div>
+                    )}
+                    <div className="project-card-overlay">
+                      <h3 className="pc-title">{proj.name}</h3>
+                      <div className="pc-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="7" y1="17" x2="17" y2="7"></line>
+                          <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                      </div>
                     </div>
-                    </motion.div>
-                ))
+                  </div>
+                </motion.div>
+              ))
             )}
-            </motion.div>
+          </motion.div>
         )}
       </div>
     </section>

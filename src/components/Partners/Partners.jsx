@@ -5,89 +5,16 @@ import { useModal } from '../../ModalContext';
 import './Partners.css';
 import placeholderImage1 from '../../assets/catalog_kitchen.png';
 import placeholderImage2 from '../../assets/catalog_storage.png';
-
-const tabsData = [
-  {
-    id: 'private',
-    label: 'Частным клиентам',
-    subtitle: '/Для частных клиентов',
-    titleMain: 'Мебель, которая завершает ремонт,',
-    titleGray: 'а не превращает его в бесконечный процесс',
-    cards: [
-      {
-        id: 1,
-        image: placeholderImage1,
-        title: <>Почему мебель — <span className="pc-accent">самый</span> рискованный этап ремонта</>,
-        text: 'Именно на мебели чаще всего ломается весь ремонт: подрядчики пропадают, сроки сдвигаются, размеры не совпадают, а результат отличается от ожиданий. Ошибка на этом этапе стоит дороже всего — по деньгам, времени и нервам.',
-        buttonLabel: 'Обсудить проект',
-        isLink: false
-      },
-      {
-        id: 2,
-        image: placeholderImage2,
-        title: '',
-        text: 'Когда вы делаете ремонт, мебель — самый рискованный этап. Ошибки в размерах, срывы сроков и несоответствие ожиданиям могут перечеркнуть месяцы работы и вложенные деньги. Мы берём на себя мебельную часть под ключ, чтобы вы получили результат без стресса и сюрпризов.',
-        buttonLabel: '',
-        isLink: false
-      }
-    ]
-  },
-  {
-    id: 'designers',
-    label: 'Дизайнерам',
-    subtitle: '/Для дизайнеров интерьеров',
-    titleMain: 'Мебельный партнёр для дизайнеров,',
-    titleGray: 'которые ценят репутацию',
-    cards: [
-      {
-        id: 1,
-        image: placeholderImage1,
-        title: 'Пробное изделие бесплатно',
-        text: 'В рамках затрат до 150 000 ₽ — чтобы вы могли убедиться в качестве, точности исполнения и подходе к работе до старта большого проекта.',
-        buttonLabel: 'Стать партнером',
-        isLink: false
-      },
-      {
-        id: 2,
-        image: placeholderImage2,
-        title: '',
-        text: 'Мы работаем с дизайнерами как с партнёрами, а не как с посредниками. Берём на себя мебельную часть проекта под ключ, снимая с вас риски сроков, качества и коммуникации с подрядчиками — чтобы вы спокойно вели проекты и сдавали их без репутационных потерь.',
-        buttonLabel: 'Подробнее',
-        isLink: true
-      }
-    ]
-  },
-  {
-    id: 'corporate',
-    label: 'Коммерция',
-    subtitle: '/Для корпоративных клиентов',
-    titleMain: 'Серийная мебель для коммерческих проектов',
-    titleGray: 'с контролем сроков и качества',
-    cards: [
-      {
-        id: 1,
-        image: placeholderImage1,
-        title: 'Где бизнес чаще всего теряет время и деньги',
-        text: 'При работе с мебелью для ресторанов и коммерческих пространств проблемы чаще всего возникают на этапе масштабирования: одна партия отличается от другой, сроки «плывут», а подрядчики не готовы работать с объёмами и ответственностью.',
-        buttonLabel: 'Запросить предложение',
-        isLink: false
-      },
-      {
-        id: 2,
-        image: placeholderImage2,
-        title: '',
-        text: 'В коммерческих проектах мебель — это не декор, а часть бизнес-процесса. Срыв сроков, нестабильное качество или несоответствие партий напрямую влияют на запуск объекта, выручку и репутацию. Мы выстраиваем мебельную часть проекта так, чтобы эти риски были под полным контролем.',
-        buttonLabel: '',
-        isLink: false
-      }
-    ]
-  }
-];
+import { useLang } from '../../i18n/context';
 
 const Partners = () => {
   const [activeTabId, setActiveTabId] = useState('private');
-  const activeData = tabsData.find(t => t.id === activeTabId);
   const { openModal } = useModal();
+  const { t } = useLang();
+
+  const tabsData = t.partners.tabs;
+  const activeData = tabsData.find(tab => tab.id === activeTabId);
+  const images = [placeholderImage1, placeholderImage2];
 
   const handleNextTab = () => {
     const currentIndex = tabsData.findIndex(t => t.id === activeTabId);
@@ -100,6 +27,7 @@ const Partners = () => {
     const prevIndex = (currentIndex - 1 + tabsData.length) % tabsData.length;
     setActiveTabId(tabsData[prevIndex].id);
   };
+
 
   return (
     <section className="partners-section" id="partners">
@@ -123,7 +51,7 @@ const Partners = () => {
             </div>
             
             <p className="partners-intro-text">
-              Независимо от масштаба и задачи проекта, мы берём на себя мебельную часть под ключ, чтобы вы получили результат без хаоса, переделок и лишних рисков.
+              {t.partners.introText}
             </p>
 
             <div className="partners-bottom-content">
@@ -147,7 +75,7 @@ const Partners = () => {
               
               <div className="partners-cta-wrap">
                 <Link to="/catalog" className="btn-primary-orange">
-                  Перейти в каталог 
+                  {t.partners.goToCatalog}
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{marginLeft: '8px', marginBottom: '-2px'}}>
                     <line x1="7" y1="7" x2="17" y2="17"></line>
                     <polyline points="17 7 17 17 7 17"></polyline>
@@ -171,7 +99,7 @@ const Partners = () => {
               {/* Tall Card (Index 0) */}
               <motion.div 
                 className="partner-card card-tall" 
-                style={{ backgroundImage: `url(${activeData.cards[0].image})` }}
+                style={{ backgroundImage: `url(${images[0]})` }}
                 initial={{ opacity: 0, y: 20, filter: 'blur(2px)' }}
                 whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 viewport={{ once: true, amount: 0.1 }}
@@ -216,7 +144,7 @@ const Partners = () => {
               <div className="partner-card-col-right">
                 <motion.div 
                   className="partner-card card-short" 
-                  style={{ backgroundImage: `url(${activeData.cards[1].image})` }}
+                  style={{ backgroundImage: `url(${images[1]})` }}
                   initial={{ opacity: 0, y: 20, filter: 'blur(2px)' }}
                   whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   viewport={{ once: true, amount: 0.1 }}

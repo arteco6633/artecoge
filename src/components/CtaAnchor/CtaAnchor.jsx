@@ -1,31 +1,33 @@
 import React from 'react';
 import { useModal } from '../../ModalContext';
 import './CtaAnchor.css';
-import bgImage from '../../assets/catalog_storage.png'; 
+import bgImage from '../../assets/catalog_storage.png';
+import { useLang } from '../../i18n/context';
 
 const CtaAnchor = () => {
   const { openModal } = useModal();
-  
+  const { t } = useLang();
+  const c = t.cta;
+
   return (
     <section className="cta-anchor-section" id="contact">
       <div className="container">
-        <div 
-          className="cta-bg-block" 
+        <div
+          className="cta-bg-block"
           style={{ backgroundImage: `url(${bgImage})` }}
         >
           <div className="cta-overlay"></div>
-          
           <div className="cta-content">
-            <span className="cta-label">/Готовы обсудить ваш проект?</span>
+            <span className="cta-label">{c.label}</span>
             <h2 className="cta-title">
-              Мы честно скажем, подходим ли мы<br/>
-              вам — ещё до начала работы.
+              {c.title1}<br/>
+              {c.title2}
             </h2>
-            <button 
+            <button
               className="cta-btn-white"
-              onClick={() => openModal("Консультация со специалистом", "Оставьте заявку, и мы обсудим ваш проект")}
+              onClick={() => openModal(c.modalTitle, c.modalDesc)}
             >
-              Консультация со специалистом
+              {c.button}
             </button>
           </div>
         </div>
