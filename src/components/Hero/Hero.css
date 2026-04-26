@@ -223,7 +223,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #f5f5f5;
+  background-color: var(--bg-light);
   padding: 12px 40px;
   border-radius: 15px 15px 0 0;
   display: flex;
@@ -236,18 +236,18 @@
   content: "";
   position: absolute;
   bottom: 0;
-  width: 40px;
-  height: 40px;
+  width: 15px;
+  height: 15px;
 }
 
 .hero-social-bubble::before {
   right: 100%;
-  background: radial-gradient(circle at 0 0, transparent 40px, #f5f5f5 40px);
+  background: radial-gradient(circle at 0 0, transparent 15px, var(--bg-light) 15px);
 }
 
 .hero-social-bubble::after {
   left: 100%;
-  background: radial-gradient(circle at 100% 0, transparent 40px, #f5f5f5 40px);
+  background: radial-gradient(circle at 100% 0, transparent 15px, var(--bg-light) 15px);
 }
 
 .social-circle {

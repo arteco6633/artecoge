@@ -46,7 +46,7 @@
 
 ::-webkit-scrollbar-thumb {
   background: var(--primary-orange);
-  border-radius: 10px;
+  border-radius: 15px;
   transition: background 0.3s ease;
 }
 

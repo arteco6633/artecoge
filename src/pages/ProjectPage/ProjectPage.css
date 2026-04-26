@@ -50,7 +50,7 @@
   gap: 30px;
   background-color: var(--bg-light);
   padding: 50px;
-  border-radius: 40px;
+  border-radius: 15px;
   border: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0 10px 40px rgba(0,0,0,0.02);
 }
@@ -59,7 +59,7 @@
   background-color: #121212;
   color: #fff;
   padding: 40px;
-  border-radius: 40px;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -71,7 +71,7 @@
   background-color: var(--primary-orange);
   color: #fff;
   padding: 6px 16px;
-  border-radius: 100px;
+  border-radius: 15px;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -113,12 +113,12 @@
 @media (max-width: 768px) {
   .pp-intro-block.main {
     padding: 30px;
-    border-radius: 24px;
+    border-radius: 15px;
   }
   
   .pp-result-block {
     padding: 30px;
-    border-radius: 24px;
+    border-radius: 15px;
   }
   
   .pp-title {
@@ -192,7 +192,7 @@
 
 .pp-gallery-item {
   position: relative;
-  border-radius: 12px;
+  border-radius: 15px;
   overflow: hidden;
   cursor: pointer;
   background-color: #f0f0f0;
@@ -396,7 +396,7 @@
 .cp-cta-block {
   background-color: #121212 !important;
   color: #ffffff;
-  border-radius: 40px;
+  border-radius: 15px;
   padding: 60px 80px;
   display: flex;
   justify-content: space-between;
@@ -468,7 +468,7 @@
 
 .pp-other-card {
   background: #fff;
-  border-radius: 20px;
+  border-radius: 15px;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
