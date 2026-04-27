@@ -130,10 +130,16 @@
   right: 80px;
   width: 380px;
   height: 400px;
-  /* MATCHES Title + Button span */
   border-radius: 15px;
   overflow: hidden;
   z-index: 10;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hero-mini-slider:hover {
+  transform: translateY(-52%) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 89, 152, 0.2);
 }
 
 .mini-slider-track {
@@ -168,34 +174,37 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
   z-index: 2;
 }
 
 .mini-slider-content {
   position: relative;
   z-index: 2;
-  padding: 30px;
+  padding: 40px 30px 8px 8px; /* Top, Right, Bottom, Left */
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   color: #ffffff;
 }
 
 .mini-num {
-  font-size: var(--f-label);
-  opacity: 0.6;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  opacity: 0.5;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .mini-title {
-  font-size: 18px;
+  font-size: 22px; /* Slightly larger but more elegant */
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.2;
   margin: 0;
-  max-width: 250px;
+  max-width: 280px;
+  letter-spacing: -0.01em;
 }
 
 .btn-white-pill {
@@ -269,7 +278,7 @@
     padding: 80px 16px 24px;
     height: auto;
     min-height: 100vh;
-    background-color: #f5f5f5;
+    background-color: var(--bg-light);
   }
 
   .hero-card {
@@ -374,15 +383,18 @@
 
   .mini-slide-mobile-card {
     scroll-snap-align: start;
-    flex: 0 0 calc(100% - 0px);
-    background-color: #765d44;
-    /* Premium Brown from Ref */
+    flex: 0 0 100%;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 15px;
     padding: 16px;
     display: flex;
     align-items: center;
     gap: 20px;
     min-height: 180px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
   }
 
   .mini-slide-img-left {
@@ -405,14 +417,14 @@
 
   .mini-num-mobile {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.4);
     margin-bottom: 6px;
   }
 
   .mini-title-mobile {
     font-size: 16px;
     font-weight: 700;
-    color: #ffffff !important;
+    color: #121212 !important;
     line-height: 1.25;
     margin-bottom: 32px;
   }

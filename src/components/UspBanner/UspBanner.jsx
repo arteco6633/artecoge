@@ -1,9 +1,9 @@
 import React from 'react';
 import './UspBanner.css';
-import { Warehouse, Users, Wrench, Clock } from 'lucide-react';
+import { PencilRuler, Maximize, Factory, Wrench } from 'lucide-react';
 import { useLang } from '../../i18n/context';
 
-const icons = [<Warehouse size={28} />, <Users size={28} />, <Wrench size={28} />, <Clock size={28} />];
+const icons = [<PencilRuler size={28} />, <Maximize size={28} />, <Factory size={28} />, <Wrench size={28} />];
 
 const UspBanner = () => {
   const { t } = useLang();

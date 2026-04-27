@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import './Hero.css';
 import { useModal } from '../../ModalContext';
 import { useLang } from '../../i18n/context';
-import heroBg from '../../assets/hero_background_new.jpg';
-import bg1 from '../../assets/catalog_kitchen.png';
-import bg2 from '../../assets/catalog_storage.png';
-import bg3 from '../../assets/hero_background_new.jpg';
+import heroBg from '../../assets/hero_kitchen_final.jpg';
+import bg1 from '../../assets/hero_3d_design.jpg';
+import bg2 from '../../assets/hero_measurement.png';
+import bg3 from '../../assets/hero_installation.jpg';
 
 const Hero = ({ 
   showSlider = true,
