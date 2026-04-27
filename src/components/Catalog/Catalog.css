@@ -1,6 +1,6 @@
 .catalog {
-  padding-top: 8rem;
-  padding-bottom: 7rem;
+  padding-top: 5rem;
+  padding-bottom: 4rem;
   background-color: var(--bg-light);
 }
 
@@ -86,7 +86,7 @@
 .catalog-card-default {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  padding: 8px;
+  padding: 16px;
   display: flex;
   align-items: flex-end;
   z-index: 3;
@@ -227,7 +227,7 @@
   }
 
   .catalog-card-default {
-    padding: 8px;
+    padding: 16px;
   }
 
   .card-top-title {

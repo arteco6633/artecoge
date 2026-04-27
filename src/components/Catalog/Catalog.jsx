@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Catalog.css';
-import kitchenBg from '../../assets/catalog_kitchen.png';
-import storageBg from '../../assets/catalog_storage.png';
+import kitchenBg from '../../assets/catalog_kitchen_modern.jpg';
+import storageBg from '../../assets/catalog_storage_premium.jpg';
 import heroBg from '../../assets/hero_background.png';
-import panelsBg from '../../assets/catalog_panels.png';
+import panelsBg from '../../assets/catalog_panels_tech.jpg';
 import receptionBg from '../../assets/catalog_reception.png';
 import { useLang } from '../../i18n/context';
 
@@ -52,7 +52,10 @@ const Catalog = ({ isMinimal = false }) => {
               className="catalog-card-1to1"
               onClick={() => navigate('/catalog')}
             >
-              <div className="catalog-card-bg" style={{ backgroundImage: `url(${images[idx]})` }}></div>
+              <div className="catalog-card-bg" style={{ 
+                backgroundImage: `url(${images[idx]})`,
+                backgroundPosition: idx === 2 ? 'right center' : 'center'
+              }}></div>
               <div className="catalog-card-overlay"></div>
               <div className="catalog-card-default">
                 <div className="card-plate">
