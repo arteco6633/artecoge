@@ -49,7 +49,16 @@ const Hero = ({
   return (
     <section className={`hero ${compact ? 'hero--compact' : ''}`} id="home">
       <div className="hero-card">
-        <div className="hero-bg" style={{ backgroundImage: `url(${bgImage})` }}></div>
+        {/* Video Background */}
+        <video 
+          className="hero-video-bg" 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        >
+          <source src="/hero-bg-video.mp4" type="video/mp4" />
+        </video>
         <div className="hero-overlay"></div>
 
         <div className="hero-card-content">
