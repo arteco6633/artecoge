@@ -57,6 +57,7 @@ const Hero = ({
             <h1 className="hero-title">
               {title}
             </h1>
+            <p className="hero-tagline">{h.titleTagline}</p>
 
             {/* Orange Button INSIDE the card - DESKTOP ONLY */}
             <button 
