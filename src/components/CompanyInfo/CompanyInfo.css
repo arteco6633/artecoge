@@ -105,7 +105,7 @@
 }
 
 .role-title {
-  font-size: 13px;
+  font-size: 16px;
   color: var(--primary-orange);
   font-weight: 600;
   text-transform: uppercase;
@@ -116,7 +116,7 @@
   font-size: 16px;
   font-weight: 500;
   color: #555;
-  line-height: 1.5;
+  line-height: 1.6;
   margin: 0;
 }
 
@@ -413,7 +413,7 @@
     grid-template-columns: 1fr;
   }
 
-  .role-role {
+  .role-title {
     font-size: 16px;
     letter-spacing: 0.05em;
     margin-bottom: 24px;
@@ -421,6 +421,6 @@
 
   .role-desc {
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.6;
   }
 }
