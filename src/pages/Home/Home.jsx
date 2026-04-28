@@ -34,9 +34,9 @@ const Home = () => {
       <UspBanner />
       <Catalog isMinimal={false} />
       <CompanyInfo />
+      <Projects isMinimal={false} />
       <Partners />
       <CtaAnchor />
-      <Projects isMinimal={false} />
       <HowWeWork />
       <Articles />
       <Faq />
