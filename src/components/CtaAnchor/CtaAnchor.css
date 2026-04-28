@@ -101,7 +101,7 @@
 
 @media (max-width: 900px) {
   .cta-anchor-section {
-    padding-bottom: 60px;
+    display: none;
   }
   .cta-bg-block {
     min-height: 450px;
