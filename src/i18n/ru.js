@@ -105,7 +105,10 @@ const ru = {
       {
         num: '02',
         title: 'Запуск бренда ARTECO',
-        desc: 'Создание бренда мебели ARTECO для работы с дизайнерами. Участие в выставках Крокус Сити, прямые контракты с известными студиями дизайна интерьера.'
+        desc: 'Создание бренда мебели ARTECO для работы с дизайнерами. Участие в выставках Крокус Сити, прямые контракты с известными студиями дизайна интерьера.',
+        hasInsta: true,
+        instaLink: 'https://www.instagram.com/arteco.one?igsh=MXcwbHFiYWxkcWowbA%3D%3D&utm_source=qr',
+        instaHandle: '@arteco.one'
       },
       {
         num: '03',
