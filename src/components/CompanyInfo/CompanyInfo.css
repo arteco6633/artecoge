@@ -384,16 +384,30 @@
   }
 
   .company-team-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
     gap: 16px;
+    padding: 0 0 20px 0;
+    margin: 0 -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .company-team-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .role-card {
+    min-width: 85%;
+    max-width: 85%;
+    scroll-snap-align: center;
+    padding: 24px;
   }
 
   .timeline-grid {
     grid-template-columns: 1fr;
-  }
-
-  .role-card {
-    padding: 24px;
   }
 
   .role-name {
