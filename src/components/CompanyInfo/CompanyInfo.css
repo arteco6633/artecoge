@@ -60,7 +60,11 @@
 }
 
 .role-card {
-  background-color: #f4f4f4;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
   border-radius: 15px;
   padding: 32px 40px;
   display: flex;
