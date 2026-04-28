@@ -264,9 +264,9 @@ const ru = {
   // Final Form
   form: {
     label: '/Контакты',
-    title1: 'Обсудим ваш',
-    titleHighlight: 'проект',
-    title2: 'и скажем честно — подходим ли мы вам',
+    title1: 'Спроектируем и реализуем',
+    titleHighlight: 'ваш проект',
+    title2: 'с любовью',
     messengerLabel: 'Связаться в мессенджерах:',
     phoneLabel: 'Основной телефон:',
     socialLabel: 'Соц сети:',

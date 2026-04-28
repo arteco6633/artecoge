@@ -63,13 +63,7 @@ const FinalForm = () => {
                 {f.title1} <span className="text-orange-italic">{f.titleHighlight}</span> {f.title2}
               </h2>
               <div className="ff-contacts">
-                <div className="ff-contact-block">
-                  <span className="ff-contact-label">{f.messengerLabel}</span>
-                  <div style={{display:'flex', gap:'15px', marginTop:'10px'}}>
-                    <a href="https://wa.me/79651468409" target="_blank" rel="noopener noreferrer" className="ff-contact-value">WhatsApp</a>
-                    <a href="https://t.me/arteco_sale" target="_blank" rel="noopener noreferrer" className="ff-contact-value">Telegram</a>
-                  </div>
-                </div>
+
                 <div className="ff-contact-block">
                   <span className="ff-contact-label">{f.phoneLabel}</span>
                   <a href="tel:+995591088478" className="ff-contact-value">+995 591 088 478</a>
@@ -105,8 +99,8 @@ const FinalForm = () => {
                 </div>
               ) : (
                 <>
-                  <h3 className="ff-form-title">{f.formTitle}</h3>
-                  <p className="ff-form-subtitle">{f.formSubtitle}</p>
+
+
                   <form className="ff-form" onSubmit={handleSubmit}>
                     <input
                       type="text"
@@ -131,14 +125,7 @@ const FinalForm = () => {
                         searchPlaceholder={f.searchPlaceholder}
                       />
                     </div>
-                    <label className="ff-checkbox-label">
-                      <input type="checkbox" required className="ff-checkbox" />
-                      <span className="ff-checkbox-text">{f.consent1}</span>
-                    </label>
-                    <label className="ff-checkbox-label">
-                      <input type="checkbox" className="ff-checkbox" />
-                      <span className="ff-checkbox-text">{f.consent2}</span>
-                    </label>
+
                     <button type="submit" className="ff-submit-btn" disabled={isSubmitting}>
                       {isSubmitting ? f.submitting : f.submit}
                     </button>
