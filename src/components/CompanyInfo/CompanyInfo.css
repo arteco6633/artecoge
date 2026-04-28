@@ -387,11 +387,11 @@
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    gap: 16px;
+    gap: 12px;
     padding: 0 0 20px 0;
     margin: 0 -20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 12px;
+    padding-right: 12px;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -400,8 +400,8 @@
   }
 
   .role-card {
-    min-width: 85%;
-    max-width: 85%;
+    min-width: 92%;
+    max-width: 92%;
     scroll-snap-align: center;
     padding: 24px;
   }
