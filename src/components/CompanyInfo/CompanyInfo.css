@@ -410,26 +410,24 @@
   .role-card {
     min-width: 95%;
     max-width: 95%;
+    min-height: 420px;
     scroll-snap-align: center;
-    padding: 32px 40px;
+    padding: 40px 24px;
     display: flex;
     flex-direction: column;
-    min-height: auto;
   }
 
   .role-header {
-    display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
     gap: 16px;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
   }
 
   .role-photo {
     width: 100px;
     height: 100px;
-    margin-bottom: 0;
+    margin-bottom: 8px;
   }
 
   .role-header-text {
@@ -446,13 +444,15 @@
 
   .role-title {
     font-size: 13px;
-    letter-spacing: 1px;
-    margin-bottom: 0;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
     text-align: left;
   }
 
   .role-desc {
-    display: none;
+    text-align: left;
+    font-size: 15px;
+    line-height: 1.5;
   }
 
   .company-info {
