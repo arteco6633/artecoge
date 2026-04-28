@@ -108,7 +108,10 @@ const ru = {
         desc: 'Создание бренда мебели ARTECO для работы с дизайнерами. Участие в выставках Крокус Сити, прямые контракты с известными студиями дизайна интерьера.',
         hasInsta: true,
         instaLink: 'https://www.instagram.com/arteco.one?igsh=MXcwbHFiYWxkcWowbA%3D%3D&utm_source=qr',
-        instaHandle: '@arteco.one'
+        instaHandle: '@arteco.one',
+        hasTG: true,
+        tgLink: 'https://t.me/arteco_one',
+        tgHandle: '@arteco_one'
       },
       {
         num: '03',

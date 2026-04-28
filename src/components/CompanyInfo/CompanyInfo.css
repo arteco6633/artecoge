@@ -180,30 +180,52 @@
   border: 1px solid rgba(0,0,0,0.05);
 }
 
-/* --- Instagram Preview in Timeline --- */
-.timeline-insta-preview {
+/* --- Social Previews in Timeline --- */
+.timeline-socials {
   margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.timeline-social-preview {
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 16px 20px;
-  background: linear-gradient(135deg, rgba(253, 29, 29, 0.05) 0%, rgba(252, 176, 69, 0.05) 100%);
-  border: 1px solid rgba(253, 29, 29, 0.15);
   border-radius: 12px;
   text-decoration: none;
   transition: all 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.05);
 }
 
-.timeline-insta-preview:hover {
-  background: linear-gradient(135deg, rgba(253, 29, 29, 0.1) 0%, rgba(252, 176, 69, 0.1) 100%);
+.timeline-social-preview.insta {
+  background: linear-gradient(135deg, rgba(253, 29, 29, 0.05) 0%, rgba(252, 176, 69, 0.05) 100%);
+  border-color: rgba(253, 29, 29, 0.15);
+}
+
+.timeline-social-preview.tg {
+  background: rgba(0, 136, 204, 0.05);
+  border-color: rgba(0, 136, 204, 0.15);
+}
+
+.timeline-social-preview:hover {
   transform: translateY(-2px);
+}
+
+.timeline-social-preview.insta:hover {
+  background: linear-gradient(135deg, rgba(253, 29, 29, 0.1) 0%, rgba(252, 176, 69, 0.1) 100%);
   box-shadow: 0 8px 24px rgba(253, 29, 29, 0.1);
 }
 
-.insta-icon {
+.timeline-social-preview.tg:hover {
+  background: rgba(0, 136, 204, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 136, 204, 0.1);
+}
+
+.social-icon {
   width: 44px;
   height: 44px;
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -212,39 +234,49 @@
   flex-shrink: 0;
 }
 
-.insta-icon svg {
+.insta .social-icon {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.tg .social-icon {
+  background: #0088cc;
+}
+
+.social-icon svg {
   width: 24px;
   height: 24px;
 }
 
-.insta-info {
+.social-info {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
-.insta-title {
+.social-title {
   font-size: 13px;
   font-weight: 600;
   color: #777;
   margin-bottom: 2px;
 }
 
-.insta-handle {
+.social-handle {
   font-size: 16px;
   font-weight: 800;
   color: var(--text-primary);
 }
 
-.insta-arrow {
-  color: #cc2366;
+.social-arrow {
   font-size: 20px;
   font-weight: bold;
   opacity: 0.7;
   transition: transform 0.3s ease;
 }
 
-.timeline-insta-preview:hover .insta-arrow {
+.insta .social-arrow { color: #cc2366; }
+.tg .social-arrow { color: #0088cc; }
+
+.timeline-social-preview:hover .social-arrow {
   transform: translateX(4px);
   opacity: 1;
 }
