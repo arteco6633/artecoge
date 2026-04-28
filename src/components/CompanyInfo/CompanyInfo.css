@@ -1,11 +1,11 @@
 .company-info {
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: 100px;
+  padding-bottom: 100px;
   background-color: var(--bg-light);
   border-radius: 15px;
-  margin-top: -50px;
+  margin-top: 0px;
   position: relative;
-  z-index: 10;
+  z-index: 15;
 }
 
 .company-white-block {
@@ -79,7 +79,7 @@
   gap: 16px;
   margin-bottom: 16px;
   padding-bottom: 16px;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .role-photo {
@@ -177,14 +177,14 @@
   margin-top: 24px;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .timeline-map-container {
   margin-top: 24px;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /* --- Image in Timeline --- */
@@ -192,7 +192,7 @@
   margin-top: 24px;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   aspect-ratio: 16 / 9;
 }
 
@@ -219,7 +219,7 @@
   border-radius: 12px;
   text-decoration: none;
   transition: all 0.3s ease;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .timeline-social-preview.insta {
@@ -277,7 +277,7 @@
 
 .web .social-icon {
   background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .social-icon img {
@@ -317,9 +317,17 @@
   transition: transform 0.3s ease;
 }
 
-.insta .social-arrow { color: #cc2366; }
-.tg .social-arrow { color: #0088cc; }
-.web .social-arrow { color: #333; }
+.insta .social-arrow {
+  color: #cc2366;
+}
+
+.tg .social-arrow {
+  color: #0088cc;
+}
+
+.web .social-arrow {
+  color: #333;
+}
 
 .timeline-social-preview:hover .social-arrow {
   transform: translateX(4px);
@@ -490,7 +498,8 @@
     margin-bottom: -40px;
   }
 
-  .timeline-image-container, .timeline-map-container {
+  .timeline-image-container,
+  .timeline-map-container {
     margin-top: 12px;
   }
 
@@ -505,7 +514,8 @@
     border-radius: 8px;
   }
 
-  .social-icon svg, .social-icon img {
+  .social-icon svg,
+  .social-icon img {
     width: 18px;
     height: 18px;
   }
