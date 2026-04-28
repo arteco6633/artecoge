@@ -388,8 +388,8 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 12px;
-    padding: 0 0 20px 0;
-    margin: 0 -20px;
+    padding: 0 0 24px 0;
+    margin: 0 -12px;
     padding-left: 12px;
     padding-right: 12px;
     -webkit-overflow-scrolling: touch;
@@ -400,10 +400,13 @@
   }
 
   .role-card {
-    min-width: 92%;
-    max-width: 92%;
+    min-width: 95%;
+    max-width: 95%;
+    min-height: 420px;
     scroll-snap-align: center;
-    padding: 24px;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
   }
 
   .timeline-grid {
