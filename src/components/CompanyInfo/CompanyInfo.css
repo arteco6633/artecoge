@@ -253,7 +253,14 @@
 }
 
 .web .social-icon {
-  background: #333;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.social-icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .social-icon svg {
