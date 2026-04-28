@@ -117,9 +117,11 @@ const ru = {
         num: '03',
         title: 'Масштабирование',
         desc: 'Прямое сотрудничество с известным Российским производством «Старт».',
-        hasWeb: true,
-        webLink: 'https://mebel-start.ru/',
-        webTitle: 'Партнер Старт'
+        features: [
+          { icon: 'factory', label: 'Мощности' },
+          { icon: 'target', label: 'Точность' },
+          { icon: 'shield', label: 'Гарантия' }
+        ]
       },
       {
         num: '04',
