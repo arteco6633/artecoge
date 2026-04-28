@@ -25,10 +25,9 @@ const HowWeWork = () => {
   };
 
   return (
-    <motion.section
+    <section
       className="how-we-work"
       id="how-we-work"
-      {...revealProps}
     >
       <div className="container">
         <div className="work-grid">
@@ -54,18 +53,12 @@ const HowWeWork = () => {
             </div>
 
             <div className="step-content-box">
-              <AnimatePresence mode="wait">
-                <motion.div
+                <div
                   key={activeStep}
-                  initial={{ opacity: 0, x: -20, filter: 'blur(5px)' }}
-                  animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, x: 20, filter: 'blur(5px)' }}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
                   className="step-content"
                 >
                   <h3 className="step-title">{current.title}</h3>
-                </motion.div>
-              </AnimatePresence>
+                </div>
             </div>
 
             <div className="work-controls">
@@ -76,13 +69,8 @@ const HowWeWork = () => {
 
           <div className="work-right">
             <div className="work-image-card">
-              <AnimatePresence mode="wait">
-                <motion.div
+                <div
                   key={activeStep}
-                  initial={{ opacity: 0, scale: 1.05 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.1 }}
-                  transition={{ duration: 0.8 }}
                   className="work-image-inner"
                 >
                   <img src="/images/work4.png" alt={`ARTECO - ${current.title}`} className="card-bg-img" />
@@ -100,13 +88,12 @@ const HowWeWork = () => {
                       <span className="giant-num">{current.num}</span>
                     </div>
                   </div>
-                </motion.div>
-              </AnimatePresence>
+                </div>
             </div>
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

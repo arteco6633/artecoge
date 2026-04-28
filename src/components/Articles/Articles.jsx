@@ -14,21 +14,8 @@ const Articles = () => {
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
-    const containerVariants = isMobile ? {} : {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.2, delayChildren: 0.3 }
-        }
-    };
-
-    const itemVariants = isMobile ? {} : {
-        hidden: { opacity: 0, y: 30, scale: 0.98 },
-        visible: {
-            opacity: 1, y: 0, scale: 1,
-            transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-        }
-    };
+    const containerVariants = {};
+    const itemVariants = {};
 
     useEffect(() => { fetchArticles(); }, []);
 
@@ -65,9 +52,6 @@ const Articles = () => {
                     <motion.div
                         className="articles-grid"
                         variants={containerVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: false, amount: 0.2 }}
                     >
                         {articles.map(article => (
                             <motion.div

@@ -6,7 +6,6 @@ import catalogHero from '../../assets/catalog_hero.png';
 import ImageLightbox from '../../components/ImageLightbox/ImageLightbox';
 import { useModal } from '../../ModalContext';
 import { supabase } from '../../supabaseClient';
-import { motion } from 'framer-motion';
 import { useLang } from '../../i18n/context';
 
 const CatalogPage = () => {
@@ -20,13 +19,6 @@ const CatalogPage = () => {
   const cp = t.catalogPage;
 
   const SECTION_ORDER = ['kitchens', 'wardrobes', 'cabinet', 'shelves', 'panels', 'bathrooms'];
-
-  const revealProps = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.01 },
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -92,89 +84,87 @@ const CatalogPage = () => {
       {sections.map((section) => {
         const meta = cp.sections[section.id] || {};
         return (
-          <motion.div key={section.id} {...revealProps}>
-            <section id={section.id} className="cp-section">
-              <div className="container">
-                <h2 className="cp-section-title">{meta.title || section.id.toUpperCase()}</h2>
+          <section key={section.id} id={section.id} className="cp-section">
+            <div className="container">
+              <h2 className="cp-section-title">{meta.title || section.id.toUpperCase()}</h2>
 
-                <div className="cp-projects-list">
-                  {section.projects.map((project, pIdx) => (
-                    <div key={pIdx} className="cp-project">
-                      <div className="cp-project-header">
-                        <div className="cp-project-title-area">
-                          <h3 className="cp-project-name">
-                            {project.name} <span className="cp-project-category-suffix">{cp.projectSuffix}</span>
-                          </h3>
+              <div className="cp-projects-list">
+                {section.projects.map((project, pIdx) => (
+                  <div key={pIdx} className="cp-project">
+                    <div className="cp-project-header">
+                      <div className="cp-project-title-area">
+                        <h3 className="cp-project-name">
+                          {project.name} <span className="cp-project-category-suffix">{cp.projectSuffix}</span>
+                        </h3>
+                      </div>
+                      <p className="cp-project-description-top">
+                        {project.desc?.substring(0, 160) || cp.defaultDesc}
+                      </p>
+                    </div>
+
+                    <div className="cp-project-image-grid">
+                      {(project.images || project.image_urls || []).slice(0, 4).map((url, i) => (
+                        <img
+                          key={i}
+                          src={url}
+                          alt={project.name}
+                          className="cp-grid-img"
+                          onClick={() => openLightbox(project.images || project.image_urls, i)}
+                          style={{ cursor: 'zoom-in' }}
+                        />
+                      ))}
+                    </div>
+
+                    <div className="cp-project-footer">
+                      <div className="cp-result-box">
+                        <div className="cp-result-header">
+                          <h4 className="cp-result-title">{cp.resultTitle}</h4>
+                          <Link to={`/catalog/${project.slug || project.id}`} className="cp-details-link">
+                            {cp.detailsLink}
+                          </Link>
                         </div>
-                        <p className="cp-project-description-top">
-                          {project.desc?.substring(0, 160) || cp.defaultDesc}
+                        <p className="cp-result-text">
+                          {project.result || cp.defaultResult}
                         </p>
                       </div>
 
-                      <div className="cp-project-image-grid">
-                        {(project.images || project.image_urls || []).slice(0, 4).map((url, i) => (
-                          <img
-                            key={i}
-                            src={url}
-                            alt={project.name}
-                            className="cp-grid-img"
-                            onClick={() => openLightbox(project.images || project.image_urls, i)}
-                            style={{ cursor: 'zoom-in' }}
-                          />
-                        ))}
-                      </div>
-
-                      <div className="cp-project-footer">
-                        <div className="cp-result-box">
-                          <div className="cp-result-header">
-                            <h4 className="cp-result-title">{cp.resultTitle}</h4>
-                            <Link to={`/catalog/${project.slug || project.id}`} className="cp-details-link">
-                              {cp.detailsLink}
-                            </Link>
-                          </div>
-                          <p className="cp-result-text">
-                            {project.result || cp.defaultResult}
-                          </p>
-                        </div>
-
-                        <div className="cp-actions-area">
-                          <button
-                            className="cp-view-all-link"
-                            onClick={() => openLightbox(project.images || project.image_urls, 0)}
-                            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
-                          >
-                            {cp.viewPhotos}
-                          </button>
-                          <button
-                            className="btn-orange-pill"
-                            onClick={() => openModal(meta.ctaTitle, meta.ctaDesc)}
-                          >
-                            {cp.calcPrice}
-                          </button>
-                        </div>
+                      <div className="cp-actions-area">
+                        <button
+                          className="cp-view-all-link"
+                          onClick={() => openLightbox(project.images || project.image_urls, 0)}
+                          style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                        >
+                          {cp.viewPhotos}
+                        </button>
+                        <button
+                          className="btn-orange-pill"
+                          onClick={() => openModal(meta.ctaTitle, meta.ctaDesc)}
+                        >
+                          {cp.calcPrice}
+                        </button>
                       </div>
                     </div>
-                  ))}
-                </div>
-
-                <div className="cp-section-cta">
-                  <div className="cp-cta-block">
-                    <div className="cp-cta-text">
-                      <span className="cp-cta-label">{cp.wantSimilar}</span>
-                      <h3 className="cp-cta-title">{meta.ctaTitle}</h3>
-                      <p className="cp-cta-desc">{meta.ctaDesc}</p>
-                    </div>
-                    <button
-                      className="btn-orange-pill"
-                      onClick={() => openModal(meta.ctaTitle, meta.ctaDesc)}
-                    >
-                      {cp.discussProject}
-                    </button>
                   </div>
+                ))}
+              </div>
+
+              <div className="cp-section-cta">
+                <div className="cp-cta-block">
+                  <div className="cp-cta-text">
+                    <span className="cp-cta-label">{cp.wantSimilar}</span>
+                    <h3 className="cp-cta-title">{meta.ctaTitle}</h3>
+                    <p className="cp-cta-desc">{meta.ctaDesc}</p>
+                  </div>
+                  <button
+                    className="btn-orange-pill"
+                    onClick={() => openModal(meta.ctaTitle, meta.ctaDesc)}
+                  >
+                    {cp.discussProject}
+                  </button>
                 </div>
               </div>
-            </section>
-          </motion.div>
+            </div>
+          </section>
         );
       })}
 

@@ -55,14 +55,7 @@ const Partners = () => {
             </p>
 
             <div className="partners-bottom-content">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTabId}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 10 }}
-                  transition={{ duration: 0.3 }}
-                >
+              <div key={activeTabId}>
                   <div className="partners-title-block">
                     <span className="small-label-partners">{activeData.subtitle}</span>
                     <h2 className="partners-main-title">
@@ -70,8 +63,7 @@ const Partners = () => {
                       <span className="text-gray">{activeData.titleGray}</span>
                     </h2>
                   </div>
-                </motion.div>
-              </AnimatePresence>
+              </div>
               
               <div className="partners-cta-wrap">
                 <Link to="/catalog" className="btn-primary-orange">
@@ -86,24 +78,15 @@ const Partners = () => {
           </div>
 
           {/* Right Column */}
-          <AnimatePresence mode="wait">
-            <motion.div 
+            <div 
               key={activeTabId}
               className="partners-right-custom"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.3 }}
             >
               
               {/* Tall Card (Index 0) */}
-              <motion.div 
+              <div 
                 className="partner-card card-tall" 
                 style={{ backgroundImage: `url(${images[0]})` }}
-                initial={{ opacity: 0, y: 20, filter: 'blur(2px)' }}
-                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
               >
                 <div className="partner-card-overlay"></div>
                 <div className="partner-card-content">
@@ -138,17 +121,13 @@ const Partners = () => {
                     </div>
                   )}
                 </div>
-              </motion.div>
+              </div>
 
               {/* Right Column with Short Card and Arrows */}
               <div className="partner-card-col-right">
-                <motion.div 
+                <div 
                   className="partner-card card-short" 
                   style={{ backgroundImage: `url(${images[1]})` }}
-                  initial={{ opacity: 0, y: 20, filter: 'blur(2px)' }}
-                  whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
                 >
                   <div className="partner-card-overlay right-overlay"></div>
                   <div className="partner-card-content">
@@ -183,7 +162,7 @@ const Partners = () => {
                       </div>
                     )}
                   </div>
-                </motion.div>
+                </div>
                 
                 {/* Arrows */}
                 <div className="partners-arrows">
@@ -200,8 +179,7 @@ const Partners = () => {
                 </div>
               </div>
 
-            </motion.div>
-          </AnimatePresence>
+            </div>
         </div>
       </div>
     </section>

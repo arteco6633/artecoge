@@ -12,8 +12,6 @@ import Articles from '../../components/Articles/Articles';
 import Faq from '../../components/Faq/Faq';
 import FinalForm from '../../components/FinalForm/FinalForm';
 
-import { motion } from 'framer-motion';
-
 const Home = () => {
   const { hash } = useLocation();
 
@@ -30,37 +28,20 @@ const Home = () => {
     }
   }, [hash]);
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  
-  const revealProps = isMobile ? {} : {
-    initial: { opacity: 0, y: 40, scale: 0.98, filter: 'blur(5px)' },
-    whileInView: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
-    viewport: { once: true, amount: 0.1 },
-    transition: { 
-      duration: 0.8, 
-      ease: [0.16, 1, 0.3, 1],
-      delay: 0.05
-    }
-  };
-
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-    >
+    <div>
       <Hero btnLink="/catalog" />
-      <motion.div {...revealProps}><UspBanner /></motion.div>
-      <motion.div {...revealProps}><Catalog isMinimal={false} /></motion.div>
-      <motion.div {...revealProps}><CompanyInfo /></motion.div>
-      <motion.div {...revealProps}><Partners /></motion.div>
-      <motion.div {...revealProps}><CtaAnchor /></motion.div>
-      <motion.div {...revealProps}><Projects isMinimal={false} /></motion.div>
-      <motion.div {...revealProps}><HowWeWork /></motion.div>
-      <motion.div {...revealProps}><Articles /></motion.div>
-      <motion.div {...revealProps}><Faq /></motion.div>
-      <motion.div {...revealProps}><FinalForm /></motion.div>
-    </motion.div>
+      <UspBanner />
+      <Catalog isMinimal={false} />
+      <CompanyInfo />
+      <Partners />
+      <CtaAnchor />
+      <Projects isMinimal={false} />
+      <HowWeWork />
+      <Articles />
+      <Faq />
+      <FinalForm />
+    </div>
   );
 };
 

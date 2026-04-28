@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import './ArticlesPage.css';
 import { articlesData as staticArticles } from '../../data/articlesData';
 import { supabase } from '../../supabaseClient';
@@ -65,12 +64,7 @@ const ArticlesPage = () => {
     const heroTitle = <>{ap.heroTitle1} <span className="ap-highlight">{ap.heroHighlight}</span><br />{ap.heroTitle2}</>;
 
     return (
-        <motion.div
-            className="articles-page"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-        >
+        <div className="articles-page">
             <Hero
                 title={heroTitle}
                 subtitle=""
@@ -150,7 +144,7 @@ const ArticlesPage = () => {
                 title={modalTitle}
                 subtitle={modalDesc}
             />
-        </motion.div>
+        </div>
     );
 };
 

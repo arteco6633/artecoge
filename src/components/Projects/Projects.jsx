@@ -14,21 +14,8 @@ const Projects = ({ isMinimal = false }) => {
   const p = t.projects;
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
-  const containerVariants = isMobile ? {} : {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 }
-    }
-  };
-
-  const itemVariants = isMobile ? {} : {
-    hidden: { opacity: 0, y: 20, filter: 'blur(2px)' },
-    visible: {
-      opacity: 1, y: 0, filter: 'blur(0px)',
-      transition: { duration: 0.7, ease: 'easeOut' }
-    }
-  };
+  const containerVariants = {};
+  const itemVariants = {};
 
   useEffect(() => {
     fetchProjects();
@@ -70,9 +57,6 @@ const Projects = ({ isMinimal = false }) => {
           <motion.div
             className="projects-grid"
             variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
           >
             {projects.length === 0 ? (
               <p style={{color:'#666', gridColumn:'span 3', textAlign:'center'}}>{p.empty}</p>
