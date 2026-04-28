@@ -45,6 +45,33 @@ const CompanyInfo = () => {
               </div>
             ))}
           </div>
+
+          <div className="company-timeline-section">
+            <h3 className="company-timeline-title">{c.timelineTitle}</h3>
+            <div className="timeline-grid">
+              {c.timeline && c.timeline.map((step, idx) => (
+                <div key={idx} className={`timeline-card ${step.hasMap ? 'timeline-card-map' : ''}`}>
+                  <span className="timeline-num">{step.num}</span>
+                  <div className="timeline-content">
+                    <h4 className="timeline-card-title">{step.title}</h4>
+                    <p className="timeline-desc">{step.desc}</p>
+                    {step.hasMap && (
+                      <div className="timeline-map-container">
+                        <iframe 
+                          src={step.mapLink} 
+                          width="100%" 
+                          height="200" 
+                          frameBorder="0" 
+                          allowFullScreen={true}
+                          title="Yandex Map"
+                        ></iframe>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
