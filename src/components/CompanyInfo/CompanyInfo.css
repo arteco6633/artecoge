@@ -38,9 +38,9 @@
 }
 
 .company-title {
-  font-size: 64px;
-  font-weight: 800;
-  line-height: 1.1;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
   color: var(--text-primary);
   margin: 0;
   text-transform: uppercase;
@@ -346,10 +346,6 @@
 
   .header-split-right {
     max-width: 400px;
-  }
-
-  .company-title {
-    font-size: 1.8rem;
   }
 
   .company-white-block {
