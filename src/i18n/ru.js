@@ -127,10 +127,10 @@ const ru = {
         webTitle: 'Партнер Gromkom',
         hasWeb2: true,
         webLink2: 'https://tbilisi.studio-mint.pro/',
-        webTitle2: 'Studio Mint',
+        webTitle2: 'Партнер Studio Mint',
         hasWeb3: true,
         webLink3: 'https://kpistudios.com/',
-        webTitle3: 'KPI Studios'
+        webTitle3: 'Партнер KPI Studios'
       }
     ]
   },
