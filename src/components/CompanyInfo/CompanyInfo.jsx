@@ -22,7 +22,12 @@ const CompanyInfo = () => {
               </h2>
             </div>
             <div className="header-split-right">
-              <p className="company-subtitle">{c.subtitle}</p>
+              <p className="company-subtitle">
+                {c.subtitle}
+                <span style={{ textDecoration: 'underline', textDecorationThickness: '1px', textUnderlineOffset: '4px' }}>
+                  {c.subtitleHighlight}
+                </span>
+              </p>
             </div>
           </div>
 
