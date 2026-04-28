@@ -1,16 +1,16 @@
 .company-info {
   padding-top: 100px;
-  padding-bottom: 100px;
+  padding-bottom: 20px;
   background-color: var(--bg-light);
-  border-radius: 0;
-  margin-top: 0;
+  border-radius: 15px 15px 0 0;
+  margin-top: 0px;
   position: relative;
   z-index: 15;
 }
 
 .company-white-block {
   background-color: var(--bg-light);
-  border-radius: 0;
+  border-radius: 15px;
   padding: 0;
 }
 
@@ -359,10 +359,10 @@
 
 @media (max-width: 900px) {
   .company-info {
-    border-radius: 0;
+    border-radius: 15px 15px 0 0;
     margin-top: 0;
-    padding-top: 0;
-    padding-bottom: 40px;
+    padding-top: 40px;
+    padding-bottom: 0;
   }
 
   .company-white-block {
@@ -458,7 +458,7 @@
   }
 
   .company-info {
-    margin-bottom: -80px;
+    margin-bottom: 0;
   }
 
   .company-timeline-section {
