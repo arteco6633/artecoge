@@ -124,7 +124,10 @@ const ru = {
         desc: 'Выход на рынок Грузии, первые контракты, собственная мастерская производства мебели. Сотрудничество с Gromkom, локальными дизайнерами и ремонтными компаниями.',
         hasWeb: true,
         webLink: 'https://ru.gromkom.com/',
-        webTitle: 'Партнер Gromkom'
+        webTitle: 'Партнер Gromkom',
+        hasWeb2: true,
+        webLink2: 'https://tbilisi.studio-mint.pro/',
+        webTitle2: 'Studio Mint'
       }
     ]
   },
