@@ -413,11 +413,14 @@
     grid-template-columns: 1fr;
   }
 
-  .role-name {
-    font-size: 20px;
+  .role-role {
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    margin-bottom: 24px;
   }
 
   .role-desc {
-    font-size: 15px;
+    font-size: 16px;
+    line-height: 1.5;
   }
 }
