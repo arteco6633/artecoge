@@ -117,11 +117,7 @@ const ru = {
         num: '03',
         title: 'Масштабирование',
         desc: 'Прямое сотрудничество с известным Российским производством «Старт».',
-        features: [
-          { icon: 'factory', label: 'Мощности' },
-          { icon: 'target', label: 'Точность' },
-          { icon: 'shield', label: 'Гарантия' }
-        ]
+        hasImage: true
       },
       {
         num: '04',

@@ -2,6 +2,7 @@ import React from 'react';
 import './CompanyInfo.css';
 import teamSalavat from '../../assets/team_salavat.jpg';
 import teamAnastasia from '../../assets/team_anastasia.jpg';
+import productionStart from '../../assets/production_start.png';
 import { useLang } from '../../i18n/context';
 
 const CompanyInfo = () => {
@@ -56,18 +57,9 @@ const CompanyInfo = () => {
                     <h4 className="timeline-card-title">{step.title}</h4>
                     <p className="timeline-desc">{step.desc}</p>
                     
-                    {step.features && (
-                      <div className="timeline-features-grid">
-                        {step.features.map((feat, fidx) => (
-                          <div key={fidx} className="timeline-feature-item">
-                            <div className="feature-icon-circle">
-                              {feat.icon === 'factory' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 20V9l4-2 4 2 4-2 4 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/><path d="M7 14h1"/><path d="M12 14h1"/><path d="M17 14h1"/><path d="M7 10h1"/><path d="M12 10h1"/><path d="M17 10h1"/></svg>}
-                              {feat.icon === 'target' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>}
-                              {feat.icon === 'shield' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m12 22 10-4V7l-10-4L2 7v11z"/></svg>}
-                            </div>
-                            <span className="feature-label">{feat.label}</span>
-                          </div>
-                        ))}
+                    {step.hasImage && (
+                      <div className="timeline-image-container">
+                        <img src={productionStart} alt="Производство мебели" className="timeline-step-img" />
                       </div>
                     )}
 
