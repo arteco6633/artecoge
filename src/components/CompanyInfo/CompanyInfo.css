@@ -359,13 +359,13 @@
 @media (max-width: 900px) {
   .company-info {
     border-radius: 15px;
-    margin-top: 8px;
-    padding-top: 20px;
+    margin-top: 0;
+    padding-top: 0;
     padding-bottom: 40px;
   }
 
   .company-white-block {
-    padding: 4px 0 60px;
+    padding: 0 0 60px;
   }
 
   .company-header-split {
