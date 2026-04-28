@@ -13,7 +13,10 @@ const CompanyInfo = () => {
     <section className="company-info" id="about">
       <div className="container">
         <div className="company-white-block">
-          <div className="company-header-split">
+          <div className="glass-blob glass-blob-1"></div>
+          <div className="glass-blob glass-blob-2"></div>
+          
+          <div className="company-header-split relative-z">
             <div className="header-split-left">
               <span className="small-label">{c.label}</span>
               <h2 className="company-title">
@@ -31,7 +34,7 @@ const CompanyInfo = () => {
             </div>
           </div>
 
-          <div className="company-team-grid">
+          <div className="company-team-grid relative-z">
             {c.roles && c.roles.map((role, idx) => (
               <div key={idx} className="role-card">
                 <div className="role-header">
@@ -46,7 +49,7 @@ const CompanyInfo = () => {
             ))}
           </div>
 
-          <div className="company-timeline-section">
+          <div className="company-timeline-section relative-z">
             <h3 className="company-timeline-title">{c.timelineTitle}</h3>
             <div className="timeline-grid">
               {c.timeline && c.timeline.map((step, idx) => (
