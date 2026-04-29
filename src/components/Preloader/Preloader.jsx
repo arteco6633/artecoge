@@ -34,6 +34,13 @@ const Preloader = () => {
     };
   }, []);
 
+  // Restore scrolling when preloader fades out
+  useEffect(() => {
+    if (!isVisible) {
+      document.body.style.overflow = '';
+    }
+  }, [isVisible]);
+
   // Characters for ARTECO
   const brandChars = "ARTECO".split("");
 
