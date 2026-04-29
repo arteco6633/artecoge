@@ -630,11 +630,16 @@
 }
 
 @media (max-width: 900px) {
+  .cp-global-cta-wrapper {
+    margin-top: 0 !important;
+    margin-bottom: 40px !important;
+  }
+
   .cp-cta-block {
     flex-direction: column;
     text-align: center;
-    padding: 30px 20px;
-    gap: 24px;
+    padding: 24px 20px;
+    gap: 12px;
     align-items: center;
   }
 
@@ -643,16 +648,20 @@
   }
 
   .cp-cta-title {
-    font-size: 28px !important;
+    font-size: 22px !important;
     font-weight: 700 !important;
     line-height: 1.2 !important;
     margin-bottom: 12px !important;
     letter-spacing: -0.5px !important;
   }
 
+  .cp-cta-desc {
+    font-size: 16px !important;
+  }
+
   .cp-cta-text {
     width: 100% !important;
-    margin: 0 0 20px 0 !important;
+    margin: 0 0 10px 0 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -663,7 +672,7 @@
     font-size: 16px !important;
     width: 100% !important;
     max-width: none !important;
-    margin: 0 auto 20px auto !important;
+    margin: 0 auto 10px auto !important;
     line-height: 1.4 !important;
     letter-spacing: -0.1px !important;
     display: block !important;
