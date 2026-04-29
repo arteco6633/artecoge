@@ -286,7 +286,7 @@ const en = {
     defaultDesc: 'A focus on design that expands the space and looks premium.',
     resultTitle: 'Result',
     detailsLink: 'View Details ↗',
-    viewPhotos: 'View All Photos →',
+    viewPhotos: 'View All Photos',
     calcPrice: 'Get a Quote',
     wantSimilar: 'Want something similar?',
     discussProject: 'Discuss a Project',

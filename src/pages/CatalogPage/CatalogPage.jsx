@@ -80,7 +80,7 @@ const CatalogPage = () => {
         <div className="container cp-nav-inner">
           {sections.map(s => (
             <a key={s.id} href={`#${s.id}`} className="cp-nav-link">
-              {cp.sections[s.id]?.title || s.id.toUpperCase()}
+              #{cp.sections[s.id]?.title || s.id.toUpperCase()}
             </a>
           ))}
         </div>

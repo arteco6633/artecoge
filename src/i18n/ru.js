@@ -331,7 +331,7 @@ const ru = {
     defaultDesc: 'Акцент на дизайне, который расширяет пространство и выглядит дорого.',
     resultTitle: 'Результат',
     detailsLink: 'Подробнее ↗',
-    viewPhotos: 'Смотреть все фото →',
+    viewPhotos: 'Смотреть все фото',
     calcPrice: 'Рассчитать стоимость',
     wantSimilar: 'Хотите похожее?',
     discussProject: 'Обсудить проект',

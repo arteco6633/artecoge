@@ -286,7 +286,7 @@ const ka = {
     defaultDesc: 'საუკეთესო დიზაინი, რომელიც სივრცეს აფართოებს და პრემიუმ შთაბეჭდილებას ქმნის.',
     resultTitle: 'შედეგი',
     detailsLink: 'დაწვრილებით ↗',
-    viewPhotos: 'ყველა ფოტოს ნახვა →',
+    viewPhotos: 'ყველა ფოტოს ნახვა',
     calcPrice: 'ღირებულების გამოთვლა',
     wantSimilar: 'გინდათ მსგავსი?',
     discussProject: 'პროექტის განხილვა',
