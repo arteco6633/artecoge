@@ -107,6 +107,15 @@
 @media (max-width: 1100px) {
   .pp-intro-grid {
     grid-template-columns: 1fr;
+    gap: 15px !important;
+  }
+
+  .pp-content-layout {
+    gap: 30px;
+  }
+
+  .pp-gallery-section {
+    margin-top: -20px !important;
   }
 }
 
@@ -122,11 +131,21 @@
   }
   
   .pp-title {
+    font-size: 28px !important;
+    font-weight: 800 !important;
     margin-bottom: 25px;
   }
   
   .pp-desc {
-    font-size: 1.15rem;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+  }
+
+  .pp-result-text {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
   }
   
   .pp-details {
@@ -135,6 +154,19 @@
   
   .pp-detail-item {
     min-width: 120px;
+  }
+
+  .pp-other-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 20px !important;
+  }
+
+  .pp-other-title {
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    margin-bottom: 0 !important;
   }
 }
 
@@ -384,12 +416,20 @@
   }
   
   .pp-other-grid {
-    grid-template-columns: 1fr;
+    padding: 10px 0 20px 0;
+  }
+
+  .pp-other-card {
+    flex: 0 0 220px;
+  }
+
+  .pp-other-img {
+    height: 180px !important;
   }
 }
 
 .pp-main-cta-wrapper {
-  padding-top: 40px;
+  padding-top: 10px;
 }
 
 /* CP-CTA Shared Styles */
@@ -401,7 +441,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 30px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -450,28 +490,98 @@
 
 /* ===== Other Projects ===== */
 .pp-other-projects {
-  margin-top: 100px;
-  margin-bottom: 80px;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.pp-other-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 30px;
 }
 
 .pp-other-title {
   font-size: 2rem;
   font-weight: 700;
-  margin: 0 0 30px 0;
+  margin: 0;
+}
+
+.pp-other-hint {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.pp-swipe-animation-wrapper {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.pp-swipe-slides {
+  display: flex;
+  gap: 4px;
+  animation: pp-slidesMove 2s infinite ease-in-out !important;
+}
+
+.pp-swipe-slide {
+  width: 18px;
+  height: 12px;
+  background-color: var(--primary-orange);
+  opacity: 0.3;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.pp-swipe-hand {
+  position: absolute;
+  color: var(--primary-orange);
+  animation: pp-handSwipe 2s infinite ease-in-out !important;
+  z-index: 2;
+}
+
+@keyframes pp-handSwipe {
+  0% { transform: translateX(20px) translateY(5px) rotate(0deg); opacity: 0; }
+  10% { transform: translateX(20px) translateY(5px) rotate(0deg); opacity: 1; }
+  50% { transform: translateX(-20px) translateY(5px) rotate(-15deg); opacity: 1; }
+  70% { transform: translateX(-20px) translateY(5px) rotate(-15deg); opacity: 0; }
+  100% { transform: translateX(20px) translateY(5px) rotate(0deg); opacity: 0; }
+}
+
+@keyframes pp-slidesMove {
+  0%, 10% { transform: translateX(0); }
+  50%, 100% { transform: translateX(-22px); }
 }
 
 .pp-other-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  overflow-x: auto;
   gap: 20px;
+  padding: 10px 0 30px 0;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+
+.pp-other-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .pp-other-card {
+  flex: 0 0 280px;
   background: #fff;
   border-radius: 15px;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
+  scroll-snap-align: start;
 }
 
 .pp-other-card:hover {
@@ -486,10 +596,11 @@
 }
 
 .pp-other-info {
-  padding: 24px;
+  padding: 20px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
 }
 
 .pp-other-name {
