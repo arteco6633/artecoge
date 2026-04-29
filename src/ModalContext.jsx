@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState, lazy, Suspense } from 'react';
-
-const LeadModal = lazy(() => import('./components/FinalForm/LeadModal'));
+import React, { createContext, useContext, useState } from 'react';
+import LeadModal from './components/FinalForm/LeadModal';
 
 const ModalContext = createContext();
 
@@ -26,16 +25,12 @@ export const ModalProvider = ({ children }) => {
   return (
     <ModalContext.Provider value={{ openModal }}>
       {children}
-      <Suspense fallback={null}>
-        {modalState.isOpen && (
-          <LeadModal 
-            isOpen={modalState.isOpen} 
-            onClose={closeModal} 
-            title={modalState.title} 
-            subtitle={modalState.subtitle} 
-          />
-        )}
-      </Suspense>
+      <LeadModal 
+        isOpen={modalState.isOpen} 
+        onClose={closeModal} 
+        title={modalState.title} 
+        subtitle={modalState.subtitle} 
+      />
     </ModalContext.Provider>
   );
 };
