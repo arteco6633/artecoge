@@ -7,6 +7,21 @@
   <link rel="apple-touch-icon" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
+  <!-- Resource Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://mc.yandex.ru">
+  
+  <!-- Preload Critical Assets -->
+  <link rel="preload" as="video" href="/hero-bg-video.mp4" type="video/mp4" fetchpriority="high">
+  
+  <!-- Optimized Font Loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  </noscript>
+
   <!-- SEO Primary Meta Tags -->
   <title>ARTECO | Дизайнерская мебель на заказ в Тбилиси</title>
   <meta name="description"
@@ -65,38 +80,38 @@
     }
   </script>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M9TJLF3QVY"></script>
+  <!-- Delayed Analytics for better LCP -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        // Google Tag Manager
+        var gtm = document.createElement('script');
+        gtm.async = true;
+        gtm.src = 'https://www.googletagmanager.com/gtag/js?id=G-M9TJLF3QVY';
+        document.head.appendChild(gtm);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-M9TJLF3QVY');
 
-    gtag('config', 'G-M9TJLF3QVY');
-  </script>
+        var gtm2 = document.createElement('script');
+        gtm2.async = true;
+        gtm2.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18067817567';
+        document.head.appendChild(gtm2);
+        gtag('config', 'AW-18067817567');
 
-  <!-- Google tag (gtag.js) AW-18067817567 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18067817567"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'AW-18067817567');
-  </script>
-
-  <!-- Yandex.Metrika counter -->
-  <script type="text/javascript">
-      (function(m,e,t,r,i,k,a){
+        // Yandex Metrika
+        (function(m,e,t,r,i,k,a){
           m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
           m[i].l=1*new Date();
           for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
           k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108462215', 'ym');
-
-      ym(108462215, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108462215', 'ym');
+        ym(108462215, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+      }, 3000); // 3 second delay
+    });
   </script>
-  <!-- /Yandex.Metrika counter -->
 </head>
 
 <body>

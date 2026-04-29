@@ -126,14 +126,16 @@ const CatalogPage = () => {
                     </div>
                     <div className="cp-project-image-carousel">
                       {(project.images || project.image_urls || []).map((url, i) => (
-                        <img
-                          key={i}
-                          src={url}
-                          alt={project.name}
-                          className="cp-carousel-img"
-                          onClick={() => openLightbox(project.images || project.image_urls, i)}
-                          style={{ cursor: 'zoom-in' }}
-                        />
+                         <img
+                           key={i}
+                           src={url}
+                           alt={project.name}
+                           className="cp-carousel-img"
+                           onClick={() => openLightbox(project.images || project.image_urls, i)}
+                           style={{ cursor: 'zoom-in' }}
+                           loading="lazy"
+                           decoding="async"
+                         />
                       ))}
                     </div>
 

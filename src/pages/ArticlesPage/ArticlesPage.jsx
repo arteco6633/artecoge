@@ -102,7 +102,13 @@ const ArticlesPage = () => {
                             {filteredArticles.map(article => (
                                 <div key={article.id || article.slug} className="ap-card" onClick={() => navigate(`/article/${article.slug}`)}>
                                     <div className="ap-card-image-wrap">
-                                        <img src={article.img} alt={article.title} className="ap-card-img" />
+                                        <img 
+                                          src={article.img} 
+                                          alt={article.title} 
+                                          className="ap-card-img" 
+                                          loading="lazy"
+                                          decoding="async"
+                                        />
                                         <span className="ap-card-category">{article.category}</span>
                                     </div>
                                     <div className="ap-card-info">

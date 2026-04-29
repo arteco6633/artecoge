@@ -70,7 +70,13 @@ const Projects = ({ isMinimal = false }) => {
                 >
                   <div className="project-card-inner">
                     {proj.images && proj.images.length > 0 ? (
-                      <img src={proj.images[0]} alt={proj.name} className="project-card-img" />
+                      <img 
+                        src={proj.images[0]} 
+                        alt={proj.name} 
+                        className="project-card-img" 
+                        loading="lazy"
+                        decoding="async"
+                      />
                     ) : (
                       <div className="project-card-img-placeholder"></div>
                     )}

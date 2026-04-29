@@ -124,7 +124,12 @@ const ProjectPage = () => {
                     className={`pp-gallery-item ${idx === 0 ? 'featured' : ''}`}
                     onClick={() => openLightbox(idx)}
                   >
-                    <img src={img} alt={`${project.name} photo ${idx + 1}`} />
+                    <img 
+                      src={img} 
+                      alt={`${project.name} photo ${idx + 1}`} 
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <div className="pp-gallery-overlay">
                       <div className="pp-zoom-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

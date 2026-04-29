@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import Home from './pages/Home/Home';
-import CatalogPage from './pages/CatalogPage/CatalogPage';
-import ProjectPage from './pages/ProjectPage/ProjectPage';
-import ArticlesPage from './pages/ArticlesPage/ArticlesPage';
-import ArticleSingle from './pages/ArticleSingle/ArticleSingle';
 import { ModalProvider } from './ModalContext';
-import Admin from './pages/Admin/Admin';
 import Preloader from './components/Preloader/Preloader';
 import './App.css';
+
+// Lazy load pages for performance
+const Home = lazy(() => import('./pages/Home/Home'));
+const CatalogPage = lazy(() => import('./pages/CatalogPage/CatalogPage'));
+const ProjectPage = lazy(() => import('./pages/ProjectPage/ProjectPage'));
+const ArticlesPage = lazy(() => import('./pages/ArticlesPage/ArticlesPage'));
+const ArticleSingle = lazy(() => import('./pages/ArticleSingle/ArticleSingle'));
+const Admin = lazy(() => import('./pages/Admin/Admin'));
 
 function App() {
   const location = useLocation();
@@ -22,15 +24,17 @@ function App() {
       <div className="app">
         {!isAdminPath && <Header />}
         <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/catalog" element={<CatalogPage />} />
-            <Route path="/catalog/:projectId" element={<ProjectPage />} />
-            <Route path="/project/:projectId" element={<ProjectPage />} />
-            <Route path="/articles" element={<ArticlesPage />} />
-            <Route path="/article/:slug" element={<ArticleSingle />} />
-            <Route path="/admin-panel-secret" element={<Admin />} />
-          </Routes>
+          <Suspense fallback={<div style={{ minHeight: '100vh', backgroundColor: '#F0EDE9' }} />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/catalog" element={<CatalogPage />} />
+              <Route path="/catalog/:projectId" element={<ProjectPage />} />
+              <Route path="/project/:projectId" element={<ProjectPage />} />
+              <Route path="/articles" element={<ArticlesPage />} />
+              <Route path="/article/:slug" element={<ArticleSingle />} />
+              <Route path="/admin-panel-secret" element={<Admin />} />
+            </Routes>
+          </Suspense>
         </main>
         {!isAdminPath && <Footer />}
       </div>
