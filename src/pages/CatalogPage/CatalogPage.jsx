@@ -154,6 +154,18 @@ const CatalogPage = () => {
                             {cp.detailsLink}
                           </Link>
                         </div>
+
+                        {/* Mobile: View Photos Styled like Result Header */}
+                        <div 
+                          className="cp-result-header cp-view-photos-header mobile-only" 
+                          onClick={() => openLightbox(project.images || project.image_urls, 0)}
+                          style={{ cursor: 'pointer', marginTop: '12px' }}
+                        >
+                          <h4 className="cp-result-title">
+                            {cp.viewPhotos}
+                            <span className="cp-expand-icon">→</span>
+                          </h4>
+                        </div>
                         <div className={`cp-result-collapse ${expandedProjects[project.id] ? 'is-expanded' : ''}`}>
                           <p className="cp-result-text">
                             {project.result || cp.defaultResult}
@@ -166,7 +178,7 @@ const CatalogPage = () => {
 
                       <div className="cp-actions-area">
                         <button
-                          className="cp-view-all-link"
+                          className="cp-view-all-link desktop-only"
                           onClick={() => openLightbox(project.images || project.image_urls, 0)}
                           style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
                         >

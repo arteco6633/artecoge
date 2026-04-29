@@ -367,6 +367,17 @@
     right: 0;
     height: 1px;
     background-color: rgba(0, 0, 0, 0.08);
+    display: none;
+  }
+
+  .cp-view-photos-header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.08);
     display: block;
   }
 
@@ -379,7 +390,7 @@
     background-color: #F8F8F8;
     border-radius: 15px;
     position: relative;
-    margin-bottom: 20px; /* Space for the line */
+    margin-bottom: 12px;
   }
 
   .cp-result-collapse.is-expanded {
