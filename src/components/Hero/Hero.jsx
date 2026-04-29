@@ -13,7 +13,7 @@ const Hero = ({
   rightText = null,
   compact = false,
   btnLink = null,
-  bgImage = heroBg
+  ctaText = null
 }) => {
   const navigate = useNavigate();
   const [activeUsp, setActiveUsp] = useState(0);
@@ -23,7 +23,10 @@ const Hero = ({
   const h = t.hero;
   const uspImages = [bg1, bg2, bg3];
   const usps = h.usps.map((u, i) => ({ ...u, img: uspImages[i] }));
-  const title = <><span className="mobile-only">{h.titleLine1} </span><span className="highlight-text">{h.titleHighlight}</span><br/>{h.titleLine2}</>;
+  
+  const title = (
+    <><span className="mobile-only">{h.titleLine1} </span><span className="highlight-text">{h.titleHighlight}</span><br/>{h.titleLine2}</>
+  );
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -49,7 +52,6 @@ const Hero = ({
   return (
     <section className={`hero ${compact ? 'hero--compact' : ''}`} id="home">
       <div className="hero-card">
-        {/* Video Background */}
         <video 
           className="hero-video-bg" 
           autoPlay 
@@ -73,8 +75,8 @@ const Hero = ({
               className="btn-orange-pill hero-cta-btn desktop-only"
               onClick={() => btnLink ? navigate(btnLink) : openModal(h.cta, '')}
             >
-              {h.cta}
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: '10px', verticalAlign: 'middle', display: 'inline-block' }}>
+              {ctaText || h.cta}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ verticalAlign: 'middle', display: 'inline-block' }}>
                 <line x1="7" y1="7" x2="17" y2="17"></line>
                 <polyline points="17 7 17 17 7 17"></polyline>
               </svg>
@@ -105,8 +107,8 @@ const Hero = ({
               className="btn-orange-pill hero-cta-btn-mobile-inner"
               onClick={() => btnLink ? navigate(btnLink) : openModal(h.cta, '')}
             >
-              {h.cta}
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: '10px' }}>
+              {ctaText || h.cta}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <line x1="7" y1="7" x2="17" y2="17"></line>
                 <polyline points="17 7 17 17 7 17"></polyline>
               </svg>

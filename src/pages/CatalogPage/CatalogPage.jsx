@@ -17,6 +17,11 @@ const CatalogPage = () => {
   const [lightboxData, setLightboxData] = useState(null);
   const { t } = useLang();
   const cp = t.catalogPage;
+  const [expandedProjects, setExpandedProjects] = useState({});
+
+  const toggleProject = (id) => {
+    setExpandedProjects(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
   const SECTION_ORDER = ['kitchens', 'wardrobes', 'cabinet', 'shelves', 'panels', 'bathrooms'];
 
@@ -63,11 +68,11 @@ const CatalogPage = () => {
     <div className="catalog-page-container">
       <Hero
         title={heroTitle}
-        subtitle=""
         rightText={cp.heroRight}
-        showSlider={false}
-        compact={true}
+        showSlider={true}
+        compact={false}
         bgImage={catalogHero}
+        ctaText="Рассчитать"
       />
 
       {/* Navigation */}
@@ -102,13 +107,30 @@ const CatalogPage = () => {
                       </p>
                     </div>
 
-                    <div className="cp-project-image-grid">
-                      {(project.images || project.image_urls || []).slice(0, 4).map((url, i) => (
+                    <div className="cp-carousel-header">
+                      <div className="cp-swipe-animation-wrapper">
+                        <div className="cp-swipe-slides">
+                          <div className="cp-swipe-slide"></div>
+                          <div className="cp-swipe-slide"></div>
+                          <div className="cp-swipe-slide"></div>
+                        </div>
+                        <div className="cp-swipe-hand">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path>
+                            <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path>
+                            <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path>
+                            <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="cp-project-image-carousel">
+                      {(project.images || project.image_urls || []).map((url, i) => (
                         <img
                           key={i}
                           src={url}
                           alt={project.name}
-                          className="cp-grid-img"
+                          className="cp-carousel-img"
                           onClick={() => openLightbox(project.images || project.image_urls, i)}
                           style={{ cursor: 'zoom-in' }}
                         />
@@ -117,15 +139,29 @@ const CatalogPage = () => {
 
                     <div className="cp-project-footer">
                       <div className="cp-result-box">
-                        <div className="cp-result-header">
-                          <h4 className="cp-result-title">{cp.resultTitle}</h4>
-                          <Link to={`/catalog/${project.slug || project.id}`} className="cp-details-link">
+                        <div 
+                          className="cp-result-header" 
+                          onClick={() => toggleProject(project.id)}
+                          style={{ cursor: 'pointer' }}
+                        >
+                          <h4 className="cp-result-title">
+                            {cp.resultTitle}
+                            <span className="cp-expand-icon mobile-only">
+                              {expandedProjects[project.id] ? '−' : '+'}
+                            </span>
+                          </h4>
+                          <Link to={`/catalog/${project.slug || project.id}`} className="cp-details-link desktop-only">
                             {cp.detailsLink}
                           </Link>
                         </div>
-                        <p className="cp-result-text">
-                          {project.result || cp.defaultResult}
-                        </p>
+                        <div className={`cp-result-collapse ${expandedProjects[project.id] ? 'is-expanded' : ''}`}>
+                          <p className="cp-result-text">
+                            {project.result || cp.defaultResult}
+                          </p>
+                          <Link to={`/catalog/${project.slug || project.id}`} className="cp-details-link mobile-only">
+                            {cp.detailsLink}
+                          </Link>
+                        </div>
                       </div>
 
                       <div className="cp-actions-area">

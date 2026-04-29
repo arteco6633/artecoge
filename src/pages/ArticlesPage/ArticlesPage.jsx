@@ -67,11 +67,10 @@ const ArticlesPage = () => {
         <div className="articles-page">
             <Hero
                 title={heroTitle}
-                subtitle=""
                 rightText={ap.heroRight}
                 bgImage={heroBgArticles}
-                showSlider={false}
-                compact={true}
+                showSlider={true}
+                compact={false}
             />
 
             <div className={`ap-sticky-filter ${isSticky ? 'is-sticky' : ''}`}>
